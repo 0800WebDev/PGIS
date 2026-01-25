@@ -26,13 +26,15 @@
             cursor: pointer;
              background-color: lightgray; 
              color: black; border: none; }
-              a { color: white; } /* Particle background container */ #particles-js {position: fixed;
+              a { color: white; } /* Particle background container */ #particles-js {
+                 position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 0; /* on top of body but below other elements visually */
-    pointer-events: none; /* so clicks go through to your buttons */}
+    z-index: 0;       /* keep behind the games */
+    pointer-events: none; /* so clicks go through */
+    background: transparent; /* make sure it’s not black */}
     
     
 
@@ -132,6 +134,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
