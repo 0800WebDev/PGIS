@@ -4,7 +4,7 @@
     
 
 <meta name="msvalidate.01" content="13B7C7BA68D4EED9D46BF4F1EE98F40B" />
-<title>PGIS 3 -</title>
+<title>PGIS 3</title>
 <link
 id="favicon"
 rel="icon"
@@ -188,20 +188,21 @@ href="https://i.postimg.cc/1XJnjRTF/0937a70d8c13420e9c4d8b0dc92bddaa-free-1.png"
     <img src="https://i.postimg.cc/V6zNPQXW/7ad210998816426cb8bd123081203109-free.png" width="100px" height="100px" class="fadeIn"/>
     <img src="https://i.postimg.cc/5Ng9k1mx/28470cf859534f4da1071c04d2f2ee6b-free.png" width="100px" height="100px" class="fadeIn"/>
     <img src="https://industrialfloortape.com/cdn/shop/products/doNotBlock24x24.png?v=1466016136" width="100px" height="100px" class="fadeIn"/>
-    <br>
+   <script type="text/javascript" src="https://www.stat-counter.org/count/jbi5" target="_blank"></script> <br>
  
 </div>
 
 
 <!--stat-counter JS-->
     <script>
-  // Wait a little for the stat counter to render
-  window.addEventListener('load', function() {
-    const counter = document.getElementById('besucherzaehler2'); // the SVG inside the stat script
+window.addEventListener('load', function() {
+    const counter = document.getElementById('besucherzaehler2'); 
     if (counter) {
-      counter.style.cursor = 'pointer'; // make it look clickable
-      counter.addEventListener('click', function() {
-        window.open('https://www.stat-counter.org/stats/jbi5', '_blank'); // open in new tab
+      counter.style.cursor = 'pointer';
+      counter.addEventListener('click', function(e) {
+        e.preventDefault(); // stop any default link behavior
+        e.stopPropagation(); // prevent it from affecting parent elements
+        window.open('https://www.stat-counter.org/stats/jbi5', '_blank'); // open in new tab only
       });
     }
   });
@@ -341,6 +342,7 @@ particlesJS('particles-js', {
 
 </body>
 </html>
+
 
 
 
