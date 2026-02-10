@@ -4,7 +4,7 @@
     
 
 <meta name="msvalidate.01" content="13B7C7BA68D4EED9D46BF4F1EE98F40B" />
-<title>PGIS 3 </title>
+<title>PGIS 3 ..</title>
 <link
 id="favicon"
 rel="icon"
@@ -295,10 +295,23 @@ window.addEventListener('load', function() {
 
 
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+    if (localStorage.getItem('ubPopupClosed') === 'true') {
+        const popup = document.getElementById('ub-popup-overlay');
+        if (popup) popup.remove();
+    }
+});
+
+    
+    
 function closeUbPopup() {
     const popup = document.getElementById('ub-popup-overlay');
     if (popup) popup.remove();
+
+    // remember it's closed
+    localStorage.setItem('ubPopupClosed', 'true');
 }
+
 </script>
 
 
@@ -433,6 +446,7 @@ particlesJS('particles-js', {
 
 </body>
 </html>
+
 
 
 
