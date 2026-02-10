@@ -37,16 +37,15 @@
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>
 let player;
-let index = 0;
 let shorts = [];
+let played = new Set(); // keep track of videos already played
 let nextPageToken = null;
 
 // ===== CONFIG =====
-const API_KEY = "AIzaSyAGVdK3kXEJMbRfBvT6TwoL893CCkbi4HU"; // replace with your key
-const SEARCH_QUERY = "fun shorts";      // keyword to search
+const API_KEY = "AIzaSyAGVdK3kXEJMbRfBvT6TwoL893CCkbi4HU"; 
+const SEARCH_QUERY = "fun shorts";      
 const MAX_RESULTS = 10;
 
-// Fetch Shorts from YouTube Data API (duration < 60s)
 async function fetchShorts() {
   try {
     const url = new URL("https://www.googleapis.com/youtube/v3/search");
@@ -54,7 +53,7 @@ async function fetchShorts() {
     url.searchParams.set("type", "video");
     url.searchParams.set("q", SEARCH_QUERY);
     url.searchParams.set("maxResults", MAX_RESULTS);
-    url.searchParams.set("videoDuration", "short"); // only short videos
+    url.searchParams.set("videoDuration", "short"); 
     if(nextPageToken) url.searchParams.set("pageToken", nextPageToken);
     url.searchParams.set("key", API_KEY);
 
@@ -62,56 +61,59 @@ async function fetchShorts() {
     const data = await res.json();
     nextPageToken = data.nextPageToken;
 
-    // add new video IDs
-    shorts.push(...data.items.map(item => item.id.videoId));
+    // add new video IDs, filter out ones already played
+    const newShorts = data.items.map(item => item.id.videoId)
+                                .filter(id => !played.has(id));
+    shorts.push(...newShorts);
 
-    // if player not loaded, start
-    if(!player) loadPlayer();
-
+    if(!player && shorts.length) loadPlayer();
   } catch(err) {
     console.error("Failed to fetch shorts:", err);
-    // fallback to last 3 hardcoded videos
     if(shorts.length === 0) shorts = ["dQw4w9WgXcQ","9bZkp7q19f0","3JZ_D3ELwOQ"];
     if(!player) loadPlayer();
   }
 }
 
 function loadPlayer() {
+  const nextId = getNextVideoId();
   player = new YT.Player("player", {
-    videoId: shorts[index],
-    playerVars: {
-      autoplay: 1,
-      controls: 0,
-      modestbranding: 1,
-      rel: 0,
-      playsinline: 1
-    },
-    events: {
-      onStateChange: onPlayerStateChange
-    }
+    videoId: nextId,
+    playerVars: { autoplay: 1, controls: 0, modestbranding: 1, rel: 0, playsinline: 1 },
+    events: { onStateChange: onPlayerStateChange }
   });
 }
 
+function getNextVideoId() {
+  // if all have been played, reset
+  if(played.size >= shorts.length) played.clear();
+
+  // pick the next video that hasn't played yet
+  const remaining = shorts.filter(id => !played.has(id));
+  const nextId = remaining[Math.floor(Math.random() * remaining.length)];
+  played.add(nextId);
+  return nextId;
+}
+
 function nextVideo() {
-  index++;
-  if(index >= shorts.length - 2) {
-    // pre-fetch more videos when nearing the end
-    fetchShorts();
-  }
-  if(index >= shorts.length) index = 0;
-  player.loadVideoById(shorts[index]);
+  const nextId = getNextVideoId();
+
+  // pre-fetch more videos if close to end
+  if(shorts.length - played.size <= 2) fetchShorts();
+
+  player.loadVideoById(nextId);
 }
 
 function onPlayerStateChange(event) {
   if(event.data === YT.PlayerState.ENDED) nextVideo();
 }
 
-// wait for YouTube IFrame API
 function onYouTubeIframeAPIReady() {
   fetchShorts();
 }
+
 </script>
 
 </body>
 </html>
+
 
