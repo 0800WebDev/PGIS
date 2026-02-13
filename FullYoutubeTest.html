@@ -1,0 +1,314 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="robots" content="noindex">
+<meta charset="utf-8">
+<title>YouTube – Unblocked (Embed)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root {
+    --bg: #0f0f0f;
+    --bg-secondary: #1f1f1f;
+    --card: #272727;
+    --text: #fff;
+    --text-secondary: #aaa;
+    --accent: #ff0000;
+    --hover: #3d3d3d;
+    --border: #373737;
+    --radius: 12px;
+    --shadow: 0 4px 12px rgba(0, 0, 0, .4);
+}
+* {margin:0;padding:0;box-sizing:border-box;}
+body {font-family:'Roboto',Arial,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+.header {position:fixed;top:0;left:0;right:0;height:60px;background:var(--bg);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 20px;z-index:1000;gap:20px;}
+.logo {display:flex;align-items:center;gap:8px;font-size:20px;font-weight:bold;color:var(--text);cursor:pointer;}
+.logo-icon {width:32px;height:24px;background:var(--accent);border-radius:4px;position:relative;}
+.logo-icon::after {content:'▶';position:absolute;top:50%;left:50%;transform:translate(-40%,-50%);color:#fff;font-size:12px;}
+.search-container {flex:1;max-width:600px;display:flex;align-items:center;}
+.search-box {flex:1;height:40px;background:var(--bg-secondary);border:1px solid var(--border);border-radius:20px 0 0 20px;padding:0 16px;color:var(--text);font-size:16px;}
+.search-box:focus {outline:none;border-color:var(--accent);}
+.search-btn {height:40px;width:60px;background:var(--bg-secondary);border:1px solid var(--border);border-left:none;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.search-btn:hover {background:var(--hover);}
+.header-actions {display:flex;align-items:center;gap:16px;}
+.header-btn {width:40px;height:40px;border-radius:50%;background:var(--bg-secondary);border:none;color:var(--text);cursor:pointer;display:flex;align-items:center;justify-content:center;text-decoration:none;}
+.header-btn:hover {background:var(--hover);}
+.sidebar {position:fixed;top:60px;left:0;width:240px;height:calc(100vh - 60px);background:var(--bg);border-right:1px solid var(--border);padding:20px 0;overflow-y:auto;z-index:900;}
+.nav-item {display:flex;align-items:center;padding:12px 24px;color:var(--text);text-decoration:none;gap:20px;font-size:14px;transition:background .2s;cursor:pointer;border:none;background:none;width:100%;text-align:left;}
+.nav-item:hover,.nav-item.active {background:var(--hover);}
+.nav-item.active {background:var(--card);}
+.main-content {margin-left:240px;margin-top:60px;padding:24px;min-height:calc(100vh - 60px);}
+.section-title {font-size:24px;margin-bottom:24px;color:var(--text);}
+.page-section {display:none;}
+.page-section.active {display:block;}
+.video-grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;}
+.video-card {background:var(--card);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative;}
+.video-card:hover {transform:translateY(-4px);box-shadow:var(--shadow);}
+.video-thumbnail {width:100%;height:160px;background:var(--bg-secondary);position:relative;overflow:hidden;}
+.video-thumbnail img {width:100%;height:100%;object-fit:cover;}
+.video-duration {position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.8);color:white;padding:2px 6px;border-radius:4px;font-size:12px;}
+.video-info {padding:12px;}
+.video-title {font-size:14px;font-weight:500;margin-bottom:8px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.video-meta {font-size:12px;color:var(--text-secondary);}
+.video-channel {margin-bottom:4px;}
+.watch-later-btn {position:absolute;top:8px;right:8px;width:32px;height:32px;background:rgba(0,0,0,.7);border:none;border-radius:50%;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;z-index:10;}
+.video-card:hover .watch-later-btn {opacity:1;}
+.watch-later-btn:hover {background:var(--accent);}
+.watch-later-btn.active {opacity:1;background:var(--accent);}
+.clear-all-btn {margin-left:auto;padding:8px 16px;background:var(--accent);color:white;border:none;border-radius:20px;cursor:pointer;font-size:14px;transition:background .2s;}
+.clear-all-btn:hover {background:#c00;}
+.remove-btn {position:absolute;top:8px;right:8px;width:32px;height:32px;background:rgba(0,0,0,.7);border:none;border-radius:50%;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s;z-index:10;}
+.video-card:hover .remove-btn {opacity:1;}
+.remove-btn:hover {background:var(--accent);}
+.added-date {font-size:11px;color:var(--text-secondary);margin-top:4px;}
+.empty-state {grid-column:1/-1;text-align:center;padding:80px 20px;color:var(--text-secondary);}
+.empty-state h3 {font-size:20px;margin-bottom:12px;color:var(--text);}
+.empty-state p {font-size:16px;margin-bottom:24px;}
+.browse-btn {padding:12px 24px;background:var(--accent);color:white;border:none;border-radius:24px;cursor:pointer;font-size:16px;text-decoration:none;display:inline-block;transition:background .2s;}
+.browse-btn:hover {background:#c00;}
+.tabs {display:flex;gap:8px;margin-bottom:24px;border-bottom:1px solid var(--border);padding-bottom:16px;}
+.tab {padding:8px 16px;background:transparent;border:none;color:var(--text-secondary);cursor:pointer;border-radius:20px;font-size:14px;transition:all .2s;}
+.tab:hover {background:var(--hover);color:var(--text);}
+.tab.active {background:var(--text);color:var(--bg);}
+@media (max-width:768px) {.sidebar {transform:translateX(-100%);transition:transform .3s;}.sidebar.open {transform:translateX(0);}.main-content {margin-left:0;}.video-grid {grid-template-columns:1fr;}}
+@media (max-width:480px) {.shorts-grid {grid-template-columns:1fr;max-width:300px;}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="logo" id="logo"><div class="logo-icon"></div>YouTube</div>
+  <div class="search-container">
+    <input type="text" class="search-box" id="searchInput" placeholder="Search videos...">
+    <button class="search-btn" id="searchBtn">🔍</button>
+  </div>
+  <div class="header-actions">
+    <button class="header-btn" id="watchLaterBtn" title="Watch Later">⏰</button>
+  </div>
+</header>
+
+<aside class="sidebar">
+  <button class="nav-item active" data-page="home">🏠 Home</button>
+  <button class="nav-item" data-page="watch-later">⏰ Watch Later</button>
+</aside>
+
+<main class="main-content">
+  <div id="home-page" class="page-section active">
+    <h1 class="section-title">Recommended Videos</h1>
+    <div class="tabs">
+      <button class="tab active" data-cat="all">All</button>
+      <button class="tab" data-cat="music">Music</button>
+      <button class="tab" data-cat="gaming">Gaming</button>
+      <button class="tab" data-cat="news">News</button>
+    </div>
+    <div class="video-grid" id="homeVideoGrid"></div>
+  </div>
+
+  <div id="watch-later-page" class="page-section">
+    <h1 class="section-title">Watch Later
+      <button class="clear-all-btn" id="clearAllBtn" style="display:none;">Clear All</button>
+    </h1>
+    <div class="video-grid" id="watchLaterGrid"></div>
+  </div>
+</main>
+
+<script>
+const API_KEY = 'AIzaSyAGVdK3kXEJMbRfBvT6TwoL893CCkbi4HU';
+let currentPage = 'home';
+let currentCategory = 'all';
+let watchLaterList = JSON.parse(localStorage.getItem('watchLater')||'[]');
+
+function showPage(page){
+  document.querySelectorAll('.page-section').forEach(p=>p.classList.remove('active'));
+  document.getElementById(page+'-page').classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(item=>item.classList.toggle('active',item.dataset.page===page));
+  currentPage=page;
+  document.getElementById('searchInput').value='';
+  if(page==='home') loadPopularVideos(); else displayWatchLater();
+}
+
+function loadPopularVideos(){
+  showSkeleton('homeVideoGrid');
+  fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&chart=mostPopular&regionCode=US&maxResults=24&key=${API_KEY}`)
+    .then(r=>r.json()).then(data=>{
+      if(!data.items) return showError('homeVideoGrid');
+      const formatted=data.items.map(v=>({id:{videoId:v.id},snippet:v.snippet,contentDetails:v.contentDetails,statistics:v.statistics}));
+      const map={};
+      data.items.forEach(v=>{map[v.id]={duration:formatDuration(v.contentDetails.duration),views:parseInt(v.statistics.viewCount)}})
+      displayVideos(formatted,map);
+    }).catch(()=>showError('homeVideoGrid'));
+}
+
+function showSkeleton(id){
+  const grid=document.getElementById(id); grid.innerHTML='';
+  for(let i=0;i<24;i++){
+    const s=document.createElement('div'); s.className='video-card skeleton-card';
+    s.innerHTML='<div class="video-thumbnail skeleton"></div><div class="video-info"><div class="video-title skeleton" style="height:40px"></div><div class="video-meta skeleton" style="height:30px;margin-top:8px"></div></div>';
+    grid.appendChild(s);
+  }
+}
+
+function showError(id){
+  document.getElementById(id).innerHTML='<div style="grid-column:1/-1;text-align:center;padding:60px;color:var(--text-secondary)"><h3>Failed to load videos</h3><p>Please try again later</p></div>';
+}
+
+function formatDuration(d){
+  let t=d.replace('PT','').replace('H',':').replace('M',':').replace('S',''); 
+  if(!t.includes(':')) t='0:'+t.padStart(2,'0'); 
+  return t;
+}
+
+// Event listeners
+document.getElementById('searchBtn').addEventListener('click',()=>{performSearch();});
+document.getElementById('searchInput').addEventListener('keypress',e=>{if(e.key==='Enter') performSearch();});
+document.querySelectorAll('.nav-item').forEach(btn=>btn.addEventListener('click',()=>showPage(btn.dataset.page)));
+document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active')); 
+  btn.classList.add('active'); 
+  currentCategory=btn.dataset.cat; 
+  loadPopularVideos();
+}));
+document.getElementById('clearAllBtn').addEventListener('click',clearAllWatchLater);
+
+function performSearch(){
+  const q=document.getElementById('searchInput').value.trim();
+  if(!q) loadPopularVideos(); else searchVideos(q);
+}
+
+function searchVideos(q){
+  showSkeleton('homeVideoGrid');
+  fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=24&q=${encodeURIComponent(q)}&key=${API_KEY}`)
+    .then(r=>r.json()).then(d=>{if(d.items) fetchVideoDetails(d.items,'home');}).catch(()=>showError('homeVideoGrid'));
+}
+
+function fetchVideoDetails(videos,page){
+  const ids=videos.map(v=>v.id.videoId).join(',');
+  fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics&id=${ids}&key=${API_KEY}`)
+    .then(r=>r.json()).then(details=>{
+      const map={}; 
+      details.items.forEach(v=>{map[v.id]={duration:formatDuration(v.contentDetails.duration),views:parseInt(v.statistics.viewCount)}}); 
+      if(page==='home') displayVideos(videos,map);
+    });
+}
+
+function displayVideos(videos,map){
+  const grid=document.getElementById('homeVideoGrid'); grid.innerHTML='';
+  videos.forEach(v=>{
+    const inWL=watchLaterList.some(item=>item.id===v.id.videoId);
+    const card=document.createElement('div'); card.className='video-card';
+    card.addEventListener('click',e=>{if(!e.target.classList.contains('watch-later-btn')) openEmbed(v.id.videoId,v.snippet.title)});
+    const titleSafe=JSON.stringify(v.snippet.title);
+    card.innerHTML=`
+      <div class="video-thumbnail">
+        <img src="${v.snippet.thumbnails.medium.url}" alt="">
+        <div class="video-duration">${map[v.id.videoId].duration}</div>
+        <button class="watch-later-btn ${inWL?'active':''}" data-id="${v.id.videoId}" data-title=${titleSafe} data-thumb="${v.snippet.thumbnails.medium.url}">${inWL?'✓':'⏰'}</button>
+      </div>
+      <div class="video-info">
+        <div class="video-title">${v.snippet.title}</div>
+        <div class="video-meta">
+          <div class="video-channel">${v.snippet.channelTitle}</div>
+          <div>${Number(map[v.id.videoId].views).toLocaleString()} views</div>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+
+  // Watch later button click
+  grid.querySelectorAll('.watch-later-btn').forEach(btn=>{
+    btn.addEventListener('click',e=>{
+      e.stopPropagation(); 
+      const id=btn.dataset.id,title=btn.dataset.title.slice(1,-1),thumb=btn.dataset.thumb;
+      const idx=watchLaterList.findIndex(v=>v.id===id);
+      if(idx===-1){watchLaterList.push({id,title,thumbnail:thumb,addedAt:new Date().toISOString()}); btn.classList.add('active'); btn.textContent='✓';}
+      else{watchLaterList.splice(idx,1); btn.classList.remove('active'); btn.textContent='⏰';}
+      localStorage.setItem('watchLater',JSON.stringify(watchLaterList));
+    });
+  });
+}
+</script>
+<script>
+function displayWatchLater(){
+    const grid=document.getElementById('watchLaterGrid');
+    const clearBtn=document.getElementById('clearAllBtn');
+    if(watchLaterList.length===0){
+        grid.innerHTML=`<div class="empty-state">
+            <h3>No videos saved</h3>
+            <p>Save videos to watch later by clicking the ⏰ button on any video</p>
+            <button class="browse-btn" onclick="showPage('home')">Browse Videos</button>
+        </div>`;
+        clearBtn.style.display='none';
+        return;
+    }
+    clearBtn.style.display='block';
+    grid.innerHTML='';
+    watchLaterList.forEach(v=>{
+        const card=document.createElement('div');
+        card.className='video-card';
+        card.addEventListener('click',e=>{if(!e.target.classList.contains('remove-btn')) openEmbed(v.id,v.title)});
+        card.innerHTML=`
+            <div class="video-thumbnail">
+                <img src="${v.thumbnail}" alt="">
+                <button class="remove-btn">✕</button>
+            </div>
+            <div class="video-info">
+                <div class="video-title">${v.title}</div>
+                <div class="video-meta"><div class="added-date">Added ${new Date(v.addedAt).toLocaleDateString()}</div></div>
+            </div>`;
+        grid.appendChild(card);
+    });
+
+    // Remove video button
+    grid.querySelectorAll('.remove-btn').forEach((btn,i)=>{
+        btn.addEventListener('click',e=>{
+            e.stopPropagation();
+            watchLaterList.splice(i,1);
+            localStorage.setItem('watchLater',JSON.stringify(watchLaterList));
+            displayWatchLater();
+        });
+    });
+}
+
+function clearAllWatchLater(){
+    if(confirm('Remove all videos from Watch Later?')){
+        watchLaterList=[];
+        localStorage.setItem('watchLater',JSON.stringify(watchLaterList));
+        displayWatchLater();
+    }
+}
+
+function openEmbed(videoId,title){
+    const win=window.open('about:blank','vid','width=640,height=360,scrollbars=no,resizable=yes');
+    win.document.write(`<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>${title.replace(/<|>/g,'')}</title>
+<style>
+html,body{margin:0;height:100%;background:#000;display:flex;flex-direction:column;color:#fff;font-family:Arial,Helvetica,sans-serif}
+#player{width:100%;flex:1;display:flex;align-items:center;justify-content:center;background:#000}
+iframe{border:none;width:100%;height:100%}
+#bar{height:46px;background:#0f0f0f;border-bottom:1px solid #222;display:flex;align-items:center;padding:0 12px;font-size:15px}
+#bar span{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#bar button{margin-left:8px;padding:6px 12px;background:#ff0000;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:13px}
+#bar button:hover{background:#c00}
+</style>
+</head>
+<body>
+<div id="bar">
+<span>${title.replace(/<|>/g,'')}</span>
+<button onclick="window.open('https://www.youtube.com/watch?v=${videoId}','_blank')">Open on YouTube</button>
+</div>
+<div id="player">
+<iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&fs=1" allowfullscreen allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"></iframe>
+</div>
+<script>
+window.onload=()=>{const f=document.querySelector('iframe');f.requestFullscreen?.()||f.webkitRequestFullscreen?.()||f.mozRequestFullScreen?.();}
+<\/script>
+</body>
+</html>`);
+    win.document.close();
+}
+</script>
+</body>
+</html>
