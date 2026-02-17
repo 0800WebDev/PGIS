@@ -381,18 +381,50 @@ function closeUbPopup() {
         document.getElementById('favicon').href = 'https://i.postimg.cc/1XJnjRTF/0937a70d8c13420e9c4d8b0dc92bddaa-free-1.png';
     }
 
-    function visDagligHilsen() {
-        const hilsenEl = document.getElementById("daglig-hilsen");
-        const time = new Date().getHours();
-        let hilsen = "";
+
+
+
+
+
+    
+   function visDagligHilsen() {
+    const hilsenEl = document.getElementById("daglig-hilsen");
+    const time = new Date().getHours();
+
+    const randomSentences = [
+        "Page 2 on google",
+        "Best u​n​b​l​o​c​k​e​d​ ​g​a​m​e​",
+        "Did you finish your homework?",
+        "be aware of teachers",
+        "if blocked go to pgis-ub.onrender.com",
+        "Tip: open in about:blank",
+        "Tip: cloack the tab"
+        "If you are a teacher, dont block this!"
+    ];
+
+    let hilsen = "";
+
+    // 50% chance to show random sentence
+    if (Math.random() < 0.5) {
+        const tilfeldigIndex = Math.floor(Math.random() * randomSentences.length);
+        hilsen = randomSentences[tilfeldigIndex];
+    } else {
         if (time < 6) hilsen = "A bit late?";
         else if (time < 12) hilsen = "Good morning!";
         else if (time < 18) hilsen = "Ready to play?";
         else hilsen = "Still playing?";
-        hilsenEl.textContent = hilsen;
     }
-    visDagligHilsen();
+
+    hilsenEl.textContent = hilsen;
+}
+
+visDagligHilsen();
+
     
+
+
+
+
     
     
     
@@ -496,6 +528,7 @@ particlesJS('particles-js', {
 
 </body>
 </html>
+
 
 
 
