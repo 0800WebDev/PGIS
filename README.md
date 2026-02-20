@@ -23,6 +23,10 @@ Pgis has a selection of tools inclouding:
 2. click the button saying ">>>MORE GAMES<<<"
 3. search or choose a game to play
 4. click on the button saying "play" on the game you want to play
+## Use a tool
+1. go to the official url
+2. choose one of the tools from over the logos and below the games and buttons
+3. click open
 ### Disclaimer
 I do not own any games or tools on this website
 ### Images
