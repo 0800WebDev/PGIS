@@ -69,7 +69,7 @@
       <div id="particles-js"></div>
       <div>
          <h1>PGIS</h1>
-         <strong>games</strong> <br><br> <a href="/index.html" style="color: white;">Back to Homepage</a> <br><br> <input type="text" id="search" placeholder="Search for games" /> <br><br> 
+         <strong>games</strong> <br><br> <a href="/index.html" style="color: white;">Back to Homepage</a> <br><br> <input type="text" id="search" placeholder="Search for games" /> <button id="random-game-btn">Play Random Game</button> <br><br> 
       </div>
       <div class="games-area">
          <!--games area--> 
@@ -133,6 +133,29 @@
          <div class="gamediv"><b>Sandbox City</b><img src="https://i.postimg.cc/Kz5VxFKP/Skjermbilde-2026-02-16-125733.png" alt="sanbox city" width="100px" height="100px"><a href="sandboxcity"><button>play</button></a></div>
       </div>
       </div>
+
+<script>
+document.getElementById("random-game-btn").addEventListener("click", () => {
+  // Find all links inside the div with class "games-area"
+  const links = Array.from(document.querySelectorAll(".games-area a"));
+
+  if (links.length > 0) {
+    // Pick a random link
+    const randomLink = links[Math.floor(Math.random() * links.length)];
+    
+    // Open it in the same tab
+    window.location.href = randomLink.href;
+
+    // Or open in a new tab instead:
+    // window.open(randomLink.href, "_blank");
+  } else {
+    console.log("No game links found in .games-area");
+  }
+});
+</script>
+
+
+      
       <script src="killSwitch.js"></script><script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> <script>
          // GHUB-style particles with cursor fix
 particlesJS('particles-js', {
@@ -202,6 +225,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
