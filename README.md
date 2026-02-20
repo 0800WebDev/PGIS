@@ -23,13 +23,13 @@ PGIS has a selection of tools including:
 
 ### How to Use
 
-## Play a Game
+#### Play a Game
 1. Go to the official URL
 2. Click the button saying ">>> MORE GAMES <<<"
 3. Search for or choose a game
 4. Click the "Play" button on the game you want
 
-## Use a Tool
+#### Use a Tool
 1. Go to the official URL
 2. Choose a tool from the section above the logos and below the games
 3. Click Open
