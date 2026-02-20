@@ -18,7 +18,13 @@ pgis has a selection of tools inclouding
 - youtube shorts
 - emulatorJS
 - AI
-###
+### how to use
+## play a game
+1. go to the official url
+2. click the button saying ">>>MORE GAMES<<<"
+3. search or choose a game to play
+4. click on the button saying "play" on the game you want to play
+
 
 
 
