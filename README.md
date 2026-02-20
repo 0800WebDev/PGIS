@@ -1,7 +1,7 @@
 # PGIS 2
 ## Play Games In School 2
 
-### descriptio
+### description
 **PGIS** stands for Play Games In School and is an unblocked games site
 ### official link
 [pgis.onrender.com](https://pgis.onrender.com)
