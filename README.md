@@ -24,7 +24,9 @@ pgis has a selection of tools inclouding
 2. click the button saying ">>>MORE GAMES<<<"
 3. search or choose a game to play
 4. click on the button saying "play" on the game you want to play
-
+### Disclaimer
+i do not own any games or tools on this website
+### images
 
 
 
