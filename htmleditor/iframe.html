@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live HTML Editor</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+  textarea {
+    width: 50%;
+    height: 100%;
+    border: none;
+    padding: 10px;
+    font-family: monospace;
+    font-size: 16px;
+    resize: none;
+    outline: none;
+    box-sizing: border-box;
+  }
+  iframe {
+    width: 50%;
+    height: 100%;
+    border: none;
+    box-sizing: border-box;
+  }
+  .editor-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+</head>
+<body>
+
+<div class="editor-container">
+  <textarea id="htmlEditor" placeholder="Type your HTML here...">
+<h1>Hello World!</h1>
+<p>This is a live HTML editor.</p>
+  </textarea>
+  <iframe id="preview"></iframe>
+</div>
+
+<script>
+  const editor = document.getElementById('htmlEditor');
+  const preview = document.getElementById('preview');
+
+  function updatePreview() {
+    preview.srcdoc = editor.value;
+  }
+
+  editor.addEventListener('input', updatePreview);
+  
+  // Initialize preview
+  updatePreview();
+</script>
+
+</body>
+</html>
