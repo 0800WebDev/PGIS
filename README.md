@@ -31,8 +31,9 @@ PGIS has a selection of tools including:
 
 #### Use a Tool
 1. Go to the official URL
-2. Choose a tool from the section above the logos and below the games
-3. Click Open
+2. Click the button saying "more tools"
+3. Search or choose a tool
+4. Click the "Open" button on the tool you want to want
 
 ### Disclaimer
 I do not own any games or tools on this website.
