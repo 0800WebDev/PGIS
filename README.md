@@ -27,13 +27,13 @@ PGIS has a selection of tools including:
 1. Go to the official URL
 2. Click the button saying ">>> MORE GAMES <<<"
 3. Search for or choose a game
-4. Click the "Play" button on the game you want
+4. Click the "Play" button on the game you want to want to play
 
 #### Use a Tool
 1. Go to the official URL
 2. Click the button saying "more tools"
 3. Search or choose a tool
-4. Click the "Open" button on the tool you want to want
+4. Click the "Open" button on the tool you want to want to use
 
 ### Disclaimer
 I do not own any games or tools on this website.
