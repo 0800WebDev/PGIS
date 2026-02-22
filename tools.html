@@ -1,0 +1,173 @@
+<!doctype html> 
+<html>
+   <head>
+      
+
+      <title>PGIS 2 - games</title>
+      <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/1XJnjRTF/0937a70d8c13420e9c4d8b0dc92bddaa-free-1.png">
+      <style> html, body { text-align: center; background-color: black; color: whitesmoke; } /* Container for the game divs */ .games-area {background-color: rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; position: relative; z-index: 1; } /* Each game div itself */ .gamediv {   width: 200px;
+    height: 150px;
+    background-color: rgba(0, 0, 0, 0.3); /* semi-transparent black */
+    background-size: cover;
+    background-position: center;
+    cursor: auto;
+    border: 1px solid #444;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px); /* optional, makes it smoother */}
+     button { cursor: pointer;
+      background-color: #444;
+       color: whitesmoke;
+        border: none; }
+         button:hover { 
+            cursor: pointer;
+             background-color: lightgray; 
+             color: black; border: none; }
+              a { color: white; } /* Particle background container */ #particles-js {
+                 position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;       /* keep behind the games */
+    pointer-events: none; /* so clicks go through */
+    background: transparent; /* make sure it’s not black */}
+    
+    
+
+#search {
+    width: 250px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #555;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: whitesmoke;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+
+#search::placeholder {
+    color: #aaa;
+}
+
+#search:focus {
+    border-color: #fff;
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    background-color: rgba(0,0,0,0.8);
+}
+</style>
+   </head>
+   <body>
+      <!-- Particle background --> 
+      <div id="particles-js"></div>
+      <div>
+         <h1>PGIS</h1>
+         <strong>Tools</strong> <br><br> <a href="/index.html" style="color: white;">Back to Homepage</a> <br><br> <input type="text" id="search" placeholder="Search for tools" /> <br><br> <button id="random-game-btn">Random tool</button> <br><br> 
+      </div>
+      <div class="games-area">
+         <!--games area--> 
+         <div class="gamediv"><b>Orange Unlock</b><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSEbIjGbQ7kWQzBt3gyygxzuDLgzGukjbyEg&s" alt="1v1lol image" width="100px" height="100px"><a href="/1v1lol/"><button>play</button></a></div>
+         <div class="gamediv"><b>Slope game</b><img src="https://img.slopeunblocked76.net/cdn-cgi/image/fit=cover,format=auto,metadata=none,quality=70,width=256/https://img.slopeunblocked76.net/games/slope-game/thumb.png" alt="slope image" width="100px" height="100px"><a href="/slope/index.html"><button>play</button></a></div>
+         <div class="gamediv"><b>Roblox</b><img src="https://i.redd.it/is-that-the-old-roblox-logo-v0-8j4r1ks8nmic1.png?width=860&format=png&auto=webp&s=04cea48d576b5025ea9f481b50fc274ef560426c" alt="roblox image" width="100px" height="100px"><a href="/roblox/index.html"><button>play</button></a></div>
+         <div class="gamediv"><b>Smash karts(might not work)</b><img src="https://imgs.crazygames.com/smash-karts_1x1/20251204152019/smash-karts_1x1-cover?format=auto&quality=100&metadata=none&width=1200" alt="slope image" width="100px" height="100px"><a href="/smash-karts/index.html"><button>play</button></a></div>
+         <div class="gamediv"><b>Bubble Shooter</b><img src="https://i.postimg.cc/6pJT8Kr0/Screenshot-2025-12-08-11-17-03.png" alt="bubble image" width="100px" height="100px"><a href="/bubbleshoot/index.html"><button>play</button></a></div>
+         <div class="gamediv"><b>2048</b><img src="https://specials.manoramaonline.com/News/2022/manorama-promotions/img/2048-game.jpg" alt="2048 image" width="100px" height="100px"><a href="/2048/index.html"><button>play</button></a></div>
+      </div>
+      </div>
+<div id="bottom"></div>
+<script>
+document.getElementById("random-game-btn").addEventListener("click", () => {
+  // Find all links inside the div with class "games-area"
+  const links = Array.from(document.querySelectorAll(".games-area a"));
+
+  if (links.length > 0) {
+    // Pick a random link
+    const randomLink = links[Math.floor(Math.random() * links.length)];
+    
+    // Open it in the same tab
+    window.location.href = randomLink.href;
+
+    // Or open in a new tab instead:
+    // window.open(randomLink.href, "_blank");
+  } else {
+    console.log("No game links found in .games-area");
+  }
+});
+</script>
+
+
+      
+      <script src="killSwitch.js"></script><script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> <script>
+         // GHUB-style particles with cursor fix
+particlesJS('particles-js', {
+  "particles": {
+    "number": {
+      "value": 100,
+      "density": { "enable": true, "value_area": 800 }
+    },
+    "color": { "value": "#ffffff" },
+    "shape": { "type": "circle", "stroke": { "width": 0 } },
+    "opacity": {
+      "value": 0.08,
+      "random": true,
+      "anim": { "enable": true, "speed": 1, "opacity_min": 0.3, "sync": false }
+    },
+    "size": {
+      "value": 3,
+      "random": true,
+      "anim": { "enable": true, "speed": 2, "size_min": 0.5, "sync": false }
+    },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#ffffff",
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 1.5,
+      "direction": "none",
+      "straight": false,
+      "out_mode": "out"
+    }
+  },
+  "interactivity": {
+    "detect_on": "window", // ← cursor now works over all elements
+    "events": {
+      "onhover": { "enable": true, "mode": "repulse" },
+      "onclick": { "enable": false }
+    },
+    "modes": {
+      "repulse": { "distance": 120, "duration": 0.5 }
+    }
+  },
+  "retina_detect": true
+});
+
+      </script> 
+      <script>
+const searchInput = document.getElementById('search');
+const gameDivs = document.querySelectorAll('.gamediv');
+
+searchInput.addEventListener('input', () => {
+    const query = searchInput.value.toLowerCase();
+
+    gameDivs.forEach(div => {
+        const gameName = div.querySelector('b').textContent.toLowerCase();
+        if (gameName.includes(query) || query === '') {
+            div.style.display = 'flex'; // show matching games
+        } else {
+            div.style.display = 'none'; // hide non-matching games
+        }
+    });
+});
+</script>
+
+   </body>
+</html>
