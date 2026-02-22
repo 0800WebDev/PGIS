@@ -20,6 +20,9 @@ PGIS has a selection of tools including:
 - YouTube Shorts
 - EmulatorJS
 - AI
+- Live HTML Editor
+- The wagon site (iframe)
+- Soundboard
 
 ### How to Use
 
