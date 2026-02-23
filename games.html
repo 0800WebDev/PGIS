@@ -154,6 +154,39 @@ document.getElementById("random-game-btn").addEventListener("click", () => {
 });
 </script>
 
+<script>
+const RARE_AUDIO_CHANCE = 1 / 1000; 
+let audioUnlocked = false;
+
+function playRareAudio() {
+  const audio = new Audio("/giga 1.mp3"); 
+  audio.play().catch(() => console.log("Autoplay blocked"));
+}
+
+function unlockAudio() {
+  if (audioUnlocked) return;
+  audioUnlocked = true;
+
+  // attempt to unlock audio context
+  const a = new Audio();
+  a.play().catch(() => {});
+
+  // 🎲 rare roll
+  if (Math.random() < RARE_AUDIO_CHANCE) {
+    playRareAudio();
+  }
+}
+
+// wait for first real interaction
+document.addEventListener("click", unlockAudio, { once: true });
+document.addEventListener("keydown", unlockAudio, { once: true });
+
+// console trigger
+window.forceRareAudio = () => {
+  playRareAudio();
+  console.log("Rare audio forced");
+};
+</script>
 
       
       <script src="killSwitch.js"></script><script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> <script>
@@ -225,6 +258,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
