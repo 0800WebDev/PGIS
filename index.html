@@ -338,7 +338,39 @@ href="https://i.postimg.cc/1XJnjRTF/0937a70d8c13420e9c4d8b0dc92bddaa-free-1.png"
 
 
  
+<script>
+const RARE_AUDIO_CHANCE = 1 / 1000000; // 0.0001%
+let audioUnlocked = false;
 
+function playRareAudio() {
+  const audio = new Audio("/giga 1.mp3"); // change path
+  audio.play().catch(() => console.log("Autoplay blocked"));
+}
+
+function unlockAudio() {
+  if (audioUnlocked) return;
+  audioUnlocked = true;
+
+  // attempt to unlock audio context
+  const a = new Audio();
+  a.play().catch(() => {});
+
+  // 🎲 rare roll
+  if (Math.random() < RARE_AUDIO_CHANCE) {
+    playRareAudio();
+  }
+}
+
+// wait for first real interaction
+document.addEventListener("click", unlockAudio, { once: true });
+document.addEventListener("keydown", unlockAudio, { once: true });
+
+// console trigger
+window.forceRareAudio = () => {
+  playRareAudio();
+  console.log("Rare audio forced");
+};
+</script>
 
 
 
@@ -843,6 +875,7 @@ particlesJS('particles-js', {
     
 </body>
 </html>
+
 
 
 
