@@ -352,7 +352,7 @@ navigator.serviceWorker.addEventListener('message', event => {
     if (event.data === 'runShortcut') {
         document.addEventListener("keydown", function(e) {
             if (e.ctrlKey && e.key === "k") {
-                alert("Shortcut triggered!");
+                window.location.href = "https://www.google.com";
             }
         });
     }
@@ -913,6 +913,7 @@ particlesJS('particles-js', {
     
 </body>
 </html>
+
 
 
 
