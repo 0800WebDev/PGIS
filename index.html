@@ -339,6 +339,41 @@ href="https://i.postimg.cc/1XJnjRTF/0937a70d8c13420e9c4d8b0dc92bddaa-free-1.png"
 
 
 
+
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').then(reg => {
+        console.log('Service Worker registered!', reg);
+    });
+}
+
+// Listen for the message from the service worker
+navigator.serviceWorker.addEventListener('message', event => {
+    if (event.data === 'runShortcut') {
+        document.addEventListener("keydown", function(e) {
+            if (e.ctrlKey && e.key === "k") {
+                alert("Shortcut triggered!");
+            }
+        });
+    }
+});
+
+// Trigger the injection immediately
+navigator.serviceWorker.ready.then(sw => {
+    if (sw.active) {
+        sw.active.postMessage('injectShortcut');
+    }
+});
+</script>
+
+
+
+
+
+
+    
+
+
  
 <script>
 const RARE_AUDIO_CHANCE = 1 / 1000; 
@@ -878,6 +913,7 @@ particlesJS('particles-js', {
     
 </body>
 </html>
+
 
 
 
