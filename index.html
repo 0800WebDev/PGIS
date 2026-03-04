@@ -353,6 +353,9 @@ async function loadPage(url) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(text, 'text/html');
 
+    // Remove all elements with class "indexRemove"
+    doc.querySelectorAll('.indexRemove').forEach(el => el.remove());
+
     // Copy body content
     const bodyHTML = doc.body.innerHTML;
 
@@ -381,7 +384,7 @@ async function loadPage(url) {
 }
 
 loadPage('games.html'); // Replace with your page
-</script>
+                                 </script>
 
 
 
@@ -968,6 +971,7 @@ particlesJS('particles-js', {
     
 </body>
 </html>
+
 
 
 
