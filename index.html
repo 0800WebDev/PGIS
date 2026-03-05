@@ -389,6 +389,56 @@ loadPage('games.html'); // Replace with your page
 
 
 
+
+
+<div id="tools"></div>
+
+<script>
+async function loadPage(url) {
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Network response was not ok');
+
+    const text = await res.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, 'text/html');
+
+    // Remove all elements with class "indexRemove"
+    doc.querySelectorAll('.indexRemove').forEach(el => el.remove());
+
+    // Copy body content
+    const bodyHTML = doc.body.innerHTML;
+
+    // Optionally copy <head> styles
+    const headStyles = [...doc.head.querySelectorAll('link[rel="stylesheet"], style')];
+    headStyles.forEach(node => document.head.appendChild(node.cloneNode(true)));
+
+    // Inject body content
+    document.getElementById('tools').innerHTML = bodyHTML;
+
+    // Optional: run scripts manually
+    const scripts = doc.body.querySelectorAll('script');
+    scripts.forEach(oldScript => {
+      const newScript = document.createElement('script');
+      if (oldScript.src) {
+        newScript.src = oldScript.src;
+      } else {
+        newScript.textContent = oldScript.textContent;
+      }
+      document.body.appendChild(newScript);
+    });
+
+  } catch (err) {
+    console.error('Failed to load page:', err);
+  }
+}
+
+loadPage('tools.html'); // Replace with your page
+</script>
+
+
+
+
     
 
 
@@ -971,6 +1021,7 @@ particlesJS('particles-js', {
     
 </body>
 </html>
+
 
 
 
