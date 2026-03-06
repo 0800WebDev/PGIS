@@ -137,6 +137,28 @@
       </div>
       </div>
 <div id="bottom"></div>
+
+
+<script>
+const placeholder = "placeholder.png";
+
+document.querySelectorAll("img").forEach(img => {
+  img.addEventListener("error", function () {
+    if (this.src !== placeholder) {
+      this.src = placeholder;
+    }
+  });
+
+  if (!img.getAttribute("src")) {
+    img.src = placeholder;
+  }
+});
+</script>
+
+
+      
+
+      
 <script>
 document.getElementById("random-game-btn").addEventListener("click", () => {
   // Find all links inside the div with class "games-area"
@@ -261,6 +283,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
