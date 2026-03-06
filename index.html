@@ -441,8 +441,26 @@ loadPage('tools.html'); // Replace with your page
 
 
     
+<script>
+const placeholder = "placeholder.png";
+
+document.querySelectorAll("img").forEach(img => {
+  img.addEventListener("error", function () {
+    if (this.src !== placeholder) {
+      this.src = placeholder;
+    }
+  });
+
+  if (!img.getAttribute("src")) {
+    img.src = placeholder;
+  }
+});
+</script>
+    
 
 
+
+    
 
 <script>
 if ('serviceWorker' in navigator) {
@@ -1022,6 +1040,7 @@ particlesJS('particles-js', {
     
 </body>
 </html>
+
 
 
 
