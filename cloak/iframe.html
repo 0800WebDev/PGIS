@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML Loader</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+textarea{
+    width:90%;
+    height:300px;
+    margin-top:10px;
+    background:#222;
+    color:white;
+    border:1px solid #555;
+}
+
+button{
+    padding:10px 18px;
+    margin:6px;
+    font-size:15px;
+    cursor:pointer;
+}
+
+input{
+    margin:10px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>HTML Loader</h2>
+
+<input type="file" id="fileInput" accept=".html,.htm">
+<br>
+
+<textarea id="htmlInput"><h1>Hello</h1><p>Test page</p></textarea>
+<br>
+
+<button onclick="openAbout()">Open in about:blank</button>
+<button onclick="openBlob()">Open in blob:</button>
+<button onclick="openData()">Open in data:</button>
+
+<script>
+
+const textarea = document.getElementById("htmlInput");
+const fileInput = document.getElementById("fileInput");
+
+/* upload html file */
+fileInput.addEventListener("change", function(){
+    const file = this.files[0];
+    if(!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e){
+        textarea.value = e.target.result;
+    };
+    reader.readAsText(file);
+});
+
+/* about:blank */
+function openAbout(){
+    const html = textarea.value;
+    const win = window.open("about:blank","_blank");
+    win.document.open();
+    win.document.write(html);
+    win.document.close();
+}
+
+/* blob: */
+function openBlob(){
+    const html = textarea.value;
+    const blob = new Blob([html], {type:"text/html"});
+    const url = URL.createObjectURL(blob);
+    window.open(url,"_blank");
+}
+
+/* data: */
+function openData(){
+    const html = textarea.value;
+    const url = "data:text/html;charset=utf-8," + encodeURIComponent(html);
+    window.open(url,"_blank");
+}
+
+</script>
+
+</body>
+</html>
