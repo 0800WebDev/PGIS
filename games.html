@@ -189,7 +189,7 @@ favoriteButtons.forEach(btn => {
 // Show only favorites
 document.getElementById('show-favorites').addEventListener('click', () => {
     items.forEach(item => {
-        item.style.display = favorites.has(item.dataset.id) ? 'block' : 'none';
+        item.style.display = favorites.has(item.dataset.id) ? "" : 'none';
     });
 });
 
@@ -328,6 +328,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
