@@ -239,13 +239,7 @@ href="https://i.postimg.cc/1XJnjRTF/0937a70d8c13420e9c4d8b0dc92bddaa-free-1.png"
     <strong>p​l​a​y​ ​g​a​m​e​s​ in school 2</strong>
     <br>
     <div style="padding: 4px 8px; display: inline-block; background-color: #80808080; border-radius: 10px; width: auto;" id="daglig-hilsen" class="fadeIn">loading splash text...</div>
-    <p>
-        original site:
-        <a href="https://tl6kv8.mimo.run/" target="_blank">PGIS on mimo</a>
-        <br />
-        and
-        <a href="https://0800games.neocities.org/" target="_blank">PGIS on neocities</a>
-    </p>
+    <p>  </p>
 </div>
 
 <div class="gamesarea">
@@ -455,7 +449,52 @@ loadPage('tools.html'); // Replace with your page
 
 
 
+<script>
+function checkPGIS() {
+    const url = window.location.href;
+    const protocol = window.location.protocol;
 
+    if (protocol === "file:") {
+        return "local file";
+    }
+
+    if (url.startsWith("https://pgis.onrender.com/")) {
+        return "Main site (render)";
+    }
+
+    if (url.startsWith("https://pgis-ub.onrender.com/")) {
+        return "UB version";
+    }
+
+    if (url.startsWith("https://pgis-mirror.vercel.app/")) {
+        return "Vercel site";
+    }
+
+    if (url.startsWith("https://pgis-mirror.netlify.app/")) {
+        return "Netlify site";
+    }
+
+    if (url.startsWith("https://pgis-mirror.up.railway.app/")) {
+        return "Railway site";
+    }
+
+    if (url.startsWith("https://0800WebDev.github.io/PGIS/")) {
+        return "Github pages site";
+    }
+
+    if (url.startsWith("https://sites.google.com/view/PGIShub")) {
+        return "Google site";
+    }
+
+    if (url.startsWith("https://ub-i.onrender.com")) {
+        return "Iframe site";
+    }
+
+    return "this is not an official PGIS website";
+}
+
+document.getElementById("pgis-check").textContent = checkPGIS();
+</script>
 
 
 
@@ -1107,6 +1146,7 @@ particlesJS('particles-js', {
     
 </body>
 </html>
+
 
 
 
