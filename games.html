@@ -166,38 +166,36 @@ document.querySelectorAll("img").forEach(img => {
 
 <script> 
    const favorites = new Set();
-const favorites = new Set();
 const favoriteButtons = document.querySelectorAll('.favorite-btn');
-const gameDivs = document.querySelectorAll('.gamediv');
+const items = document.querySelectorAll('.gamediv'); // select divs with class "gamediv"
 
-// Toggle favorite
 favoriteButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-        const gameDiv = btn.parentElement;
-        const id = gameDiv.dataset.id;
+        const itemDiv = btn.parentElement;
+        const id = itemDiv.dataset.id;
 
         if (favorites.has(id)) {
             favorites.delete(id);
             btn.textContent = '☆';
-            gameDiv.classList.remove('favorite');
+            itemDiv.classList.remove('favorite');
         } else {
             favorites.add(id);
             btn.textContent = '★';
-            gameDiv.classList.add('favorite');
+            itemDiv.classList.add('favorite');
         }
     });
 });
 
 // Show only favorites
 document.getElementById('show-favorites').addEventListener('click', () => {
-    gameDivs.forEach(div => {
-        div.style.display = favorites.has(div.dataset.id) ? 'block' : 'none';
+    items.forEach(item => {
+        item.style.display = favorites.has(item.dataset.id) ? 'block' : 'none';
     });
 });
 
-// Show all
+// Show all items
 document.getElementById('show-all').addEventListener('click', () => {
-    gameDivs.forEach(div => div.style.display = 'block');
+    items.forEach(item => item.style.display = 'block');
 });
 </script>
 
@@ -330,6 +328,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
