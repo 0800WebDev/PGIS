@@ -163,6 +163,51 @@ document.querySelectorAll("img").forEach(img => {
 </script>
 
 
+
+<script> 
+   const favorites = new Set();
+const favoriteButtons = document.querySelectorAll('.favorite-btn');
+const items = document.querySelectorAll('.item');
+const showFavBtn = document.getElementById('show-favorites');
+const showAllBtn = document.getElementById('show-all');
+
+// Toggle favorite
+favoriteButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const itemDiv = btn.parentElement;
+        const id = itemDiv.dataset.id;
+
+        if (favorites.has(id)) {
+            favorites.delete(id);
+            btn.textContent = '☆';
+            itemDiv.classList.remove('favorite');
+        } else {
+            favorites.add(id);
+            btn.textContent = '★';
+            itemDiv.classList.add('favorite');
+        }
+    });
+});
+
+// Show only favorites
+showFavBtn.addEventListener('click', () => {
+    items.forEach(item => {
+        if (!favorites.has(item.dataset.id)) {
+            item.style.display = 'none';
+        } else {
+            item.style.display = 'block';
+        }
+    });
+});
+
+// Show all items
+showAllBtn.addEventListener('click', () => {
+    items.forEach(item => item.style.display = 'block');
+});
+</script>
+
+
+
       
 
       
@@ -290,6 +335,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
