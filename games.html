@@ -165,10 +165,23 @@ document.querySelectorAll("img").forEach(img => {
 
 
 <script> 
-   const favorites = new Set();
 const favoriteButtons = document.querySelectorAll('.favorite-btn');
-const items = document.querySelectorAll('.gamediv'); // select divs with class "gamediv"
+const items = document.querySelectorAll('.gamediv');
 
+// Load favorites from localStorage
+let favorites = new Set(JSON.parse(localStorage.getItem('favorites')) || []);
+
+// Apply favorite state on page load
+items.forEach(item => {
+    const id = item.dataset.id;
+    const btn = item.querySelector('.favorite-btn');
+    if (favorites.has(id)) {
+        item.classList.add('favorite');
+        btn.textContent = '★';
+    }
+});
+
+// Toggle favorite on click
 favoriteButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         const itemDiv = btn.parentElement;
@@ -183,19 +196,22 @@ favoriteButtons.forEach(btn => {
             btn.textContent = '★';
             itemDiv.classList.add('favorite');
         }
+
+        // Save updated favorites to localStorage
+        localStorage.setItem('favorites', JSON.stringify([...favorites]));
     });
 });
 
 // Show only favorites
 document.getElementById('show-favorites').addEventListener('click', () => {
     items.forEach(item => {
-        item.style.display = favorites.has(item.dataset.id) ? "" : 'none';
+        item.classList.toggle('hidden', !favorites.has(item.dataset.id));
     });
 });
 
-// Show all items
+// Show all
 document.getElementById('show-all').addEventListener('click', () => {
-    items.forEach(item => item.style.display = "");
+    items.forEach(item => item.classList.remove('hidden'));
 });
 </script>
 
@@ -328,6 +344,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
