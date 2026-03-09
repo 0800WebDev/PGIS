@@ -75,9 +75,8 @@
       <div>
          <h1 class="indexRemove">PGIS</h1>
          <h2>games</h2> <br> <a class="indexRemove" href="/" style="color: white;">Back to Homepage</a> <br><br> <input type="text" id="search" placeholder="Search for games" /> <br><br> <button id="random-game-btn">Play Random Game</button> <a href="#bottom"><button>scroll to the bottom</button></a> <br> 
-         <button id="show-favorites">Show Favorites</button>
-         <button id="show-all">Show All</button>  <br><br> 
-      </div>
+         <button id="toggle-favorites">Show Favorites</button>
+          </div>
       <div class="games-area">
          <!--games area--> 
          <div data-id="1" class="gamediv"><b>1v1lol</b><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSEbIjGbQ7kWQzBt3gyygxzuDLgzGukjbyEg&s" alt="1v1lol image" width="100px" height="100px"><a href="/1v1lol/"><button>play</button></a> <button class="favorite-btn">☆</button> </div>
@@ -201,15 +200,21 @@ favoriteButtons.forEach(btn => {
 });
 
 // show only favorites
-document.getElementById('show-favorites').addEventListener('click', () => {
-    items.forEach(item => {
-        item.style.display = favorites.has(item.dataset.id) ? '' : 'none';
-    });
-});
+let showingFavorites = false;
+const toggleBtn = document.getElementById("toggle-favorites");
 
-// show all
-document.getElementById('show-all').addEventListener('click', () => {
-    items.forEach(item => item.style.display = '');
+toggleBtn.addEventListener("click", () => {
+    showingFavorites = !showingFavorites;
+
+    items.forEach(item => {
+        if (showingFavorites) {
+            item.style.display = favorites.has(item.dataset.id) ? '' : 'none';
+        } else {
+            item.style.display = '';
+        }
+    });
+
+    toggleBtn.textContent = showingFavorites ? "Show All" : "Show Favorites";
 });
 </script>
 
@@ -342,6 +347,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
