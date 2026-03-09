@@ -9,7 +9,7 @@
       <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/1XJnjRTF/0937a70d8c13420e9c4d8b0dc92bddaa-free-1.png">
       <style> html, body { scroll-behavior: smooth; text-align: center; background-color: black; color: whitesmoke; } /* Container for the game divs */ .games-area {background-color: rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; position: relative; z-index: 1; } /* Each game div itself */ .gamediv {   width: 200px;
                                                                                                                                                                                                                                                                                                                                                    
-   position: relative;                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                       
                                                                                                                                                                                                                                                                                                                                                    
     height: 170px;
     background-color: rgba(0, 0, 0, 0.3); /* semi-transparent black */
@@ -72,11 +72,12 @@
 }
 
 .favorite-btn {
-   position: absolute;
-    top: 5px;    /* distance from the top of the game div */
-    right: 5px;  /* distance from the right of the game div */
-    z-index: 2;  /* ensure it’s above the text */
-}         
+   float: right;           /* move it to the top-right */
+    margin-left: 5px;       /* space between button and text */
+    margin-bottom: 2px;     /* small bottom gap */
+    position: static !important; /* cancel any absolute positioning */
+    display: inline-block;  /* allow text to flow around it */
+    z-index: 2;             /* ensure it stays above images if needed */}         
 </style>
    </head>
    <body>
@@ -357,6 +358,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
