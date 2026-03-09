@@ -165,23 +165,23 @@ document.querySelectorAll("img").forEach(img => {
 
 
 <script> 
+// load favorites from localStorage
+const favorites = new Set(JSON.parse(localStorage.getItem("favorites") || "[]"));
+
 const favoriteButtons = document.querySelectorAll('.favorite-btn');
 const items = document.querySelectorAll('.gamediv');
 
-// Load favorites from localStorage
-let favorites = new Set(JSON.parse(localStorage.getItem('favorites')) || []);
-
-// Apply favorite state on page load
+// apply saved favorites on page load
 items.forEach(item => {
     const id = item.dataset.id;
     const btn = item.querySelector('.favorite-btn');
+
     if (favorites.has(id)) {
-        item.classList.add('favorite');
         btn.textContent = '★';
     }
 });
 
-// Toggle favorite on click
+// toggle favorite
 favoriteButtons.forEach(btn => {
     btn.addEventListener('click', () => {
         const itemDiv = btn.parentElement;
@@ -190,28 +190,26 @@ favoriteButtons.forEach(btn => {
         if (favorites.has(id)) {
             favorites.delete(id);
             btn.textContent = '☆';
-            itemDiv.classList.remove('favorite');
         } else {
             favorites.add(id);
             btn.textContent = '★';
-            itemDiv.classList.add('favorite');
         }
 
-        // Save updated favorites to localStorage
-        localStorage.setItem('favorites', JSON.stringify([...favorites]));
+        // save to localStorage
+        localStorage.setItem("favorites", JSON.stringify([...favorites]));
     });
 });
 
-// Show only favorites
+// show only favorites
 document.getElementById('show-favorites').addEventListener('click', () => {
     items.forEach(item => {
-        item.classList.toggle('hidden', !favorites.has(item.dataset.id));
+        item.style.display = favorites.has(item.dataset.id) ? '' : 'none';
     });
 });
 
-// Show all
+// show all
 document.getElementById('show-all').addEventListener('click', () => {
-    items.forEach(item => item.classList.remove('hidden'));
+    items.forEach(item => item.style.display = '');
 });
 </script>
 
@@ -344,6 +342,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
