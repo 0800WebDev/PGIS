@@ -8,9 +8,21 @@
       <title>PGIS 2 - games </title>
       <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/1XJnjRTF/0937a70d8c13420e9c4d8b0dc92bddaa-free-1.png">
       <style> html, body { scroll-behavior: smooth; text-align: center; background-color: black; color: whitesmoke; } /* Container for the game divs */ .games-area {background-color: rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; position: relative; z-index: 1; } /* Each game div itself */ .gamediv {   width: 200px;
+
+                                                                                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                                   
                                                                                                                                                                                                                                                                                                                                                    
                  position: relative;                                                                                                                                                                                                                                                                                                                      
+padding-top: 10px;        /* existing spacing */
+    padding-right: 30px;      /* push text left so it doesn’t overlap button */
                                                                                                                                                                                                                                                                                                                                                    
+
+                                                                                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                                   
+                                                                                                                                                                                                                                                                                                                                              
     height: 170px;
     background-color: rgba(0, 0, 0, 0.3); /* semi-transparent black */
     background-size: cover;
@@ -72,7 +84,7 @@
 }
 
 .favorite-btn {
-   float: right;
+   position: absolute;
   top: 10px;    /* distance from the top of the div */
   right: 10px;  /* distance from the right of the div */
 }         
@@ -357,6 +369,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
