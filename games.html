@@ -72,9 +72,10 @@
 }
 
 .favorite-btn {
-   position: absolute;
-    top: 5px;
-    right: 5px;
+   float: right;       /* moves button to top-right corner */
+    margin-left: 5px;   /* space between button and text */
+    margin-bottom: 2px; /* small gap below button */
+    display: inline-block; /* allows text to wrap */
 }         
 .gamediv b {
     display: block;
@@ -360,6 +361,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
