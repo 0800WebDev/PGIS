@@ -13,9 +13,6 @@
                                                                                                                                                                                                                                                                                                                                                    
                                                                                                                                                                                                                                                                                                                                                    
                  position: relative;                                                                                                                                                                                                                                                                                                                      
-padding-top: 10px;        /* existing spacing */
-    padding-right: 30px;      /* push text left so it doesn’t overlap button */
-                                                                                                                                                                                                                                                                                                                                                   
 
                                                                                                                                                                                                                                                                                                                                                    
                                                                                                                                                                                                                                                                                                                                                    
@@ -167,6 +164,50 @@ padding-top: 10px;        /* existing spacing */
 <div id="bottom"></div>
 <p>Didn't find the game you where looking for? <strong>Request a game <a href="https://forms.gle/Jgj8tLefJViDdAp87" target="_blank"> here</a></strong></p>
 
+
+
+
+<script>// For every gamediv
+document.querySelectorAll('.gamediv').forEach(div => {
+    const btn = div.querySelector('.favorite-btn');
+    if (!btn) return;
+
+    // Run this on load and on window resize
+    function wrapText() {
+        const divWidth = div.clientWidth;
+        const btnWidth = btn.offsetWidth + 10; // add some buffer
+        const children = Array.from(div.childNodes);
+
+        children.forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+                const words = node.textContent.split(' ');
+                let newHTML = '';
+                let lineLength = 0;
+
+                words.forEach(word => {
+                    lineLength += word.length * 8; // rough px estimate per character
+                    if (lineLength > divWidth - btnWidth) {
+                        newHTML += '<br>' + word + ' ';
+                        lineLength = word.length * 8;
+                    } else {
+                        newHTML += word + ' ';
+                    }
+                });
+
+                const span = document.createElement('span');
+                span.innerHTML = newHTML.trim();
+                node.replaceWith(span);
+            }
+        });
+    }
+
+    wrapText();
+    window.addEventListener('resize', wrapText);
+});</script>
+
+
+
+      
 <script>
 const placeholder = "placeholder.png";
 
@@ -369,6 +410,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
