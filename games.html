@@ -5,7 +5,7 @@
    <head>
       
 
-      <title>PGIS 2 - games </title>
+      <title>PGIS 2 - games .</title>
       <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/1XJnjRTF/0937a70d8c13420e9c4d8b0dc92bddaa-free-1.png">
       <style> html, body { scroll-behavior: smooth; text-align: center; background-color: black; color: whitesmoke; } /* Container for the game divs */ .games-area {background-color: rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; position: relative; z-index: 1; } /* Each game div itself */ .gamediv {   width: 200px;
 
@@ -85,7 +85,12 @@
   top: 10px;    /* distance from the top of the div */
   right: 10px;  /* distance from the right of the div */
 }         
-
+         
+.gamediv b {
+    display: inline-block;
+    max-width: 150px; /* adjust so it doesn't reach the button */
+    text-align: center; /* keeps the text centered inside its block */
+}
 </style>
    </head>
    <body>
@@ -167,21 +172,7 @@
 
 
 
-<script>document.querySelectorAll('.gamediv').forEach(div => {
-    const btn = div.querySelector('.favorite-btn');
-    const title = div.querySelector('b');
-    if (!btn || !title) return;
 
-    function adjustText() {
-        const divWidth = div.clientWidth;
-        const btnWidth = btn.offsetWidth + 10; // small gap
-        title.style.display = 'inline-block';
-        title.style.maxWidth = (divWidth - btnWidth) + 'px';
-    }
-
-    adjustText();
-    window.addEventListener('resize', adjustText);
-});</script>
 
 
 
@@ -388,6 +379,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
