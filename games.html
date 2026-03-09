@@ -8,6 +8,9 @@
       <title>PGIS 2 - games</title>
       <link rel="icon" type="image/x-icon" href="https://i.postimg.cc/1XJnjRTF/0937a70d8c13420e9c4d8b0dc92bddaa-free-1.png">
       <style> html, body { scroll-behavior: smooth; text-align: center; background-color: black; color: whitesmoke; } /* Container for the game divs */ .games-area {background-color: rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; position: relative; z-index: 1; } /* Each game div itself */ .gamediv {   width: 200px;
+                                                                                                                                                                                                                                                                                                                                                   
+   position: relative;                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                   
     height: 170px;
     background-color: rgba(0, 0, 0, 0.3); /* semi-transparent black */
     background-size: cover;
@@ -70,10 +73,9 @@
 
 .favorite-btn {
    position: absolute;
-  top: 10px;    
-  right: 10px;  
-  float: right;
-  margin: 0 0 10px 10px; 
+    top: 5px;    /* distance from the top of the game div */
+    right: 5px;  /* distance from the right of the game div */
+    z-index: 2;  /* ensure it’s above the text */
 }         
 </style>
    </head>
@@ -355,6 +357,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
