@@ -173,7 +173,9 @@
 
 <script>
 document.querySelectorAll("button").forEach(btn => {
-  btn.style.width = "100px";
+  if (btn.textContent.trim() === "play") {
+    btn.style.width = "120px";
+  }
 });
 </script>
 
@@ -381,6 +383,7 @@ searchInput.addEventListener('input', () => {
 
    </body>
 </html>
+
 
 
 
