@@ -349,100 +349,10 @@ href="https://i.postimg.cc/1XJnjRTF/0937a70d8c13420e9c4d8b0dc92bddaa-free-1.png"
 
 
 
-<div id="content"></div>
-
-<script>
-async function loadPage(url) {
-  try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error('Network response was not ok');
-
-    const text = await res.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(text, 'text/html');
-
-    // Remove all elements with class "indexRemove"
-    doc.querySelectorAll('.indexRemove').forEach(el => el.remove());
-
-    // Copy body content
-    const bodyHTML = doc.body.innerHTML;
-
-    // Optionally copy <head> styles
-    const headStyles = [...doc.head.querySelectorAll('link[rel="stylesheet"], style')];
-    headStyles.forEach(node => document.head.appendChild(node.cloneNode(true)));
-
-    // Inject body content
-    document.getElementById('content').innerHTML = bodyHTML;
-
-    // Optional: run scripts manually
-    const scripts = doc.body.querySelectorAll('script');
-    scripts.forEach(oldScript => {
-      const newScript = document.createElement('script');
-      if (oldScript.src) {
-        newScript.src = oldScript.src;
-      } else {
-        newScript.textContent = oldScript.textContent;
-      }
-      document.body.appendChild(newScript);
-    });
-
-  } catch (err) {
-    console.error('Failed to load page:', err);
-  }
-}
-
-loadPage('games.html'); // Replace with your page
-                                 </script>
 
 
 
 
-
-
-<div id="tools"></div>
-
-<script>
-async function loadPage(url) {
-  try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error('Network response was not ok');
-
-    const text = await res.text();
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(text, 'text/html');
-
-    // Remove all elements with class "indexRemove"
-    doc.querySelectorAll('.indexRemove').forEach(el => el.remove());
-
-    // Copy body content
-    const bodyHTML = doc.body.innerHTML;
-
-    // Optionally copy <head> styles
-    const headStyles = [...doc.head.querySelectorAll('link[rel="stylesheet"], style')];
-    headStyles.forEach(node => document.head.appendChild(node.cloneNode(true)));
-
-    // Inject body content
-    document.getElementById('tools').innerHTML = bodyHTML;
-
-    // Optional: run scripts manually
-    const scripts = doc.body.querySelectorAll('script');
-    scripts.forEach(oldScript => {
-      const newScript = document.createElement('script');
-      if (oldScript.src) {
-        newScript.src = oldScript.src;
-      } else {
-        newScript.textContent = oldScript.textContent;
-      }
-      document.body.appendChild(newScript);
-    });
-
-  } catch (err) {
-    console.error('Failed to load page:', err);
-  }
-}
-
-loadPage('tools.html'); // Replace with your page
-</script>
 
 
 
@@ -558,39 +468,7 @@ navigator.serviceWorker.ready.then(sw => {
 
 
  
-<script>
-const RARE_AUDIO_CHANCE = 1 / 10000; 
-let audioUnlocked = false;
 
-function playRareAudio() {
-  const audio = new Audio("/giga 1.mp3"); 
-  audio.play().catch(() => console.log("Autoplay blocked"));
-}
-
-function unlockAudio() {
-  if (audioUnlocked) return;
-  audioUnlocked = true;
-
-  // attempt to unlock audio context
-  const a = new Audio();
-  a.play().catch(() => {});
-
-  // 🎲 rare roll
-  if (Math.random() < RARE_AUDIO_CHANCE) {
-    playRareAudio();
-  }
-}
-
-// wait for first real interaction
-document.addEventListener("click", unlockAudio, { once: true });
-document.addEventListener("keydown", unlockAudio, { once: true });
-
-// console trigger
-window.forceRareAudio = () => {
-  playRareAudio();
-  console.log("Rare audio forced");
-};
-</script>
 
 
 
@@ -1158,6 +1036,7 @@ particlesJS('particles-js', {
     
 </body>
 </html>
+
 
 
 
