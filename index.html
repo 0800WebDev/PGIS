@@ -157,6 +157,7 @@ href="https://i.postimg.cc/1XJnjRTF/0937a70d8c13420e9c4d8b0dc92bddaa-free-1.png"
     display: flex;
     align-items: center;
     justify-content: center;
+  display: none;
 }
 
 #ub-popup {
@@ -1031,12 +1032,24 @@ particlesJS('particles-js', {
 
 
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    if(localStorage.getItem("ubPopupClosed") !== "true"){
+        document.getElementById("ub-popup-overlay").style.display = "flex";
+    }
+});
 
+function closeUbPopup(){
+    document.getElementById("ub-popup-overlay").style.display = "none";
+    localStorage.setItem("ubPopupClosed","true");
+}
+</script>
 
 
     
 </body>
 </html>
+
 
 
 
