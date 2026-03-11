@@ -39,7 +39,7 @@ PGIS has a selection of tools including:
 4. Click the "Open" button on the tool you want to want to use
 
 ### Disclaimer
-I do not own any games or tools on this website.
+I do not claim own any games or tools on this website.
 
 ### Images
 **PGIS logo**
