@@ -27,7 +27,7 @@ function startShutdownTimer(minutes) {
     const min = Math.floor(remaining / 60);
     const sec = remaining % 60;
 
-    banner.textContent =
+    banner.innerHTML =
       `This page is closing temporarily in ${min} minutes and ${sec} seconds please click <a href="/info.txt">here</a> for more info`;
 
     if (remaining <= 0) {
@@ -79,3 +79,4 @@ document.head.appendChild(s)
 window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}
 plausible.init=plausible.init||function(i){plausible.o=i||{}}
 plausible.init()
+
