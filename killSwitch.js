@@ -60,3 +60,14 @@ function killPage() {
     window.close();
   }, 100);
 }
+
+
+
+
+
+document.addEventListener("keydown", function(e) {
+    if (e.ctrlKey && e.key === "q") {
+        window.location.href = "https://www.google.com";
+    }
+});
+
