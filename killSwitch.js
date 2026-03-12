@@ -65,11 +65,17 @@ function killPage() {
 
 
 
-document.addEventListener("keydown", function(e) {
-    if (e.ctrlKey && e.key === "q") {
-        window.location.href = "https://www.google.com";
-    }
+const iframe = document.querySelector("iframe");
+
+iframe.addEventListener("load", () => {
+    iframe.contentWindow.addEventListener("keydown", function(e) {
+        if (e.ctrlKey && e.key.toLowerCase() === "q") {
+            window.location.href = "https://www.google.com";
+        }
+    });
 });
+
+
 
 const s=document.createElement("script")
 s.async=true
@@ -79,4 +85,5 @@ document.head.appendChild(s)
 window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}
 plausible.init=plausible.init||function(i){plausible.o=i||{}}
 plausible.init()
+
 
