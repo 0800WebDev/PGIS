@@ -71,3 +71,11 @@ document.addEventListener("keydown", function(e) {
     }
 });
 
+const s=document.createElement("script")
+s.async=true
+s.src="https://plausible.io/js/pa-7RQ-wKkPtManKgQ5IRQrg.js"
+document.head.appendChild(s)
+
+window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}
+plausible.init=plausible.init||function(i){plausible.o=i||{}}
+plausible.init()
