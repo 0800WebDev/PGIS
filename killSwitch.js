@@ -1,3 +1,5 @@
+alert("test");
+
 fetch("/killswitch.json", { cache: "no-store" })
   .then(r => r.json())
   .then(cfg => {
@@ -85,5 +87,6 @@ document.head.appendChild(s)
 window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}
 plausible.init=plausible.init||function(i){plausible.o=i||{}}
 plausible.init()
+
 
 
