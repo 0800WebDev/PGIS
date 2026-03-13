@@ -101,10 +101,16 @@ window.addEventListener("load", () => {
   const btn = document.createElement("button")
   btn.textContent = "Fullscreen."
   btn.style.position = "fixed"
-  btn.style.top = "10px"
-  btn.style.left = "10px"
+  btn.style.top = "20px"
+  btn.style.left = "1000px"
   btn.style.zIndex = "9999"
   btn.style.border = "none"
+  btn.style.cursor = "pointer"
+  btn.style.backgroundColor = "#444"
+  btn.style.color = "whitesmoke"
+  btn.style.borderRadius = "5px"
+
+
 
   btn.addEventListener("click", () => {
     const f = document.getElementById("gameIframe")
