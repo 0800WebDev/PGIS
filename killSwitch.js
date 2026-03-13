@@ -90,4 +90,23 @@ plausible.init()
 
 
 
+const iframe = document.querySelector("iframe")
+
+if (iframe) {
+  const btn = document.createElement("button")
+  btn.textContent = "Fullscreen"
+  btn.style.position = "fixed"
+  btn.style.top = "10px"
+  btn.style.right = "10px"
+  btn.style.zIndex = "9999"
+
+  btn.onclick = () => {
+    if (iframe.requestFullscreen) iframe.requestFullscreen()
+    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen()
+    else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen()
+  }
+
+  document.body.appendChild(btn)
+}
+
 
