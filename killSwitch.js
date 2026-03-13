@@ -90,9 +90,10 @@ plausible.init()
 
 
 
-const iframe = document.querySelector("iframe")
+window.addEventListener("load", () => {
+  const iframe = document.querySelector("iframe")
+  if (!iframe) return
 
-if (iframe) {
   const btn = document.createElement("button")
   btn.textContent = "Fullscreen"
   btn.style.position = "fixed"
@@ -107,6 +108,4 @@ if (iframe) {
   }
 
   document.body.appendChild(btn)
-}
-
-
+})
