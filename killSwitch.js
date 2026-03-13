@@ -94,11 +94,14 @@ window.addEventListener("load", () => {
   const iframe = document.querySelector("iframe")
   if (!iframe) return
 
-  // Dynamically allow fullscreen
-  iframe.setAttribute("allowfullscreen", "")
-  iframe.setAttribute("allow", "fullscreen")
+  // Wrap iframe so fullscreen works reliably
+  const wrapper = document.createElement("div")
+  wrapper.style.width = iframe.style.width
+  wrapper.style.height = iframe.style.height
+  iframe.parentNode.insertBefore(wrapper, iframe)
+  wrapper.appendChild(iframe)
 
-  // Create fullscreen button
+  // Create button
   const btn = document.createElement("button")
   btn.textContent = "Fullscreen"
   btn.style.position = "fixed"
@@ -107,10 +110,9 @@ window.addEventListener("load", () => {
   btn.style.zIndex = "9999"
 
   btn.addEventListener("click", () => {
-    
-    if (iframe.requestFullscreen) iframe.requestFullscreen()
-    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen()
-    else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen()
+    if (wrapper.requestFullscreen) wrapper.requestFullscreen()
+    else if (wrapper.webkitRequestFullscreen) wrapper.webkitRequestFullscreen()
+    else if (wrapper.msRequestFullscreen) wrapper.msRequestFullscreen()
   })
 
   document.body.appendChild(btn)
