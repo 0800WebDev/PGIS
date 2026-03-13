@@ -94,6 +94,11 @@ window.addEventListener("load", () => {
   const iframe = document.querySelector("iframe")
   if (!iframe) return
 
+  // Dynamically allow fullscreen
+  iframe.setAttribute("allowfullscreen", "")
+  iframe.setAttribute("allow", "fullscreen")
+
+  // Create fullscreen button
   const btn = document.createElement("button")
   btn.textContent = "Fullscreen"
   btn.style.position = "fixed"
@@ -101,12 +106,11 @@ window.addEventListener("load", () => {
   btn.style.right = "10px"
   btn.style.zIndex = "9999"
 
-  btn.onclick = () => {
-    const target = iframe.parentElement || iframe
-    if (target.requestFullscreen) target.requestFullscreen()
-    else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen()
-    else if (target.msRequestFullscreen) target.msRequestFullscreen()
-  }
+  btn.addEventListener("click", () => {
+    if (iframe.requestFullscreen) iframe.requestFullscreen()
+    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen()
+    else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen()
+  })
 
   document.body.appendChild(btn)
 })
