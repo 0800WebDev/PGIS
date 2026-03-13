@@ -94,25 +94,24 @@ window.addEventListener("load", () => {
   const iframe = document.querySelector("iframe")
   if (!iframe) return
 
-  // Wrap iframe so fullscreen works reliably
-  const wrapper = document.createElement("div")
-  wrapper.style.width = iframe.style.width
-  wrapper.style.height = iframe.style.height
-  iframe.parentNode.insertBefore(wrapper, iframe)
-  wrapper.appendChild(iframe)
+  // Give the iframe an id
+  iframe.id = "gameIframe"
 
-  // Create button
+  // Create fullscreen button
   const btn = document.createElement("button")
-  btn.textContent = "Fullscreen"
+  btn.textContent = "Fullscreen."
   btn.style.position = "fixed"
   btn.style.top = "10px"
   btn.style.right = "10px"
   btn.style.zIndex = "9999"
 
   btn.addEventListener("click", () => {
-    if (wrapper.requestFullscreen) wrapper.requestFullscreen()
-    else if (wrapper.webkitRequestFullscreen) wrapper.webkitRequestFullscreen()
-    else if (wrapper.msRequestFullscreen) wrapper.msRequestFullscreen()
+    const f = document.getElementById("gameIframe")
+    if (!f) return
+
+    if (f.requestFullscreen) f.requestFullscreen()
+    else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen()
+    else if (f.msRequestFullscreen) f.msRequestFullscreen()
   })
 
   document.body.appendChild(btn)
