@@ -102,9 +102,10 @@ window.addEventListener("load", () => {
   btn.style.zIndex = "9999"
 
   btn.onclick = () => {
-    if (iframe.requestFullscreen) iframe.requestFullscreen()
-    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen()
-    else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen()
+    const target = iframe.parentElement || iframe
+    if (target.requestFullscreen) target.requestFullscreen()
+    else if (target.webkitRequestFullscreen) target.webkitRequestFullscreen()
+    else if (target.msRequestFullscreen) target.msRequestFullscreen()
   }
 
   document.body.appendChild(btn)
