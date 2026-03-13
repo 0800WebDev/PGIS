@@ -107,7 +107,7 @@ window.addEventListener("load", () => {
   btn.style.zIndex = "9999"
 
   btn.addEventListener("click", () => {
-    alert("test")
+    
     if (iframe.requestFullscreen) iframe.requestFullscreen()
     else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen()
     else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen()
