@@ -102,8 +102,9 @@ window.addEventListener("load", () => {
   btn.textContent = "Fullscreen."
   btn.style.position = "fixed"
   btn.style.top = "10px"
-  btn.style.right = "10px"
+  btn.style.left = "10px"
   btn.style.zIndex = "9999"
+  btn.style.border = "none"
 
   btn.addEventListener("click", () => {
     const f = document.getElementById("gameIframe")
