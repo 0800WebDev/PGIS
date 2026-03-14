@@ -186,7 +186,48 @@
 <div id="bottom"></div>
 <p>Didn't find the game you where looking for? <strong>Request a game <a href="https://forms.gle/Jgj8tLefJViDdAp87" target="_blank"> here</a></strong></p>
 
+<script>
+  const sortSelect = document.getElementById("sort");
+const gamesContainer = document.querySelector(".games-area");
 
+function sortGames() {
+    let games = Array.from(gamesContainer.children);
+
+    switch(sortSelect.value) {
+        case "az":
+            games.sort((a, b) => a.querySelector("b").textContent.localeCompare(b.querySelector("b").textContent));
+            break;
+        case "za":
+            games.sort((a, b) => b.querySelector("b").textContent.localeCompare(a.querySelector("b").textContent));
+            break;
+        case "new":
+            games.sort((a, b) => b.dataset.id - a.dataset.id);
+            break;
+        case "old":
+            games.sort((a, b) => a.dataset.id - b.dataset.id);
+            break;
+        case "random":
+            games.sort(() => Math.random() - 0.5);
+            break;
+    }
+
+    // Re-append to container in new order
+    games.forEach(game => gamesContainer.appendChild(game));
+
+    // Save preference
+    localStorage.setItem("gameSort", sortSelect.value);
+}
+
+// Load saved sort preference
+const savedSort = localStorage.getItem("gameSort");
+if(savedSort) {
+    sortSelect.value = savedSort;
+    sortGames();
+}
+
+// Trigger sorting on change
+sortSelect.addEventListener("change", sortGames);
+</script>
 
 <script>
 document.querySelectorAll("button").forEach(btn => {
