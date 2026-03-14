@@ -398,59 +398,37 @@ searchInput.addEventListener('input', () => {
 });
 </script>
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-  const sortSelect = document.getElementById("sort");
-  const gamesContainer = document.querySelector(".games-area");
+const sortSelect = document.getElementById("sort")
+const container = document.querySelector(".games-area")
 
-  function sortGames() {
-    let games = Array.from(gamesContainer.children);
+sortSelect.addEventListener("change", function() {
 
-    switch (sortSelect.value) {
-      case "az":
-        games.sort((a, b) =>
-          a.querySelector("b").textContent.trim().localeCompare(b.querySelector("b").textContent.trim())
-        );
-        break;
+let games = Array.from(container.querySelectorAll(".gamediv"))
 
-      case "za":
-        games.sort((a, b) =>
-          b.querySelector("b").textContent.trim().localeCompare(a.querySelector("b").textContent.trim())
-        );
-        break;
+if(this.value==="az"){
+games.sort((a,b)=>a.querySelector("b").innerText.localeCompare(b.querySelector("b").innerText))
+}
 
-      case "new":
-        games.sort((a, b) => Number(b.dataset.id) - Number(a.dataset.id));
-        break;
+if(this.value==="za"){
+games.sort((a,b)=>b.querySelector("b").innerText.localeCompare(a.querySelector("b").innerText))
+}
 
-      case "old":
-        games.sort((a, b) => Number(a.dataset.id) - Number(b.dataset.id));
-        break;
+if(this.value==="new"){
+games.sort((a,b)=>Number(b.dataset.id)-Number(a.dataset.id))
+}
 
-      case "random":
-        games.sort(() => Math.random() - 0.5);
-        break;
-    }
+if(this.value==="old"){
+games.sort((a,b)=>Number(a.dataset.id)-Number(b.dataset.id))
+}
 
-    games.forEach(game => gamesContainer.appendChild(game));
-    localStorage.setItem("gameSort", sortSelect.value);
-  }
+if(this.value==="random"){
+games.sort(()=>Math.random()-0.5)
+}
 
-  // Load saved sort preference
-  const savedSort = localStorage.getItem("gameSort");
-  if (savedSort) {
-    sortSelect.value = savedSort;
-    sortGames();
-  }
+games.forEach(game=>container.appendChild(game))
 
-  sortSelect.addEventListener("change", sortGames);
-});
+})
 </script>
-
-     <script>
-document.getElementById("sort").addEventListener("change", function () {
-alert("sort changed");
-});
-     </script>
    </body>
 </html>
 
