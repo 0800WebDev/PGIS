@@ -91,6 +91,12 @@
     max-width: 120px; /* adjust so it doesn't reach the button */
     text-align: center; /* keeps the text centered inside its block */
 }
+        select {
+          background-color: #444;
+       color: whitesmoke;
+        border: none; 
+      border-radius: 4px;
+        }
 </style>
    </head>
    <body>
@@ -100,13 +106,13 @@
          <h1 class="indexRemove">PGIS</h1>
          <h2>games</h2> <br> <a class="indexRemove" href="/" style="color: white;">Back to Homepage</a> <br><br> <input type="text" id="search" placeholder="Search for games" /><br>
 <select id="sort">
-  <option value="new">Newest first</option>
   <option value="old">Oldest first</option>
+  <option value="new">Newest first</option>
   <option value="az">A-Z</option>
   <option value="za">Z-A</option>
   <option value="random">Random</option>
 </select>
-<br><br> <br><br> <button id="random-game-btn">Play Random Game</button> <a href="#bottom"><button>scroll to the bottom</button></a> <br> 
+ <br><br> <button id="random-game-btn">Play Random Game</button> <a href="#bottom"><button>scroll to the bottom</button></a> <br> 
          <button id="toggle-favorites">Show Favorites</button>
         <div style="text-align: left;">
         <p>(E) = the page uses an external embed from another domain and might be blocked <br>
