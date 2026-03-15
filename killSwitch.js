@@ -129,8 +129,10 @@ window.addEventListener("load", () => {
 
 
 
-// === LIGHT/DARK BUTTON (all pages) ===
-(function() {
+
+
+window.addEventListener("DOMContentLoaded", () => {
+  // CREATE LIGHT/DARK TOGGLE BUTTON
   const toggleBtn = document.createElement('button');
   toggleBtn.textContent = "Toggle Light Mode";
   toggleBtn.id = "lightDarkToggle";
@@ -146,6 +148,7 @@ window.addEventListener("load", () => {
   toggleBtn.style.borderRadius = "5px";
   document.body.appendChild(toggleBtn);
 
+  // STYLE FOR LIGHT MODE
   const styleTag = document.createElement('style');
   styleTag.textContent = `
     body.light-mode {
@@ -158,6 +161,7 @@ window.addEventListener("load", () => {
   `;
   document.head.appendChild(styleTag);
 
+  // APPLY LIGHT OR DARK MODE
   function applyLightMode() {
     document.body.classList.add("light-mode");
     toggleBtn.textContent = "Toggle Dark Mode";
@@ -170,12 +174,14 @@ window.addEventListener("load", () => {
     localStorage.setItem("lightMode", "false");
   }
 
+  // LOAD SAVED PREFERENCE
   if (localStorage.getItem("lightMode") === "true") applyLightMode();
 
+  // TOGGLE ON CLICK
   toggleBtn.addEventListener("click", () => {
     if (document.body.classList.contains("light-mode")) applyDarkMode();
     else applyLightMode();
   });
-})();
+});
 
 
