@@ -9,7 +9,7 @@
 window.addEventListener("load", () => {
   // CREATE LIGHT/DARK TOGGLE BUTTON
   const toggleBtn = document.createElement('button');
-  toggleBtn.textContent = "Toggle Light Mode";
+  toggleBtn.textContent = "Light Mode";
   toggleBtn.id = "lightDarkToggle";
   toggleBtn.style.position = "fixed";
   toggleBtn.style.top = "10px";
@@ -47,14 +47,14 @@ window.addEventListener("load", () => {
   // FUNCTION TO APPLY LIGHT MODE
   function applyLightMode() {
     document.body.classList.add("light-mode");
-    toggleBtn.textContent = "Toggle Dark Mode";
+    toggleBtn.textContent = "Dark Mode";
     localStorage.setItem("lightMode", "true");
   }
 
   // FUNCTION TO APPLY DARK MODE (REMOVE LIGHT MODE CLASS)
   function applyDarkMode() {
     document.body.classList.remove("light-mode");
-    toggleBtn.textContent = "Toggle Light Mode";
+    toggleBtn.textContent = "Light Mode";
     localStorage.setItem("lightMode", "false");
   }
 
