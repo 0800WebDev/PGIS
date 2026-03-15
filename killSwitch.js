@@ -131,9 +131,9 @@ window.addEventListener("load", () => {
 
 
 window.addEventListener("load", () => {
-  // Create light/dark toggle button
+  // CREATE TOGGLE BUTTON
   const toggleBtn = document.createElement('button');
-  toggleBtn.textContent = "Toggle Light Mode";
+  toggleBtn.textContent = "Toggle Light Light.t";
   toggleBtn.id = "lightDarkToggle";
   toggleBtn.style.position = "fixed";
   toggleBtn.style.top = "10px";
@@ -143,58 +143,49 @@ window.addEventListener("load", () => {
   toggleBtn.style.cursor = "pointer";
   document.body.appendChild(toggleBtn);
 
-  // Store original styles for buttons
-  const buttonOriginals = [];
-  document.querySelectorAll("button").forEach(btn => {
-    buttonOriginals.push({
-      element: btn,
-      background: getComputedStyle(btn).backgroundColor,
-      color: getComputedStyle(btn).color
-    });
-  });
-
-  // Apply light mode
+  // LIGHT MODE FUNCTION
   function applyLightMode() {
     document.body.style.backgroundColor = "white";
     document.body.style.color = "black";
     document.querySelectorAll("a").forEach(a => a.style.color = "black");
-    document.querySelectorAll("button").forEach((btn) => {
-      btn.style.backgroundColor = "black";
-      btn.style.color = "white";
-      btn.onmouseover = () => {
-        btn.style.backgroundColor = "white";
-        btn.style.color = "black";
-      };
-      btn.onmouseout = () => {
-        btn.style.backgroundColor = "black";
-        btn.style.color = "white";
-      };
-    });
+
+    // Swap button colors only for toggle button itself
+    toggleBtn.style.backgroundColor = "black";
+    toggleBtn.style.color = "white";
+    toggleBtn.onmouseover = () => {
+      toggleBtn.style.backgroundColor = "white";
+      toggleBtn.style.color = "black";
+    };
+    toggleBtn.onmouseout = () => {
+      toggleBtn.style.backgroundColor = "black";
+      toggleBtn.style.color = "white";
+    };
+
     toggleBtn.textContent = "Toggle Dark Mode";
     localStorage.setItem("lightMode", "true");
   }
 
-  // Revert to dark mode
+  // DARK MODE FUNCTION (REVERTS TO NORMAL CSS)
   function applyDarkMode() {
     document.body.style.backgroundColor = "";
     document.body.style.color = "";
     document.querySelectorAll("a").forEach(a => a.style.color = "");
-    document.querySelectorAll("button").forEach((btn, i) => {
-      const orig = buttonOriginals[i];
-      btn.style.backgroundColor = orig.background;
-      btn.style.color = orig.color;
-      btn.onmouseover = null;
-      btn.onmouseout = null;
-    });
+
+    // Remove inline styles from toggle button so it uses normal CSS
+    toggleBtn.style.backgroundColor = "";
+    toggleBtn.style.color = "";
+    toggleBtn.onmouseover = null;
+    toggleBtn.onmouseout = null;
+
     toggleBtn.textContent = "Toggle Light Mode";
     localStorage.setItem("lightMode", "false");
   }
 
-  // Check localStorage on load
+  // Load preference
   let lightMode = localStorage.getItem("lightMode") === "true";
   if (lightMode) applyLightMode();
 
-  // Toggle button click
+  // TOGGLE CLICK
   toggleBtn.addEventListener("click", () => {
     lightMode = !lightMode;
     if (lightMode) applyLightMode();
