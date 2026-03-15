@@ -111,14 +111,7 @@ async function openCustom() {
     const scriptURL = data.url;
 
     // Create a blob with HTML that loads the script immediately
-    const blobContent = `
-<!DOCTYPE html>
-<html>
-<head><title>Custom Page</title></head>
-<body>
-<script src="${scriptURL}"></script>
-</body>
-</html>
+    const blobContent = `<!DOCTYPE html ><html> <head> <title>Custom Page</title> </head> <body> <script src="${scriptURL}"></script> </body> </html>
 `;
 
     const blob = new Blob([blobContent], { type: "text/html" });
