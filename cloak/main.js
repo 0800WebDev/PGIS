@@ -3,7 +3,7 @@ async function openCustom() {
     const mode = "replace"; // or "add", you could add a select later
 
     // Send HTML to backend to generate the JS file
-    const res = await fetch("https://YOUR_BACKEND_DOMAIN/generate", {
+    const res = await fetch("https://pgis-backend/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ html, mode })
@@ -12,20 +12,10 @@ async function openCustom() {
     const data = await res.json();
     const scriptURL = data.url;
 
-    // Create a blob with HTML that loads the script immediately
-    const blobContent = `
-<!DOCTYPE html>
-<html>
-<head><title>Custom Page</title></head>
-<body>
-<script src="${scriptURL}"></script>
-</body>
-</html>
+    // Show the <script> tag so users can copy it
+    const resultContainer = document.getElementById("result");
+    resultContainer.innerHTML = `
+<label>Copy this script tag:</label><br>
+<textarea style="width:90%;height:60px;">&lt;script src="${scriptURL}"&gt;&lt;/script&gt;</textarea>
 `;
-
-    const blob = new Blob([blobContent], { type: "text/html" });
-    const url = URL.createObjectURL(blob);
-
-    // Open a new tab and show the generated page immediately
-    window.open(url, "_blank");
 }
