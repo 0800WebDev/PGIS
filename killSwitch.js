@@ -1,5 +1,82 @@
 //this is basicly just a global script
 
+
+
+
+
+
+
+window.addEventListener("load", () => {
+  // CREATE LIGHT/DARK TOGGLE BUTTON
+  const toggleBtn = document.createElement('button');
+  toggleBtn.textContent = "Toggle Light Mode";
+  toggleBtn.id = "lightDarkToggle";
+  toggleBtn.style.position = "fixed";
+  toggleBtn.style.top = "10px";
+  toggleBtn.style.right = "10px";
+  toggleBtn.style.zIndex = "9999";
+  toggleBtn.style.padding = "8px 12px";
+  toggleBtn.style.cursor = "pointer";
+  toggleBtn.style.backgroundColor = "#444";
+  toggleBtn.style.color = "whitesmoke";
+  toggleBtn.style.border = "none";
+  toggleBtn.style.borderRadius = "5px";
+  document.body.appendChild(toggleBtn);
+
+  // CREATE STYLE TAG FOR LIGHT MODE
+  const styleTag = document.createElement('style');
+  styleTag.textContent = `
+    body.light-mode {
+      background-color: white !important;
+      color: black !important;
+    }
+    body.light-mode a {
+      color: black !important;
+    }
+    body.light-mode button {
+      background-color: black !important;
+      color: white !important;
+    }
+    body.light-mode button:hover {
+      background-color: white !important;
+      color: black !important;
+    }
+  `;
+  document.head.appendChild(styleTag);
+
+  // FUNCTION TO APPLY LIGHT MODE
+  function applyLightMode() {
+    document.body.classList.add("light-mode");
+    toggleBtn.textContent = "Toggle Dark Mode";
+    localStorage.setItem("lightMode", "true");
+  }
+
+  // FUNCTION TO APPLY DARK MODE (REMOVE LIGHT MODE CLASS)
+  function applyDarkMode() {
+    document.body.classList.remove("light-mode");
+    toggleBtn.textContent = "Toggle Light Mode";
+    localStorage.setItem("lightMode", "false");
+  }
+
+  // LOAD PREFERENCE
+  let lightMode = localStorage.getItem("lightMode") === "true";
+  if (lightMode) applyLightMode();
+
+  // TOGGLE CLICK
+  toggleBtn.addEventListener("click", () => {
+    lightMode = !lightMode;
+    if (lightMode) applyLightMode();
+    else applyDarkMode();
+  });
+});
+
+
+
+
+
+
+
+
 fetch("/killswitch.json", { cache: "no-store" })
   .then(r => r.json())
   .then(cfg => {
@@ -91,69 +168,7 @@ plausible.init()
 
 
 
-window.addEventListener("load", () => {
-  // CREATE LIGHT/DARK TOGGLE BUTTON
-  const toggleBtn = document.createElement('button');
-  toggleBtn.textContent = "Toggle Light Mode";
-  toggleBtn.id = "lightDarkToggle";
-  toggleBtn.style.position = "fixed";
-  toggleBtn.style.top = "10px";
-  toggleBtn.style.right = "10px";
-  toggleBtn.style.zIndex = "9999";
-  toggleBtn.style.padding = "8px 12px";
-  toggleBtn.style.cursor = "pointer";
-  toggleBtn.style.backgroundColor = "#444";
-  toggleBtn.style.color = "whitesmoke";
-  toggleBtn.style.border = "none";
-  toggleBtn.style.borderRadius = "5px";
-  document.body.appendChild(toggleBtn);
 
-  // CREATE STYLE TAG FOR LIGHT MODE
-  const styleTag = document.createElement('style');
-  styleTag.textContent = `
-    body.light-mode {
-      background-color: white !important;
-      color: black !important;
-    }
-    body.light-mode a {
-      color: black !important;
-    }
-    body.light-mode button {
-      background-color: black !important;
-      color: white !important;
-    }
-    body.light-mode button:hover {
-      background-color: white !important;
-      color: black !important;
-    }
-  `;
-  document.head.appendChild(styleTag);
-
-  // FUNCTION TO APPLY LIGHT MODE
-  function applyLightMode() {
-    document.body.classList.add("light-mode");
-    toggleBtn.textContent = "Toggle Dark Mode";
-    localStorage.setItem("lightMode", "true");
-  }
-
-  // FUNCTION TO APPLY DARK MODE (REMOVE LIGHT MODE CLASS)
-  function applyDarkMode() {
-    document.body.classList.remove("light-mode");
-    toggleBtn.textContent = "Toggle Light Mode";
-    localStorage.setItem("lightMode", "false");
-  }
-
-  // LOAD PREFERENCE
-  let lightMode = localStorage.getItem("lightMode") === "true";
-  if (lightMode) applyLightMode();
-
-  // TOGGLE CLICK
-  toggleBtn.addEventListener("click", () => {
-    lightMode = !lightMode;
-    if (lightMode) applyLightMode();
-    else applyDarkMode();
-  });
-});
 
 
 
