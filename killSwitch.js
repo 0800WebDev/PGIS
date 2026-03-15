@@ -129,8 +129,8 @@ window.addEventListener("load", () => {
 
 
 
-window.addEventListener("load", () => {
-  // CREATE LIGHT/DARK TOGGLE BUTTON
+// === LIGHT/DARK BUTTON (all pages) ===
+(function() {
   const toggleBtn = document.createElement('button');
   toggleBtn.textContent = "Toggle Light Mode.";
   toggleBtn.id = "lightDarkToggle";
@@ -146,49 +146,62 @@ window.addEventListener("load", () => {
   toggleBtn.style.borderRadius = "5px";
   document.body.appendChild(toggleBtn);
 
-  // CREATE STYLE TAG FOR LIGHT MODE
   const styleTag = document.createElement('style');
   styleTag.textContent = `
     body.light-mode {
       background-color: white !important;
       color: black !important;
     }
-    body.light-mode a {
-      color: black !important;
-    }
-    body.light-mode button {
-      background-color: black !important;
-      color: white !important;
-    }
-    body.light-mode button:hover {
-      background-color: white !important;
-      color: black !important;
-    }
+    body.light-mode a { color: black !important; }
+    body.light-mode button { background-color: black !important; color: white !important; }
+    body.light-mode button:hover { background-color: white !important; color: black !important; }
   `;
   document.head.appendChild(styleTag);
 
-  // FUNCTION TO APPLY LIGHT MODE
   function applyLightMode() {
     document.body.classList.add("light-mode");
     toggleBtn.textContent = "Toggle Dark Mode";
     localStorage.setItem("lightMode", "true");
   }
 
-  // FUNCTION TO APPLY DARK MODE (REMOVE LIGHT MODE CLASS)
   function applyDarkMode() {
     document.body.classList.remove("light-mode");
     toggleBtn.textContent = "Toggle Light Mode";
     localStorage.setItem("lightMode", "false");
   }
 
-  // LOAD PREFERENCE
-  let lightMode = localStorage.getItem("lightMode") === "true";
-  if (lightMode) applyLightMode();
+  if (localStorage.getItem("lightMode") === "true") applyLightMode();
 
-  // TOGGLE CLICK
   toggleBtn.addEventListener("click", () => {
-    lightMode = !lightMode;
-    if (lightMode) applyLightMode();
-    else applyDarkMode();
+    if (document.body.classList.contains("light-mode")) applyDarkMode();
+    else applyLightMode();
   });
-});
+})();
+
+// === FULLSCREEN BUTTON (only pages with iframe) ===
+(function() {
+  const iframe = document.querySelector("iframe");
+  if (!iframe) return; // no iframe → skip fullscreen button
+
+  iframe.id = "gameIframe";
+
+  const btn = document.createElement("button");
+  btn.textContent = "Fullscreen";
+  btn.style.position = "fixed";
+  btn.style.top = "20px";
+  btn.style.left = "330px";
+  btn.style.zIndex = "9999";
+  btn.style.border = "none";
+  btn.style.cursor = "pointer";
+  btn.style.backgroundColor = "#444";
+  btn.style.color = "whitesmoke";
+  btn.style.borderRadius = "5px";
+
+  btn.addEventListener("click", () => {
+    if (iframe.requestFullscreen) iframe.requestFullscreen();
+    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
+    else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
+  });
+
+  document.body.appendChild(btn);
+})();
