@@ -130,79 +130,74 @@ window.addEventListener("load", () => {
 
 
 
+window.addEventListener("load", () => {
+  // Create light/dark toggle button
+  const toggleBtn = document.createElement('button');
+  toggleBtn.textContent = "Toggle Light Mode";
+  toggleBtn.id = "lightDarkToggle";
+  toggleBtn.style.position = "fixed";
+  toggleBtn.style.top = "10px";
+  toggleBtn.style.right = "10px";
+  toggleBtn.style.zIndex = "9999";
+  toggleBtn.style.padding = "8px 12px";
+  toggleBtn.style.cursor = "pointer";
+  document.body.appendChild(toggleBtn);
 
-// Create the toggle button dynamically
-const toggleBtn = document.createElement('button');
-toggleBtn.textContent = "Toggle Light Mode";
-toggleBtn.id = "lightDarkToggle";
-toggleBtn.style.position = "fixed";
-toggleBtn.style.top = "10px";
-toggleBtn.style.right = "10px";
-toggleBtn.style.zIndex = "9999";
-toggleBtn.style.padding = "8px 12px";
-toggleBtn.style.cursor = "pointer";
-document.body.appendChild(toggleBtn);
-
-// Store original styles for buttons
-const buttonOriginals = [];
-document.querySelectorAll("button").forEach(btn => {
-  buttonOriginals.push({
-    element: btn,
-    background: getComputedStyle(btn).backgroundColor,
-    color: getComputedStyle(btn).color
+  // Store original styles for buttons
+  const buttonOriginals = [];
+  document.querySelectorAll("button").forEach(btn => {
+    buttonOriginals.push({
+      element: btn,
+      background: getComputedStyle(btn).backgroundColor,
+      color: getComputedStyle(btn).color
+    });
   });
-});
 
-// Function to apply light mode
-function applyLightMode() {
-  document.body.style.backgroundColor = "white";
-  document.body.style.color = "black";
-
-  document.querySelectorAll("a").forEach(a => a.style.color = "black");
-
-  document.querySelectorAll("button").forEach((btn) => {
-    btn.style.backgroundColor = "black";
-    btn.style.color = "white";
-    btn.onmouseover = () => {
-      btn.style.backgroundColor = "white";
-      btn.style.color = "black";
-    };
-    btn.onmouseout = () => {
+  // Apply light mode
+  function applyLightMode() {
+    document.body.style.backgroundColor = "white";
+    document.body.style.color = "black";
+    document.querySelectorAll("a").forEach(a => a.style.color = "black");
+    document.querySelectorAll("button").forEach((btn) => {
       btn.style.backgroundColor = "black";
       btn.style.color = "white";
-    };
-  });
+      btn.onmouseover = () => {
+        btn.style.backgroundColor = "white";
+        btn.style.color = "black";
+      };
+      btn.onmouseout = () => {
+        btn.style.backgroundColor = "black";
+        btn.style.color = "white";
+      };
+    });
+    toggleBtn.textContent = "Toggle Dark Mode";
+    localStorage.setItem("lightMode", "true");
+  }
 
-  toggleBtn.textContent = "Toggle Dark Mode";
-  localStorage.setItem("lightMode", "true");
-}
+  // Revert to dark mode
+  function applyDarkMode() {
+    document.body.style.backgroundColor = "";
+    document.body.style.color = "";
+    document.querySelectorAll("a").forEach(a => a.style.color = "");
+    document.querySelectorAll("button").forEach((btn, i) => {
+      const orig = buttonOriginals[i];
+      btn.style.backgroundColor = orig.background;
+      btn.style.color = orig.color;
+      btn.onmouseover = null;
+      btn.onmouseout = null;
+    });
+    toggleBtn.textContent = "Toggle Light Mode";
+    localStorage.setItem("lightMode", "false");
+  }
 
-// Function to revert to dark mode
-function applyDarkMode() {
-  document.body.style.backgroundColor = "";
-  document.body.style.color = "";
-
-  document.querySelectorAll("a").forEach(a => a.style.color = "");
-
-  document.querySelectorAll("button").forEach((btn, i) => {
-    const orig = buttonOriginals[i];
-    btn.style.backgroundColor = orig.background;
-    btn.style.color = orig.color;
-    btn.onmouseover = null;
-    btn.onmouseout = null;
-  });
-
-  toggleBtn.textContent = "Toggle Light Mode";
-  localStorage.setItem("lightMode", "false");
-}
-
-// Check localStorage on page load
-let lightMode = localStorage.getItem("lightMode") === "true";
-if (lightMode) applyLightMode();
-
-// Toggle button click
-toggleBtn.addEventListener("click", () => {
-  lightMode = !lightMode;
+  // Check localStorage on load
+  let lightMode = localStorage.getItem("lightMode") === "true";
   if (lightMode) applyLightMode();
-  else applyDarkMode();
+
+  // Toggle button click
+  toggleBtn.addEventListener("click", () => {
+    lightMode = !lightMode;
+    if (lightMode) applyLightMode();
+    else applyDarkMode();
+  });
 });
