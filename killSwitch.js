@@ -132,7 +132,7 @@ window.addEventListener("load", () => {
 // === LIGHT/DARK BUTTON (all pages) ===
 (function() {
   const toggleBtn = document.createElement('button');
-  toggleBtn.textContent = "Toggle Light Mode.";
+  toggleBtn.textContent = "Toggle Light Mode";
   toggleBtn.id = "lightDarkToggle";
   toggleBtn.style.position = "fixed";
   toggleBtn.style.top = "10px";
@@ -178,30 +178,4 @@ window.addEventListener("load", () => {
   });
 })();
 
-// === FULLSCREEN BUTTON (only pages with iframe) ===
-(function() {
-  const iframe = document.querySelector("iframe");
-  if (!iframe) return; // no iframe → skip fullscreen button
 
-  iframe.id = "gameIframe";
-
-  const btn = document.createElement("button");
-  btn.textContent = "Fullscreen";
-  btn.style.position = "fixed";
-  btn.style.top = "20px";
-  btn.style.left = "330px";
-  btn.style.zIndex = "9999";
-  btn.style.border = "none";
-  btn.style.cursor = "pointer";
-  btn.style.backgroundColor = "#444";
-  btn.style.color = "whitesmoke";
-  btn.style.borderRadius = "5px";
-
-  btn.addEventListener("click", () => {
-    if (iframe.requestFullscreen) iframe.requestFullscreen();
-    else if (iframe.webkitRequestFullscreen) iframe.webkitRequestFullscreen();
-    else if (iframe.msRequestFullscreen) iframe.msRequestFullscreen();
-  });
-
-  document.body.appendChild(btn);
-})();
