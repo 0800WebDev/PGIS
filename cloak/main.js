@@ -17,5 +17,6 @@ async function openCustom() {
     resultContainer.innerHTML = `
 <label>Copy this script tag:</label><br>
 <textarea style="width:90%;height:60px;">&lt;script src="${scriptURL}"&gt;&lt;/script&gt;</textarea>
+<p>Use this script to replace a page with the html from your textarea.</p>
 `;
 }
