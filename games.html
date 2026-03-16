@@ -207,21 +207,8 @@ box-shadow: none;
 <div id="bottom"></div>
 <p>Didn't find the game you where looking for? <strong>Request a game <a href="https://forms.gle/Jgj8tLefJViDdAp87" target="_blank"> here</a></strong></p>
 
-
-
 <script>
-document.querySelectorAll("button").forEach(btn => {
-  if (btn.textContent.trim() === "play") {
-    btn.style.width = "120px";
-  }
-});
-
-
-
-
-
-
-const btn = document.querySelector("button")
+  const btn = document.querySelector("button")
 
 btn.addEventListener("mousemove", e => {
   const rect = btn.getBoundingClientRect()
@@ -237,6 +224,21 @@ btn.addEventListener("mousemove", e => {
 btn.addEventListener("mouseleave", () => {
   btn.style.transform = "translate(0,0)"
 })
+</script>
+
+<script>
+document.querySelectorAll("button").forEach(btn => {
+  if (btn.textContent.trim() === "play") {
+    btn.style.width = "120px";
+  }
+});
+
+
+
+
+
+
+
 </script>
 
 
