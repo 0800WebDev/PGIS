@@ -175,7 +175,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-
+document.addEventListener("DOMContentLoaded", function () {
+  plausible("pageview", {
+    props: {
+      site_domain: location.hostname
+    }
+  });
+});
 
 
 
