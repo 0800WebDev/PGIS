@@ -165,6 +165,15 @@ window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push
 plausible.init=plausible.init||function(i){plausible.o=i||{}}
 plausible.init()
 
+document.addEventListener("DOMContentLoaded", function () {
+  var hasIframe = document.querySelector("iframe") !== null;
+
+  plausible("pageview", {
+    props: {
+      has_iframe: hasIframe ? "yes" : "no"
+    }
+  });
+});
 
 
 
