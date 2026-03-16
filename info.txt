@@ -1,4 +1,5 @@
-PGIS 2
+PGIS 2 Play Games In School
+info
 __________________________________________________
 
 official url:
