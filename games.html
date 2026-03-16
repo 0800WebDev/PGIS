@@ -48,6 +48,7 @@
        color: whitesmoke;
         border: none; 
       border-radius: 4px;
+        transition: transform 0.15s ease;
             }
       
          button:hover { 
@@ -208,22 +209,24 @@ box-shadow: none;
 <p>Didn't find the game you where looking for? <strong>Request a game <a href="https://forms.gle/Jgj8tLefJViDdAp87" target="_blank"> here</a></strong></p>
 
 <script>
-  const btn = document.querySelector("button")
+  const buttons = document.querySelectorAll("button");
 
-btn.addEventListener("mousemove", e => {
-  const rect = btn.getBoundingClientRect()
-  const x = e.clientX - rect.left
-  const y = e.clientY - rect.top
+buttons.forEach(btn => {
+  btn.addEventListener("mousemove", e => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-  const moveX = (x - rect.width / 2) * 0.3
-  const moveY = (y - rect.height / 2) * 0.3
+    const moveX = (x - rect.width / 2) * 0.3;
+    const moveY = (y - rect.height / 2) * 0.3;
 
-  btn.style.transform = `translate(${moveX}px, ${moveY}px)`
-})
+    btn.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  });
 
-btn.addEventListener("mouseleave", () => {
-  btn.style.transform = "translate(0,0)"
-})
+  btn.addEventListener("mouseleave", () => {
+    btn.style.transform = "translate(0,0)";
+  });
+});
 </script>
 
 <script>
