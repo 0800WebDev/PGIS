@@ -215,6 +215,28 @@ document.querySelectorAll("button").forEach(btn => {
     btn.style.width = "120px";
   }
 });
+
+
+
+
+
+
+const btn = document.querySelector("button")
+
+btn.addEventListener("mousemove", e => {
+  const rect = btn.getBoundingClientRect()
+  const x = e.clientX - rect.left
+  const y = e.clientY - rect.top
+
+  const moveX = (x - rect.width / 2) * 0.3
+  const moveY = (y - rect.height / 2) * 0.3
+
+  btn.style.transform = `translate(${moveX}px, ${moveY}px)`
+})
+
+btn.addEventListener("mouseleave", () => {
+  btn.style.transform = "translate(0,0)"
+})
 </script>
 
 
