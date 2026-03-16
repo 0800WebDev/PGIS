@@ -5,7 +5,7 @@ __________________________________________________
 official url:
 pgis.onrender.com
 
-you can also find other official mirrors at pgis-ub.onrender.com/urls.html
+you can also find other official mirrors at pgis.onrender.com/urls.html
 __________________________________________________
 KILLSWITCH
 
@@ -21,7 +21,7 @@ __________________________________________________
 CONTACT
 
 My email is: spmspy0800@gmail.com  
-I recommend sending me an email with the subject: "PGIS2 - (your problem)".
+I recommend sending me an email with the subject: "PGIS - (your problem)".
 
 
 __________________________________________________
@@ -34,7 +34,7 @@ Second number = Number of games
 Third number = Major updates  
 Fourth number = Small changes / bug fixes
 
-for changelog go to pgis-ub.onrender.com/changelog.html
+for changelog go to pgis.onrender.com/changelog.html
 __________________________________________________
 
 Made by 0800
