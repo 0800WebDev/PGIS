@@ -52,6 +52,6 @@ I do not claim own any games or tools on this website.
 
 
 ### other
-- **for more info go to pgis-ub.onrender.com/info.txt**
+- **for more info go to [info.txt](https://pgis.onrender.com/info.txt)**
 
 - **made by 0800**
