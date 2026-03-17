@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://pgis.onrender.com/sitemap.xml
