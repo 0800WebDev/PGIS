@@ -50,6 +50,29 @@ input{
 <button onclick="openData()">Open in data:</button>
 <button onclick="openCustom()">generate pgis script</button>
 <div id="result"></div> 
+
+
+
+
+<h2>google translate proxy</h2>
+<input type="url" placeholder="enter url here" id="input">
+<button onclick="run()">get link</button>
+<a target="_blank" id="output"></a>
+<script>
+function run() {
+const input = document.getElementById("input");
+input.value = input.value.replaceAll(".", "-");
+input.value = input.value.replaceAll("https://", "");
+document.getElementById("output").innerHTML = input.value + ".translate.goog/?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp"
+
+document.getElementById("output").setAttribute('href', "https://" + input.value + ".translate.goog/?_x_tr_sl=auto&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=wapp");
+
+}
+</script>
+
+
+
+    
 <script>
 
 const textarea = document.getElementById("htmlInput");
