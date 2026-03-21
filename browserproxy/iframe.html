@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>browser p.r.o.x.y</title>
+   <style>
+     
+body {
+  text-align: center;
+  color: white;
+}
+#url {
+  height: 30px;
+  border: none;
+  border-radius: 10px;
+}
+
+#text {
+  height: 20px;
+  border: none;
+  border-radius: 5px;
+}
+
+button {
+  border: none;
+  border-radius: 6px;
+  background-color: grey;
+  color: black;
+  cursor: pointer;
+}
+button:hover {
+  background-color: lightgrey;
+}
+.left {
+  text-align: left;
+}
+
+.right {
+  text-align: right;
+}
+   </style>   
+</head>
+<body style="margin:0;background:black">
+<h1>browser p.r.o.x.y</h1>
+<strong>some websites like google and youtube might not let you log in and framerate and quality might be limited</strong>
+<input id="url" placeholder="https://example.com" style="width:60%">
+<button onclick="go()">Go</button>
+<br>
+<div class="left">
+<input id="text" placeholder="type here">
+<button onclick="sendText()">Type</button>
+</div>
+<div class="right">
+<button onclick="fullscreenCanvas()">Fullscreen</button>
+</div>
+<br>
+<canvas id="view" width="1280" height="720" tabindex="0"></canvas>
+
+<script>
+const canvas = document.getElementById("view")
+const ctx = canvas.getContext("2d")
+
+let ws
+
+function connect() {
+    ws = new WebSocket((location.protocol === "https:" ? "wss://" : "ws://") + location.host)
+    ws.binaryType = "blob"
+
+    ws.onopen = () => console.log("connected")
+    ws.onclose = () => setTimeout(connect, 1000)
+    ws.onerror = () => ws.close()
+
+    ws.onmessage = async (e) => {
+        const img = new Image()
+        img.src = URL.createObjectURL(e.data)
+        img.onload = () => ctx.drawImage(img, 0, 0)
+    }
+}
+
+connect()
+
+function go() {
+    let url = document.getElementById("url").value.trim()
+    if (!url.startsWith("http")) url = "https://" + url
+    ws.send(JSON.stringify({ type: "goto", url }))
+}
+
+function sendText() {
+    const text = document.getElementById("text").value
+    ws.send(JSON.stringify({ type: "type", text }))
+}
+
+// click
+canvas.onclick = (e) => {
+    const r = canvas.getBoundingClientRect()
+    ws.send(JSON.stringify({
+        type: "click",
+        x: e.clientX - r.left,
+        y: e.clientY - r.top
+    }))
+    canvas.focus()
+}
+
+// scroll
+canvas.onwheel = (e) => {
+    ws.send(JSON.stringify({ type: "scroll", deltaY: e.deltaY }))
+    e.preventDefault()
+}
+
+// keyboard live typing
+document.addEventListener("keydown", (e) => {
+    ws.send(JSON.stringify({ type: "keydown", key: e.key }))
+})
+
+document.addEventListener("keyup", (e) => {
+    ws.send(JSON.stringify({ type: "keyup", key: e.key }))
+})
+
+// prevent typing into URL box from sending to browser
+document.getElementById("url").addEventListener("keydown", e => e.stopPropagation())
+document.getElementById("text").addEventListener("keydown", e => e.stopPropagation())
+
+
+
+function fullscreenCanvas() {
+  if (canvas.requestFullscreen) {
+    canvas.requestFullscreen();
+  } else if (canvas.webkitRequestFullscreen) { /* Safari */
+    canvas.webkitRequestFullscreen();
+  } else if (canvas.msRequestFullscreen) { /* IE11 */
+    canvas.msRequestFullscreen();
+  }
+                           }
+</script>
+
+</body>
+</html>
