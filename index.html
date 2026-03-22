@@ -811,6 +811,22 @@ function checkPGIS() {
         return "Iframe site";
     }
 
+  if (url.startsWith("https://dash.cloudflare.com/9d9f6a1f78dc1ed3cd7c1081e12d79a0/workers/services/view/pgis-mirror/production")) {
+        return "cloudflare pages";
+  }
+
+if (url.startsWith("https://dash.cloudflare.com/9d9f6a1f78dc1ed3cd7c1081e12d79a0/workers/services/view/classroom-education/production")) {
+        return "classroom education";
+}
+
+  if (url.startsWith("https://classroom-education.onrender.com/")) {
+        return "classroom education";
+  }
+
+if (url.startsWith("https://raw.githack.com/0800WebDev/PGIS/main/index.html")) {
+        return "Raw Githack";
+}
+  
     return "warning: <b>this is not an official PGIS website!</b> please be kind and report this and use an official site";
 }
 
