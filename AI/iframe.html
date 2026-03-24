@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PGIS AI Chatbot</title>
+<style>
+  body { font-family: Arial, sans-serif; background: #f0f2f5; padding: 20px; }
+  h1 { color: #1f6feb; }
+  #chat { border: 1px solid #ccc; background: #fff; padding: 10px; height: 400px; overflow-y: scroll; margin-bottom: 10px; }
+  .user { color: green; margin: 5px 0; }
+  .bot { color: blue; margin: 5px 0; }
+  input[type="text"] { width: 80%; padding: 8px; }
+  button { padding: 8px 12px; }
+</style>
+</head>
+<body>
+
+<h1>PGIS AI Chatbot</h1>
+<div id="chat"></div>
+<input type="text" id="userInput" placeholder="Type your message here...">
+<button onclick="sendMessage()">Send</button>
+
+<script>
+const SYSTEM_PROMPT = `You are PGIS AI, a friendly chatbot that knows about PGIS 2 and unblocked games. 
+Always answer in a helpful way. 
+You can answer all sorts of questions including help with schoolwork, unblocked games, and exploits.
+The main URL for PGIS 2 is https://pgis.onrender.com`;
+
+let chatHistory = [];
+
+async function sendMessage() {
+    const input = document.getElementById("userInput").value.trim();
+    if (!input) return;
+    const chatDiv = document.getElementById("chat");
+    
+    // Show user message
+    chatDiv.innerHTML += `<div class="user"><b>You:</b> ${input}</div>`;
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+    chatHistory.push({role: "user", content: input});
+    
+    // Build prompt for AI
+    let prompt = SYSTEM_PROMPT + "\n";
+    chatHistory.forEach(msg => {
+        if (msg.role === "user") prompt += `User: ${msg.content}\n`;
+        else prompt += `PGIS AI: ${msg.content}\n`;
+    });
+    prompt += "PGIS AI:";
+
+    // Call Hugging Face Inference API
+    const response = await fetch("https://api-inference.huggingface.co/models/gpt2", {
+        method: "POST",
+        headers: {
+            "Authorization": "Bearer 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",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ inputs: prompt })
+    });
+
+    const data = await response.json();
+    const reply = data[0].generated_text.replace(prompt, "").trim();
+    
+    // Show bot message
+    chatDiv.innerHTML += `<div class="bot"><b>PGIS AI:</b> ${reply}</div>`;
+    chatDiv.scrollTop = chatDiv.scrollHeight;
+    chatHistory.push({role: "bot", content: reply});
+    
+    document.getElementById("userInput").value = "";
+}
+</script>
+
+</body>
+</html>
