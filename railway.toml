@@ -1,0 +1,12 @@
+[[headers]]
+path = "/*"
+[headers.values]
+Cross-Origin-Opener-Policy = "same-origin"
+Cross-Origin-Embedder-Policy = "require-corp"
+```
+
+**Option B — Move to Netlify** and add a `_headers` file:
+```
+/*
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: require-corp
