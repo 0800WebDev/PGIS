@@ -838,7 +838,11 @@ if (url.startsWith("https://classroom-education.spmspy0800-9d9.workers.dev/")) {
 if (url.startsWith("https://raw.githack.com/0800WebDev/PGIS/main/index.html")) {
         return "Raw Githack";
 }
-  
+
+if (url.startsWith("https://pgis-production.up.railway.app")) {
+        return "Main site (railway)";
+}
+    
     return "warning: <b>this is not an official PGIS website!</b> please be kind and report this and use an official site";
 }
 
