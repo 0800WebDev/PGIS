@@ -840,7 +840,11 @@ if (url.startsWith("https://raw.githack.com/0800WebDev/PGIS/main/index.html")) {
 }
 
 if (url.startsWith("https://pgis-production.up.railway.app")) {
-        return "Main site (railway)";
+        return "railway site (games doesn't work for some reson)";
+}
+
+if (url.startsWith("https://pgis.0800webdev.deno.net")) {
+        return "main site (deno deploy)" ;
 }
     
     return "warning: <b>this is not an official PGIS website!</b> please be kind and report this and use an official site";
