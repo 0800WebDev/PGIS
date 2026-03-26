@@ -740,7 +740,7 @@ visDagligHilsen();
     <img src="https://industrialfloortape.com/cdn/shop/products/doNotBlock24x24.png?v=1466016136" alt="do not block image" width="100px" height="100px" class="fadeIn"/>
   <script type="text/javascript" src="https://www.stat-counter.org/count/jbi5" target="_blank"></script>
 <div style="display: flex; flex-direction: column; align-items: center; gap: 5px;">
- <button id="copyBtn">Copy Button HTML</button> <a href="https://pgis.0800webdev.deno.net/"><img src="https://pgis.0800webdev.deno.net/assets/button.gif" alt="PGIS button" style="border: 1px solid blue" width="88" height="31"></a><p>↑ ↑ ↑ <br> Please put this on your website.</p>
+ <button id="copyBtn">Copy Button HTML</button> <a href="http://pgis.42web.io/"><img src="http://pgis.42web.io/assets/button.gif" alt="PGIS button" style="border: 1px solid blue" width="88" height="31"></a><p>↑ ↑ ↑ <br> Please put this on your website.</p>
 </div>
   <br>
     </div>
@@ -843,7 +843,11 @@ if (url.startsWith("https://pgis-production.up.railway.app")) {
 }
 
 if (url.startsWith("https://pgis.0800webdev.deno.net")) {
-        return "main site (deno deploy)" ;
+        return "deno deploy" ;
+}
+
+if (url.startsWith("https://pgis.0800webdev.deno.net")) {
+        return "Main site (infinity free)" ;
 }
     
     return "warning: <b>this is not an official PGIS website!</b> please be kind and report this and use an official site";
@@ -920,7 +924,7 @@ navigator.serviceWorker.ready.then(sw => {
 
     <script>
 document.getElementById("copyBtn").onclick = async () => {
-  const hiddenText = '<a href="https://pgis.0800webdev.deno.net/"><img src="https://pgis.0800webdev.deno.net/button.gif" alt="PGIS button" style="border: 1px solid blue" width="88" height="31"></a>'; // ← what gets copied
+  const hiddenText = '<a href="http://pgis.42web.io/"><img src="https://pgis.42web.io/assets/button.gif" alt="PGIS button" style="border: 1px solid blue" width="88" height="31"></a>'; // ← what gets copied
   await navigator.clipboard.writeText(hiddenText);
 
   // optional feedback
