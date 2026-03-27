@@ -1,17 +1,20 @@
-name: FTP Deploy
+name: Deploy Website
 on:
   push:
     branches: [ main ]
+
 jobs:
   ftp-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: FTP Upload
-        uses: SamKirkland/FTP-Deploy-Action@4.4.0
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: FTP Deploy
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
-          server: ftp.x11.x10hosting.com
-          username: ${{ secrets.FTP_USER }}
-          password: ${{ secrets.FTP_PASS }}
-          local-dir: ./ # or your build folder
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./       # adjust if your site builds somewhere else
           server-dir: /public_html
