@@ -4,6 +4,17 @@
 
 
 
+// Create a meta element
+  const meta = document.createElement('meta');
+  meta.setAttribute('charset', 'UTF-8');
+
+  // Insert it at the beginning of the head
+  const head = document.head;
+  head.insertBefore(meta, head.firstChild);
+
+
+
+
 
 
 window.addEventListener("load", () => {
