@@ -5,7 +5,7 @@
 **PGIS** stands for **Play Games In School** and is an **unblocked games site**.
 
 ### Official Link
-[pgis.onrender.com](https://pgis.onrender.com)
+[pgis.x10.mx](https://pgis.x10.mx)
 
 ### Features
 - A cloak option to hide the tab
