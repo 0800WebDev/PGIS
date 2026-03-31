@@ -85,6 +85,31 @@ window.addEventListener("load", () => {
 
 
 
+// reload button
+(function(){
+  const btn = document.createElement("button")
+  btn.textContent = "Reload"
+  btn.style.position = "fixed"
+  btn.style.top = "10px"
+  btn.style.left = "10px"
+  btn.style.zIndex = "9999"
+  btn.style.padding = "8px 12px"
+  btn.style.cursor = "pointer"
+
+  btn.onclick = async () => {
+    const res = await fetch(location.href)
+    const text = await res.text()
+    document.open()
+    document.write(text)
+    document.close()
+  }
+
+  document.body.appendChild(btn)
+})()
+
+
+
+
 
 
 
