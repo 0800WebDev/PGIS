@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>CPS Tester</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+  }
+  #clickButton {
+    padding: 20px 40px;
+    font-size: 24px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  #stats {
+    margin-top: 20px;
+    font-size: 20px;
+  }
+  input {
+    width: 50px;
+    font-size: 18px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>CPS Tester</h1>
+<p>Set test time (seconds): <input type="number" id="timeInput" value="5" min="1" max="60"></p>
+<button id="clickButton">Click Me!</button>
+
+<div id="stats">
+  <p>Clicks: <span id="clicks">0</span></p>
+  <p>Time: <span id="time">0</span>s</p>
+  <p>CPS: <span id="cps">0</span></p>
+</div>
+
+<script>
+let clicks = 0;
+let time = 5;
+let interval;
+let running = false;
+
+const clickButton = document.getElementById('clickButton');
+const clicksDisplay = document.getElementById('clicks');
+const timeDisplay = document.getElementById('time');
+const cpsDisplay = document.getElementById('cps');
+const timeInput = document.getElementById('timeInput');
+
+clickButton.addEventListener('click', () => {
+  if (!running) {
+    time = parseInt(timeInput.value) || 5;
+    startTest();
+  }
+  clicks++;
+  clicksDisplay.textContent = clicks;
+});
+
+function startTest() {
+  running = true;
+  clicks = 0;
+  clicksDisplay.textContent = clicks;
+  cpsDisplay.textContent = 0;
+  timeDisplay.textContent = time;
+
+  let remaining = time;
+
+  interval = setInterval(() => {
+    remaining--;
+    timeDisplay.textContent = remaining;
+    if (remaining <= 0) {
+      endTest();
+    }
+  }, 1000);
+}
+
+function endTest() {
+  clearInterval(interval);
+  running = false;
+  const cps = (clicks / time).toFixed(2);
+  cpsDisplay.textContent = cps;
+  alert(`Time's up! Your CPS is ${cps}`);
+}
+</script>
+
+</body>
+</html>
