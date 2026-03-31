@@ -86,7 +86,7 @@ window.addEventListener("load", () => {
 
 
 // reload button
-(function(){
+window.addEventListener("load", () => {
   const btn = document.createElement("button")
   btn.textContent = "↺"
   btn.style.position = "fixed"
@@ -105,8 +105,7 @@ window.addEventListener("load", () => {
   }
 
   document.body.appendChild(btn)
-})()
-
+})
 
 
 
