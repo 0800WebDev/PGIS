@@ -87,7 +87,7 @@ window.addEventListener("load", () => {
 
 // reload button
 window.addEventListener("load", () => {
-  const btn = document.createElement("button")
+    const btn = document.createElement("button")
   btn.textContent = "↺"
   btn.style.position = "fixed"
   btn.style.top = "10px"
@@ -99,9 +99,25 @@ window.addEventListener("load", () => {
   btn.onclick = async () => {
     const res = await fetch(location.href)
     const text = await res.text()
-    document.open()
-    document.write(text)
-    document.close()
+
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(text, "text/html")
+
+    document.documentElement.innerHTML = doc.documentElement.innerHTML
+
+    const scripts = document.querySelectorAll("script")
+    scripts.forEach(oldScript => {
+      const newScript = document.createElement("script")
+
+      if (oldScript.src) {
+        newScript.src = oldScript.src
+      } else {
+        newScript.textContent = oldScript.textContent
+      }
+
+      document.body.appendChild(newScript)
+      oldScript.remove()
+    })
   }
 
   document.body.appendChild(btn)
