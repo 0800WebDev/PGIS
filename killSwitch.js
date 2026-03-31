@@ -88,7 +88,7 @@ window.addEventListener("load", () => {
 // reload button
 (function(){
   const btn = document.createElement("button")
-  btn.textContent = "Reload"
+  btn.textContent = "↺"
   btn.style.position = "fixed"
   btn.style.top = "10px"
   btn.style.left = "10px"
