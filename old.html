@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PGIS Play Games In School</title>
+<link rel="icon" type="image/x-icon" href="https://i.postimg.cc/1XJnjRTF/0937a70d8c13420e9c4d8b0dc92bddaa-free-1.png">
+<link rel="stylesheet" href="style.css">
+<style>
+body {
+    background-color: lightgrey;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+.centerText {
+    text-align: center;
+}
+.spacer {
+    margin-top: 20px;
+}
+img {
+    max-width: 100%;
+}
+
+#daglig-hilsen {
+  background-color: #f0f8ff; 
+  color: #333; 
+  font-weight: bold;
+  font-size: 1.5rem; 
+  padding: 15px 10px;
+  margin: 0 0 0 20px auto;
+  border-radius: 10px;
+  text-align: left;
+  max-width: 160px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  left: 1;
+}
+
+ .centerText {
+  text-align: center;
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  }
+
+ @keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+  .fadeIn {
+    animation-name: fadeIn; animation-duration: 2s;
+    }
+    .small-button  {
+      background-color: rgb(221, 183, 30);
+      color: #333;
+}
+.voting-section {
+  position: relative; top:1200; left:600;
+ }
+
+ 
+  
+
+
+</style>
+</head>
+<body><img src="https://i.postimg.cc/FzcXKfm1/940-C-7a655b2a-a969-4f0c-934c-da7b62bcec38.jpg" style="position:absolute; right:0; top:0;" class="fadeIn"><img src="https://i.postimg.cc/ZRGPdWsp/Design-uten-navn-5.png" style="position:absolute; left:0; top:60px;" class="fadeIn"><img src="https://cdn.pixabay.com/photo/2016/10/30/23/05/controller-1784571_1280.png" style="position:absolute; left:120px; top:600px; width:800px;" class="fadeIn"><h1 class="centerText">PGIS</h1>
+<h2 class="centerText">play games in school</h2>
+<h4 class="centerText">NOTE: This is the old and bad version of PGIS.</h4><div id="daglig-hilsen" class="centerText" style="animation: fadeIn 2s;"></div><div class="centerText spacer">
+<a href="/games.html">return</a>
+<div class="spacer"></div>
+<div class="spacer"></div>
+<a href="https://nimble.li/v9ayvqx9">try your luck (not all games are supported)</a>
+<div class="spacer"></div>
+<a href="webcopy.html">try orange unlock</a>
+</div><div class="spacer" style="padding-left:10px;">
+<h3>games:</h3><a href="mario.html">mario</a><br><br> <a href="slope.html">Slope</a><br><br> <a href="blockblast.html">block-blast</a><br><br> <a href="minecraft.html">minecraft</a><br><br> <a href="table-tennis.html">table-tennis</a><br><br> <a href="flappy-bird.html">flappy-bird</a><br><br> <a href="uno.html">uno</a><br><br> <a href="vex-7.html">vex 7</a><br><br> <a href="pool.html">pool</a><br><br> <a href="chess.html">chess</a><br><br> <a href="solitaire.html">google solitaire</a><br><br> <a href="tetris.html">tetris</a><br><br> <a href="minesweeper.html">minesweeper</a><br><br> <a href="tic-tac-toe.html">tic tac toe</a><br><br> <a href="pong.html">pong</a><br><br> <a href="2048.html">2048</a><br><br> <a href="aqua-slide.html">aquapark slides</a><br><br> <a href="cut-the-rope.html">cut the rope</a><br><br> <a href="death-run.html">death-run</a><br><br> <a href="fruit-ninja.html">fruit ninja</a><br><br> <a href="ludo.html">ludo</a><br><br> <a href="happy-wheels.html">happy wheels</a><br><br> <a href="angry-sharks.html">Angry-sharks</a>
+
+</div><img src="https://i.postimg.cc/V6zNPQXW/7ad210998816426cb8bd123081203109-free.png" style="position:absolute; left:0; top:17px;"><img src="https://i.postimg.cc/5Ng9k1mx/28470cf859534f4da1071c04d2f2ee6b-free.png" style="position:absolute; left:200px; top:17px;"><script>
+function visDagligHilsen() {
+  const hilsenEl = document.getElementById("daglig-hilsen");
+  const time = new Date().getHours();
+  let hilsen = "";
+
+  if (time < 6) {
+    hilsen = "A bit late?";
+  } else if (time < 12) {
+    hilsen = "Good morning!";
+  } else if (time < 18) {
+    hilsen = "Ready to play?";
+  } else {
+    hilsen = "Still playing?";
+  }
+
+  hilsenEl.textContent = hilsen;
+}
+
+visDagligHilsen();
+</script></body>
+                                             </html>
