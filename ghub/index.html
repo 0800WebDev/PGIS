@@ -1,0 +1,1831 @@
+<html>
+
+<!--
+
+GHub Lightweight version: 1.1.1
+
+Made by GHub (https://thegportal.neocities.org)
+
+Source: https://thegportal.neocities.org/light
+
+    II.
+II   'II
+      II
+II   .II
+    II'
+
+-->
+
+<head>
+<meta charset="UTF-8">
+
+<style>
+body {
+  background: linear-gradient(to right, #005eb5, #3d0075);
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: 0;
+  color: white;
+	font-family: oxanium;
+}
+
+a {
+  color: white;
+}
+
+.btn {
+  border: 2px solid black;
+  border-radius: 15px;
+  background-color: white;
+  color: black;
+  padding: 0 28px;
+  font-size: 16px;
+  cursor: pointer;
+  height: auto;
+}
+
+/* Btn Animation */
+.button {
+  border-color: #7600ba;
+  border-radius: 15px;
+  color: black;
+  transform: scale(1.0);
+  z-index: 10;
+  transition: transform 0.3s;
+  transition: 0.3s;
+  box-shadow: none; 
+}
+
+.button:hover {
+  background: #9900ff;
+  border-radius: 30px;
+  color: white;
+  z-index: 20;
+  transform: scale(1.1);
+  transition: transform 0.3s;
+  transition: 0.3s;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.9); 
+}
+
+.hyperlink {
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  width: 400px;
+  margin: 5px;
+}
+
+.link {
+  transform: scale(1.0);
+  width: 400px;
+  height: 75;
+  margin: 3px;
+  border-radius: 10px;
+  align-content: center;
+  color: white;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.2);
+  bottom: 0;
+  transition: transform 0.3s;
+  transition: 0.3s;
+  z-index: 10;
+  backdrop-filter: blur(2px);
+}
+
+.link:hover {
+  border-radius: 5px;
+  transform: scale(1.2);
+  background: rgba(255, 255, 255, 0.6);
+  bottom: 0;
+  transition: transform 0.3s;
+  transition: 0.3s;
+  z-index: 11;
+}
+
+.frm  {
+  background: linear-gradient(white, #d6d6d6);
+  border-radius: 15px;
+  color: black;
+  padding: 0 0;
+  font-size: 16px;
+  cursor: pointer;
+  height: 260;
+  z-index: -1;
+  
+  align-content: center;
+}
+
+.txt {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 19px;
+  padding: 1vh 0vw;
+  width: 400px;
+}
+
+.rounded {
+  border-radius: 15px;
+}
+
+.fsb {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 0 10px;
+  height: 37px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 10px;
+  margin: 0;
+}
+.butn {
+  border-color: #5a24a6;
+  color: black;
+  transition: 0.3s;
+}
+
+.butn:hover {
+  background: #5a24a6;
+  color: white;
+  transition: 0.3s;
+}
+
+.trnsp {
+  background: white;
+}
+
+.collapsible {
+  border: 2px solid black;
+  border-color: #7600ba;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  padding: 0 18px;
+  border-radius: 15px;
+  width: 70%;
+  height: auto;
+  text-align: center;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+  transform: scale(1.0);
+  box-shadow: none; 
+  z-index: 10;
+}
+
+.active, .collapsible:hover {
+  background-color: #9900ff;
+  border-radius: 30px;
+  color: white;
+  transition: 0.3s;
+  transform: scale(1.1);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.9); 
+  z-index: 11;
+}
+
+.content {
+  border: 2px solid black;
+  border-color: white;
+  padding: 8 0;
+  border-radius: 15px;
+  width: 90%;
+  color: white;
+  overflow: hidden;
+  text-align: center;
+  background-color: rgba(0,0,0,0.5);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.9); 
+  z-index: 12;
+}
+
+.g1 {
+  width: 100%;
+  height: 94.3%;
+  border-radius: 15px;
+}
+
+.g2 {
+  width: 100%;
+  height: 89%;
+  border-radius: 15px;
+}
+
+.logo {
+  height: 5.7vh;
+  width: auto;
+  cursor: default;
+}
+.logo:hover {
+  height: 5.7vh;
+  width: auto;
+  cursor: pointer;
+}
+
+.co {
+  border: 2px solid black;
+  border-color: #7600ba;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  padding: 0 18px;
+  border-radius: 15px;
+  width: 70%;
+  height: auto;
+  text-align: center;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+  transform: scale(1.0);
+  box-shadow: none; 
+  z-index: 10;
+}
+
+.active, .co:hover {
+  background-color: #9900ff;
+  border-radius: 30px;
+  color: white;
+  transition: 0.3s;
+  transform: scale(1.1);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.9); 
+  z-index: 11;
+}
+
+.coco {
+  border: none;
+  border-radius: 7px;
+  margin-bottom: 6;
+  width: 98%;
+  color: white;
+  display: none;
+  overflow: hidden;
+  text-align: center;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 12;
+}
+
+.key {
+  background: rgba(181, 7, 175, 0.2);
+  border: none;
+  border-radius: 5px;
+  font-family: oxanium;
+  z-index: 99999;
+  color: rgba(255, 255, 255, 0.5);
+  transition: 0.3s;
+}
+
+.key:hover {
+  background: rgba(181, 7, 175, 0.5);
+  color: rgba(255, 255, 255, 1.0);
+  transition: 0.3s;
+}
+
+.ukey {
+  background: rgba(39, 122, 230, 0.2);
+  border: none;
+  border-radius: 5px;
+  font-family: oxanium;
+  z-index: 99999;
+  color: rgba(255, 255, 255, 0.5);
+  transition: 0.3s;
+}
+
+.ukey:hover {
+  background: rgba(39, 122, 230, 0.5);
+  color: rgba(255, 255, 255, 1.0);
+  transition: 0.3s;
+}
+
+hr {
+  width: 98.7%;
+  height: 4px;
+  border-radius: 2px;
+  border-width: 0;
+  z-index: 0;
+  position: relative;
+  background: linear-gradient(to right, #ff30ea, #f5ff30, #306bff);
+}
+
+textarea {
+  font-size: 12px;
+}
+
+.up {
+  position: relative;
+  bottom: 20px;
+}
+
+.fixed {
+  padding: 5;
+  text-align: center;
+  top: -10;
+  color: #ffa1a1;
+  background: #a60000;
+  z-index: 1;
+}
+
+.c {
+  z-index: 10;
+  position: relative;
+}
+
+.tc {
+  z-index: 10;
+  width: 70%;
+  position: relative;
+}
+
+.sect {
+  background: rgba(0,0,0,0.5);
+  border-radius: 15px;
+  max-width: 85%;
+  min-width: 475px;
+  z-index: 1;
+}
+
+.group {
+  height: 0%;
+  width: 100%;
+  background-color: transparent;
+}
+
+.dis {
+  margin: 6;
+
+  width: 97%;
+}
+
+.simg {
+  border-radius: 15px;
+  transform: scale(1.0);
+  transition: 0.3s;
+}
+
+.simg:hover {
+  border-radius: 35px;
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+.tbtn {
+  height: 25px;
+  width: 100px;
+  display: inline;
+  position: relative;
+  padding: 6 3;
+  margin: 0;
+  top: 0;
+  border-radius: 15px;
+  border: none;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(2px);
+  font-family: oxanium;
+  font-size: 12;
+  color: white;
+  transition: 0.3s;
+}
+
+.tbtn:hover {
+  width: 120px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+  border-radius: 25px 5px;
+  transition: 0.3s;
+}
+
+#particles-js {
+  position: fixed;
+  margin: 0;
+  zoom: 100%;
+  height: 100vh;
+  width: 100vw;
+  z-index: 0;
+}
+
+@property --myColor1 {
+  syntax: '<color>';
+  initial-value: #005eb5;
+  inherits: false;
+}
+
+@property --myColor2 {
+  syntax: '<color>';
+  initial-value: #3d0075;
+  inherits: false;
+}
+
+.sbn {
+  background: linear-gradient(to right, var(--myColor1), var(--myColor2));
+  border-radius: 15px;
+  width: 180px;
+  height: 30px;
+  border: 2px solid black;
+  color: white;
+  transition: --myColor1 0.7s, --myColor2 0.7s;
+}
+
+.sbn:hover {  
+  --myColor1: #0082fc;
+  --myColor2: #6900c9;
+}
+
+.BGPre {
+  cursor: default;
+  border-radius: 15px;
+  display: inline-block;
+  border: 2px solid black;
+  border-color: white;
+  margin: 5;
+  width: 300;
+  height: 110;
+  transform: scale(1.0);
+  transition: 0.4s;
+}
+
+.BGPre:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  transition: 0.4s;
+}
+
+.TextPre {
+  padding: 40 0;
+  margin: 0;
+  text-align: center;
+  font-family: oxanium;
+  font-size: 25;
+}
+
+.bg {
+  width: 80%;
+  padding: 6 0;
+  margin: 6;
+  display: block;
+  background: rgba(0, 0, 0, 0.4);
+  border: 2px solid black;
+  border-color: white;
+  color: white;
+  border-radius: 6px;
+  transform: scale(1.0);
+  transition: 0.5s;
+}
+
+.bg:hover {
+  background: rgba(0, 0, 0, 0);
+  transform: scale(1.1);
+  transition: 0.5s;
+}
+</style>
+
+<title>New Tab</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body id="body">
+
+<div id="pframe" style="display: block;">
+<center>
+<div id="particles-js">
+<script src=
+        "https://thegportal.neocities.org/particles.js">
+    </script>
+    <script src=
+        "https://thegportal.neocities.org/app.js">
+</script>
+</div>
+</center>
+</div>
+
+<p style="position: fixed; bottom: 0; left: 0; z-index: 9999; margin: 0; margin-left: 2px; text-shadow: 0 1px 3px rgba(0, 0, 0, 1.0); opacity: 0.4;" id="lightv"><a href="https://thegportal.neocities.org/" style="color: white;">GHub</a> Lightweight Version: 1.1.1</p>
+
+<div style="position: fixed; right: 0; z-index: 9999; margin: 0px;" id="buttons">
+<button class="c key" onclick="emergency()" style="">E-Key</button>
+</div>
+
+<!--Logo-->
+<div>
+<a class="logo c" onclick="goHome()"><img src="https://thegportal.neocities.org/ghlights.svg" width="auto" height="5.7%"></a>
+</div>
+
+<div id="frame">
+
+<center>
+<img class="c" src="https://thegportal.neocities.org/ghlight.svg" width="473.9466px" height="184.993px" style="border-radius: 30px; margin-top: 6;">
+
+<!--Special message-->
+<div class="c" style="height: auto; width: 440; border-radius: 15px; text-align: center; margin: 6; margin-left: 0; margin-right: 0; bottom: 16px; border: 2px solid black; border-color: white; z-index: 999; background: rgba(0, 0, 0, 0.7);">
+<p class="tc" style="color: white; width: 100%; font-size: 18; padding: 0 0; margin: auto; width: 95%;" id="rmessage">&#8192;</p>
+</div>
+
+<div class="c" style="height: auto; width: 80; border-radius: 15px; text-align: center; margin: 6; margin-left: 0; margin-right: 0; margin-top: -16px; bottom: 0px; border: 2px solid black; border-color: white; background: rgba(0, 0, 0, 0.7);">
+<div id="time"></div>
+</div>
+
+<script>
+var delay = 1000;
+var now = new Date();
+document.getElementById('time').innerHTML = now.toLocaleTimeString();
+
+function clock() {
+  var now = new Date();
+  document.getElementById('time').innerHTML = now.toLocaleTimeString();
+}
+
+setInterval(clock, 1000);
+</script>
+
+<!--Splash Message-->
+<script src="https://thegportal.neocities.org/rmessage.js"></script>
+</center>
+
+<!--Bookmarks-->
+<center>
+<div class="c sect" style="margin: 6; padding: 6 0; width: 85vw; margin-bottom: 0;">
+<div>
+<a class="hyperlink link txt c" href="#partner" style="width: auto; height: 25;"><p style="font-family: oxanium; margin: auto; padding: 0 6;">Partners</p></a>
+<a class="hyperlink link txt c" href="#social" style="width: auto; height: 25;"><p style="font-family: oxanium; margin: auto; padding: 0 6;">Socials</p></a>
+<a class="hyperlink link txt c" href="#soundb" style="width: auto; height: 25;"><p style="font-family: oxanium; margin: auto; padding: 0 6;">Soundboard</p></a>
+<a class="hyperlink link txt c" href="#olinks" style="width: auto; height: 25;"><p style="font-family: oxanium; margin: auto; padding: 0 6;">Other Links/Tools</p></a>
+<a class="hyperlink link txt c" href="#ccontent" style="width: auto; height: 25;"><p style="font-family: oxanium; margin: auto; padding: 0 6;">Custom Content</p></a>
+<a class="hyperlink link txt c" href="#fgame" style="width: auto; height: 25;"><p style="font-family: oxanium; margin: auto; padding: 0 6;">Featured Games</p></a>
+<a class="hyperlink link txt c" href="#agame" style="width: auto; height: 25;"><p style="font-family: oxanium; margin: auto; padding: 0 6;">All Games</p></a>
+</div>
+<div style="margin-top: 3;">
+<a style="text-decoration: none;" onclick="jsver()"><button class="c tbtn">JS Version</button></a>
+<a href="https://thegportal.neocities.org/light.html" style="text-decoration: none;"><button class="c tbtn">Light Version</button></a>
+<a href="#partner" style="text-decoration: none;"><button class="c tbtn">Partners</button></a>
+<!-- Remove the button below if you wish to remove GHub's blog :) -->
+<a style="text-decoration: none;" onclick="gblog()"><button class="c tbtn">My blog!</button></a>
+<!---->
+<a style="text-decoration: none;" onclick="mlinks()"><button class="c tbtn">More Links</button></a>
+<a href="https://drive.google.com/drive/folders/15EJVet1Ex9Iyjlahs_oQANaOlvlJwngr?usp=drive_link" style="text-decoration: none;"><button class="c tbtn">Clone GHub</button></a>
+<a href="#mygames" style="text-decoration: none;"><button class="c tbtn">GHub's Games!</button></a>
+</div>
+<br>
+<strong class="tc" style="color: white; margin: 0; width: 100%; padding: 6 0; font-size: 20; margin-bottom: -6;"><a href="/">Return to PGIS</a></strong>
+</div>
+</center>
+
+<!--Amount of Games-->
+<center>
+<p class="tc" style="color: white; font-size: 30; margin: 10; width: 191;">218 Games! :)</p>
+</center>
+
+<center>
+<button class="c sbn" onclick="displayThemes()" style="font-family: oxanium;">Themes</button>
+
+<center>
+<div id="themeDisplay" style="display: none; margin: 6; z-index: 999999; border: 2px solid black; border-color: white; width: auto; width: 90%; border-radius: 15px; left: 50%; transform: translate(-50%); background: rgba(0,0,0,0.7); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7); padding: 3 0; backdrop-filter: blur(4px);">
+
+<div onclick="changeTheme('0')" class="BGPre" style="background: linear-gradient(to right, #005eb5, #3d0075);">
+<p class="TextPre">Theme 1 (Default)</p>
+</div>
+
+<div onclick="changeTheme('1')" class="BGPre" style="background: linear-gradient(to right, #ff0000, #910000);">
+<p class="TextPre">Theme 2</p>
+</div>
+
+<div onclick="changeTheme('2')" class="BGPre" style="background: #141414;">
+<p class="TextPre">Theme 3</p>
+</div>
+
+<div onclick="changeTheme('3')" class="BGPre" style="background: linear-gradient(to right, #1bb000, #106900);">
+<p class="TextPre">Theme 4</p>
+</div>
+
+<div onclick="changeTheme('4')" class="BGPre" style="background: linear-gradient(to right, #db00d4, #780074);">
+<p class="TextPre">Theme 5</p>
+</div>
+
+<div onclick="changeTheme('5')" class="BGPre" style="background: linear-gradient(to right, #e6d602, #7a7200);">
+<p class="TextPre">Theme 6</p>
+</div>
+
+<br>
+
+<button onclick="togglep()" id="ptoggle" class="btn" style="font-family: oxanium; width: 230; color: white; background: gray;">Toggle Particles</button>
+
+</div>
+</center>
+
+<script>
+var qw = 0;
+
+function displayThemes() {
+  qw = qw + 1;
+  if (qw == 0) {
+    document.getElementById('themeDisplay').style.display = 'none';
+  } if (qw == 1) {
+    document.getElementById('themeDisplay').style.display = 'block';
+    document.getElementById('themeDisplay').style.position = 'absolute';
+  } if (qw > 1) {
+    qw = 0;
+    document.getElementById('themeDisplay').style.display = 'none';
+  }
+}
+
+function changeTheme(theme) {
+  th = theme;
+  checkBG();
+  localStorage.setItem('themes', th);
+}
+
+var th = localStorage.getItem('themes');
+th = parseInt(th);
+checkBG();
+
+function checkBG() {
+  var backg = Array(
+  'linear-gradient(to right, #005eb5, #3d0075)',
+  'linear-gradient(to right, #ff0000, #910000)',
+  '#141414',
+  'linear-gradient(to right, #1bb000, #106900)',
+  'linear-gradient(to right, #db00d4, #780074)',
+  'linear-gradient(to right, #e6d602, #7a7200)',
+  );
+  document.getElementById('body').style.background = backg[th];
+}
+
+var tp = localStorage.getItem('particlet');
+tp = parseInt(tp);
+checkp();
+
+function togglep() {
+  tp = tp + 1;
+  localStorage.setItem('particlet', tp);
+  checkp();
+}
+
+if (Number.isNaN(tp) || tp == null) {
+  tp = 0;
+  localStorage.setItem('particlet', tp);
+  checkp();
+}
+
+function checkp() {
+  if (tp == 0) {
+    document.getElementById('pframe').style.display = "block";
+    document.getElementById('ptoggle').innerHTML = "Particles are enabled";
+    document.getElementById('ptoggle').style.background = "green";
+  } if (tp == 1) {
+    document.getElementById('pframe').style.display = "none";
+    document.getElementById('ptoggle').innerHTML = "Particles are disabled";
+    document.getElementById('ptoggle').style.background = "red";
+  } if (tp > 1) {
+    tp = 0;
+    checkp();
+  }
+}
+</script>
+</center>
+
+<hr>
+
+<center>
+
+<embed class="c" src="https://incr.easrng.net/badge?key=thegportal876" style="background: white; border-radius: 5px; display: block;" title="increment badge" width="88" height="31" frameborder="0">
+<a class="c" href="https://info.flagcounter.com/sOkp"><img src="https://s05.flagcounter.com/count2/sOkp/bg_FFFFFF/txt_000000/border_CCCCCC/columns_8/maxflags_18/viewers_0/labels_0/pageviews_1/flags_0/percent_0/" alt="Flag Counter" border="0" height="0" width="0" style="border-radius: 7px;"></a>
+
+</center>
+
+<hr>
+
+<center>
+<button onclick="toggleWN()" class="c collapsible"><p style="font-family: oxanium;">What's New?</p></button>
+<center>
+<div style="margin: 10; display: none;" id="wnew">
+<div class="c content">
+<p class="c" style="font-color: white; margin: 0;">GHub Light's last major update was on March 5, 2025</p>
+
+<p class="c" style="font-color: white;">&#8226;Fixed these things:</p>
+<a class="hyperlink link txt c" onclick="aGame('https://ubg365.github.io/bitlife-life-simulator/play.html')"><p>Bitlife</p></a>
+
+</div>
+</div>
+
+</center>
+
+<script>
+var sn = 0;
+
+function toggleWN() {
+  sn++
+  if (sn == 1) {
+    document.getElementById('wnew').style.display = 'block';
+  } if (sn > 1) {
+    sn = 0;
+    document.getElementById('wnew').style.display = 'none';
+  }
+}
+</script>
+
+<hr>
+
+<a href="https://ubgameunion.neocities.org/"><img class="c" src="https://ubgameunion.neocities.org/UBGU%20Member.svg" height="150" width="auto"></a>
+
+<hr>
+
+<!--Version Buttons-->
+<div class="c sect">
+<center>
+<button class="c btn button" onclick="window.open('https://sites.google.com/view/perrymissouri/', '_blank')" style="width: 325; margin: 6;"><p style="font-family: oxanium;">Play on the Google Sites version</p></button>
+<button class="c btn button" onclick="window.open('https://thegportal.neocities.org', '_blank')" style="width: 325; margin: 6;"><p style="font-family: oxanium;">Launch Neocities Version</p></button>
+<button class="c btn button" onclick="window.open('https://thegportal.nekoweb.org', '_blank')" style="width: 325; margin: 6;"><p style="font-family: oxanium;">Launch Nekoweb Version</p></button>
+</center>
+</div>
+</center>
+
+<hr style="z-index: 0;">
+
+<center>
+<button class="btn button c" onclick="openVersions()" style="width: 400; margin: 6; margin-top: 0;"><p style="font-family: oxanium;">Versions of GHub (about:blank version, etc.)</p></button>
+</center>
+
+<script>
+var oo = 0;
+
+function openVersions() {
+  if (oo < 2) {
+    document.getElementById('versionss').style.display = 'block';
+    oo = oo + 1;
+  } if (oo > 1) {
+    document.getElementById('versionss').style.display = 'none';
+    oo = 0;
+  }
+}
+</script>
+
+<div id="versionss" style="display: none;">
+<center>
+<div class="c sect" style="margin-bottom: 6;">
+<center>
+<p class="tc" style="color: white; margin: 0; margin-bottom: -6; width: 95%; padding: 6 0;">When you're on the blank version, teachers can't see your screen!</p>
+</center>
+
+<center>
+	<button class="btn button c" style="width: 325; margin: 6;" onclick="openGame()"><p style="font-family: oxanium">Launch in about:blank</p></button>
+
+<button class="btn button c" onclick="window.open('https://drive.google.com/file/d/1qw2gYZNnfGBzK1HuNPDVJN1KkTDGfQ6k/view?usp=sharing', '_blank')" style="width: 325; margin: 6;"><p style="font-family: oxanium;">Download Blank Version</p></button>
+
+<button class="btn button c" onclick="openWindow('https://thegportal.neocities.org/')" style="width: 325; margin: 6;"><p style="font-family: oxanium;">Open in a New Window</p></button>
+
+<hr class="dis" id="customab">
+
+<p class="tc" style="color: white; margin: 6; margin-bottom: 0; width: 95%;">Launch GHub in a custom about:blank URL or a random about:blank URL</p>
+
+<div style="margin: 0;">
+<textarea id="tarea" class="c" type="text" autocomplete="off" placeholder="Enter the id of the custom about:blank URL" style="border-radius: 7px; border: none; width: 340; height: 20; resize: none; display: inline; margin: 6; margin-bottom: 0;"></textarea>
+<textarea id="titlearea" class="c" type="text" autocomplete="off" placeholder="Enter the title (Optional)" style="border-radius: 7px; border: none; width: 340; height: 20; resize: none; display: inline; margin: 6; margin-bottom: 0;"></textarea>
+<div style="margin: 0; margin-bottom: 6;">
+
+<button class="btn button c" style="width: 340; margin: 6;" onclick="openBlock()"><p style="font-family: oxanium">Launch Custom about:blank</p></button>
+
+<button class="btn button c" style="width: 340; margin: 6;" onclick="openRandom()"><p style="font-family: oxanium">Launch Random about:blank</p></button>
+
+<hr class="dis" id="nourl">
+
+<p class="tc" style="color: white; margin: 6; margin-bottom: 0; width: 95%;">Launch GHub in a tab with no URL</p>
+<p class="tc" style="color: white; margin: 0; margin-bottom: 6; width: 95%;">(The address bar will say 'about:blank' because there's no other URL to display)</p>
+
+<button class="btn button c" style="width: 90%; margin: 6; margin-bottom: 0; margin-top: 0;" onclick="urlNo()"><p style="font-family: oxanium">Launch in  a No URL Tab</p></button>
+
+<p class="tc" style="color: white; margin: 6; width: 95%;">Downloading the file is better for stricter filters (Especially filters that use allowlists); I recommend downloading it. :)</p>
+
+<button class="btn button c" onclick="window.open('https://drive.google.com/file/d/1_4UW1VBzmPYBHeY2_6Ss72xlDMn6zAS_/view?usp=sharing')" target="_blank" style="width: 90%;"><p style="font-family: oxanium;">Download No URL Version</p></button>
+
+<hr class="dis">
+
+<center>
+<p class="tc" style="color: white; margin: 0; margin-top: 6; width: 95%; padding: 0 0;">Opening the version below will automatically open GHub in an about:blank tab after opening the file, this will bypass GoGuardian Teacher blacklisting! On the automatic window version, it opens GHub in a new window. (Teachers won't be able to block these with GoGuardian)</p>
+</center>
+
+<center>
+<p class="tc" style="color: white; margin: 0; margin-top: 6; width: 95%; padding: 0 0;">(Tip: If the files app is blocked, you can use 'ctrl+o' to open the file!)</p>
+</center>
+
+<button class="btn button c" onclick="window.open('https://drive.google.com/file/d/1QIJX72kz_fCA9Ziwheswqm5f_qnJUdP3/view?usp=sharing')" target="_blank" style="width: 90%; margin: 6;"><p style="font-family: oxanium;">Download Automatic Blank Version</p></button>
+<button class="btn button c" onclick="window.open('https://drive.google.com/file/d/1zCLvczXCduI1d6who2So6SVO9hxYy3kR/view?usp=sharing')" target="_blank" style="width: 90%; margin: 6;"><p style="font-family: oxanium;">Download Automatic Window Version</p></button>
+
+<center>
+<p class="tc" style="margin: 0; width: 100%; padding: 6 0;">Bookmarklet version</p>
+</center>
+
+<center>
+<div style="width: 100%; height: 20;">
+<textarea class="c" type="text" autocomplete="off" style="border-radius: 15px; border: none; width: 100%; height: 100%; resize: none;">javascript:(function(){x = window.open(); x.document.write(` + `<frameset><frame src="https://thegportal.neocities.org/"></frameset>` + `);})();</textarea>
+</div>
+</center>
+</center>
+</div>
+</center>
+
+<hr>
+
+<!--Data Version-->
+<center>
+<div class="c sect" style="display: inline-block; width: 450; margin-bottom: 6;">
+<center>
+<p class="tc" style="margin: 0; width: 100%; padding: 6 0;">Link for data version</p>
+</center>
+
+<center>
+<div style="width: 100%; height: 65;">
+<textarea class="c" type="text" autocomplete="off" style="border-radius: 15px; border: none; width: 100%; height: 100%; resize: none;">data:text/html;charset=utf-8,%3C!DOCTYPE%20html%3E%0A%3Chtml%3E%0A%3Chead%3E%0A%3Ctitle%3D%22GHub%22%3E%0A%3Cstyle%3E%0Abody%20%7B%0Amin-width%3A%20100vw%3B%0Amin-height%3A%20100vh%3B%0Amargin%3A%200%3B%0A%7D%0A%3C%2Fstyle%3E%0A%3C%2Fhead%3E%0A%3Cbody%3E%0A%3Cembed%20src%3D%22https%3A%2F%2Fthegportal.neocities.org%22%20height%3D%22100%25%22%20width%3D%22100%25%22%20style%3D%22position%3A%20absolute%3B%22%3E%0A%3C%2Fbody%3E%0A%3C%2Fhtml%3E</textarea>
+</div>
+</center>
+</div>
+
+<div class="c sect" style="display: inline-block; width: 450;">
+<center>
+<p class="tc" style="margin: 0; width: 100%; padding: 6 0;">Bookmarklet Version</p>
+</center>
+
+<center>
+<div style="width: 100%; height: 65;">
+<textarea class="c" type="text" autocomplete="off" style="border-radius: 15px; border: none; width: 100%; height: 100%; resize: none;">javascript:(function() {var eltIF = document.createElement('object');eltIF.setAttribute("data", "https://thegportal.neocities.org");var url = ("https://thegportal.neocities.org");eltIF.style.border = 'none';eltIF.style.width = '100vw';eltIF.style.height = '90vh';eltIF.style.margin = '0';eltIF.src = url;document.body.appendChild(eltIF);eltIF.scrollIntoView();})();</textarea>
+</div>
+</center>
+</div>
+</center>
+</div>
+
+<hr style="margin-top: 2;">
+
+<!--Version Catalog-->
+<center>
+<div class="c sect" style="margin: 6; margin-bottom: 0; padding: 6 36; width: auto; display: inline-block;">
+<a class="hyperlink link txt c" onclick="window.open('https://drive.google.com/drive/folders/15EJVet1Ex9Iyjlahs_oQANaOlvlJwngr?usp=drive_link')" style="width: 300; height: 30; padding: 6 24;"><p style="font-family: oxanium; margin: auto;">View Version Catalog</p></a>
+<a class="hyperlink link txt c" onclick="openLV()" style="width: 300; height: 30; padding: 6 24;"><p style="font-family: oxanium; margin: auto;" id="vbtnl">View Latest Version</p></a>
+</div>
+</center>
+
+<!--Removed-->
+
+<hr>
+
+<!--GHub Button-->
+<center>
+<div class="c sect">
+<center>
+<p class="tc" style="margin: 0; width: 100%; padding: 6 0;">Embed the GHub button into your website!</p>
+</center>
+
+<center>
+<div>
+<a class="c" href="https://thegportal.neocities.org" target="_blank" title="Play Games on GHub!"><img alt="Site button for GHub" width="88" height="31" src="https://files.catbox.moe/j39p0r.png"></a>
+</div>
+
+<div style="width: 100%; height: 35;">
+<textarea class="c" type="text" autocomplete="off" style="border-radius: 15px; border: none; width: 100%; height: 100%; resize: none;"><a href="https://thegportal.neocities.org" target="_blank" title="Play Games on GHub!"><img alt="Site button for GHub" width="88" height="31" src="https://thegportal.neocities.org/gbutton.png"></a></textarea>
+</div>
+</center>
+</div>
+</center>
+
+<hr>
+
+<center>
+<div class="c sect" style="width: 85%">
+<center>
+
+<center>
+<p class="tc" style="margin: 0; margin-bottom: -6; width: 100%; padding: 6 0;">Embed GHub into your website! (Size it correctly!)</p>
+</center>
+
+<button onclick="toggleEmbed()" class="c co" style="margin: 6;"><p style="font-family: oxanium;">Preview</p></button>
+
+<object class="c" id="ghEmbed" data="https://thegportal.neocities.org" height="85%" width="98%" style="border-radius: 5px; background: rgba(0,0,0,0.5); display: none;"></object>
+
+<script>
+var et = 0;
+
+function toggleEmbed() {
+  et++
+  if (et == 1) {
+    document.getElementById('ghEmbed').style.display = 'block';
+  } if (et > 1) {
+    document.getElementById('ghEmbed').style.display = 'none';
+    et = 0;
+  }
+}
+</script>
+
+<center>
+
+<hr class="dis">
+
+<div style="width: 100%; height: 20;">
+<textarea class="c" type="text" autocomplete="off" style="border-radius: 15px; border: none; width: 100%; height: 100%; resize: none;"><iframe src="https://thegportal.neocities.org" height="100%" width="100%"></iframe></textarea>
+</div>
+
+<hr class="dis">
+
+<div style="width: 100%; height: 20;">
+<textarea class="c" type="text" autocomplete="off" style="border-radius: 15px; border: none; width: 100%; height: 100%; resize: none;"><embed src="https://thegportal.neocities.org" height="100%" width="100%"></textarea>
+</div>
+
+<hr class="dis">
+
+<div style="width: 100%; height: 20;">
+<textarea class="c" type="text" autocomplete="off" style="border-radius: 15px; border: none; width: 100%; height: 100%; resize: none;"><object data="https://thegportal.neocities.org" height="100%" width="100%"></object></textarea>
+</div>
+
+<hr class="dis">
+
+<div style="width: 100%; height: 20;">
+<textarea class="c" type="text" autocomplete="off" style="border-radius: 15px; border: none; width: 100%; height: 100%; resize: none;"><frameset><frame src="https://thegportal.neocities.org" height="100%" width="100%"></frameset></textarea>
+</div>
+</center>
+</div>
+</center>
+
+<!-- <hr> -->
+
+<!-- Add forms here :) -->
+<center>
+
+<!-- Forms go here :) -->
+
+</center>
+
+<hr id="partner">
+
+<center>
+<p class="c" style="color: white; font-size: 30; width: 178;">Partners! :)</p>
+</center>
+
+<div>
+<center>
+<a class="hyperlink link txt c" href="https://ubgameunion.neocities.org/"><p>The UBGU</p></a>
+</center>
+</div>
+
+<hr id="social">
+
+<!--Socials-->
+<center>
+<p class="c" style="color: white; font-size: 30; width: 178;">My Socials :)</p>
+</center>
+
+<div>
+<center>
+<a class="hyperlink link txt c" onclick="window.open('https://www.reddit.com/r/theghub/', '_blank')"><p>GHub Subreddit (r/theghub)</p></a>
+<a class="hyperlink link txt c" onclick="window.open('https://discord.com/invite/ZAnpqUNEJQ', '_blank')"><p>My Discord Server</p></a>
+<a class="hyperlink link txt c" onclick="window.open('https://t.me/+lqNbFMe-v4BjMTVh', '_blank')"><p>My Telegram Group</p></a>
+</center>
+</div>
+
+<hr id="soundb">
+
+<div>
+<center>
+<p class="c" style="color: white; font-size: 30; width: 221;">Soundboards! :)</p>
+<a class="hyperlink link txt c" onclick="aGame('https://www.myinstants.com/en/index/us/')"><p>Myinstants Soundboard</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://www.voicy.network/')"><p>Voicy Soundboard</p></a>
+</center>
+</div>
+
+<hr id="chat">
+
+<!--Other-->
+<center>
+<p class="c" style="color: white; font-size: 30; width: 281;">Chat & Tools</p>
+</center>
+
+<center>
+
+<a class="hyperlink link txt c" onclick="window.open('https://thegportal.neocities.org/BlobeBM-main/index.html')"><p>BlobeBM (Bookmarklet Runner)</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://www3.cbox.ws/box/?boxid=3542374&boxtag=ecI4Nr')"><p>Chat (CBox)</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://e.widgetbot.io/channels/1250646385431285914/1250646385431285918?api=eb3e166e-0e0f-4a3c-a731-3d75674b81ee')"><p>Chat (Widgetbot)</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://thegportal.neocities.org/data-url.html')"><p>Data URL Generator</p></a>
+<a class="hyperlink link txt c" onclick="aHTMLE()"><p>HTML Code Cloaker</p></a>
+<a class="hyperlink link txt c" onclick="openMembersList()"><p>Members of the GHub Team</p></a>
+<a class="hyperlink link txt c" onclick="particlesb()"><p>Particle Background</p></a>
+</center>
+
+<hr id="ccontent">
+
+<div>
+<center>
+<p class="c" style="color: white; font-size: 30; width: 258;">Custom Content :)</p>
+</center>
+</div>
+
+<center>
+<a class="hyperlink link txt c" onclick="cuContent(); getContent();"><p>Custom Content</p></a>
+</center>
+
+<hr id="mygames">
+
+<div>
+<center>
+<p class="c" style="color: white; font-size: 30; width: 239;">Made by GHub! :)</p>
+</center>
+</div>
+
+<center>
+<a class="hyperlink link txt c" onclick="aGameNB('https://thegportal.neocities.org/memeclicker.html')"><p>Meme Clicker</p></a>
+</center>
+
+<hr id="fgame">
+
+<div>
+<center>
+<p class="c" style="color: white; font-size: 30; width: 271;">Featured Games! :)</p>
+<p class="up c" style="color: white; font-size: 15; width: 232;">(To search for games, use ctrl+f)</p>
+</center>
+</div>
+
+<!--Featured List-->
+<div>
+<center>
+
+<a class="hyperlink link txt c" onclick="aGameCW('https://penope.com/play-adventures-with-anxiety/', '370')"><p>Adventures with Anxiety</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://blockblastonline.com/game/block-blast-v1/')"><p>Block Blast</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://bloxd.io?mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&amp;mp_embed=0&amp;mp_game_id=240164&amp;mp_game_uid=bloxd-io&amp;mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fembed%2Fbloxd-io&amp;mp_int=1&amp;mp_locale=en_US&amp;mp_player_type=IFRAME&amp;mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&amp;mp_site_name=miniplay.com&amp;mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&amp;mp_timezone=America%2FChicago&amp;mp_view_type=')"><p>Bloxd.io</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://abinbins.github.io/a7/master-chess')"><p>Chess</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://cookie-clicker-online.github.io/file/')"><p>Cookie Clicker (2013)</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://funnyhahagme.neocities.org/')"><p>Cookie Clicker (2022)</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://www.iqutest.com/games/coreball/index.html')"><p>Coreball</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://driftbossonline.github.io/file/')"><p>Drift Boss</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://freeriderhd.com/')"><p>Free Rider HD</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://gba.js.org/')"><p>GBA Online</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://www.ssuiteoffice.com/ssuitegames/Hextris/index.html')"><p>Hextris</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://archive.org/')"><p>Internet Archive</p></a>
+<a class="hyperlink link txt c" onclick="aGameNB('https://thegportal.neocities.org/memeclicker.html')"><p>Meme Clicker</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://ubggo.github.io/ub-games/monkeymart/')"><p>Monkey Mart</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://monkey-mart.io/iframe/index.html')"><p>Monkey Mart (CRASH FREE)</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://ubgfun.github.io/running/moto-x3m')"><p>Moto X3M</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://www.myinstants.com/en/index/us/')"><p>Myinstants (Soundboard)</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://pcjs.org')"><p>PCJS.org</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://www.kodub.com/apps/polytrack')"><p>PolyTrack</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://game316009.konggames.com/gamez/0031/6009/live/index.html')"><p>Retro Bowl</p></a>
+<a class="hyperlink link txt c" onclick="aGameCZ('https://coolubg2.github.io/coolubg-list/sandtris', '100%', '90')"><p>Sandtris</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://slopeio.org/game/slope')"><p>Slope</p></a>
+<a class="hyperlink link txt c" onclick="aGameCW('https://itsvijaysingh.github.io/Snow-Rider3D/', '70')"><p>Snow Rider 3D</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://ubg98.github.io/SpaceBarClicker/')"><p>Spacebar Clicker (AD FREE)</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://stickman.pro/iframe/index.html')"><p>Stickman Hook</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://szhong.4399.com/4399swf//upload_swf/ftp35/liuxinyu/20210324/jj01/index.html')"><p>Subway Surfers</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://territorial.io/')"><p>Territorial.io</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://bosorioo.github.io/wordle-unlimited/')"><p>Unlimited Wordle</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://ubg98.github.io/Vex8/')"><p>Vex 8</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://www.voicy.network/')"><p>Voicy Soundboard</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://mikhad.github.io/wordle/#infinite')"><p>Wordle Plus</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://yohoho.io/')"><p>YoHoHo.io (Pirate Battle Royale)</p></a>
+
+</center>
+</div>
+
+<hr id="agame">
+
+<div>
+<center>
+<p class="c" style="color: white; font-size: 30; width: 204;">All Games! :)</p>
+<p class="up c" style="color: white; font-size: 15; width: 232;">(To search for games, use ctrl+f)</p>
+</center>
+</div>
+
+<!--List-->
+<div>
+<center>
+<a class="hyperlink link txt c" onclick="aGame('https://education76.github.io/g77/1v1-lol-3/')"><p>1v1.LOL</p></a>
+
+<a class="hyperlink link txt c" onclick="aGameCW('https://penope.com/play-adventures-with-anxiety/', '370')"><p>Adventures with Anxiety</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://agar.cc/')"><p>Agario</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/1cff468c7b184c019a0ba7a8c03dbb6e/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Avoid</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.greatmathgame.com/game/play/1/awesome-tanks-2/index.html')"><p>Awesome Tanks 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('//html5.gamedistribution.com/rvvASMiM/d68a5fc621aa4636acb3d5cf97d42606/index.html?gd_sdk_referrer_url=https%3A%2F%2Fhtml5.gamedistribution.com%2Fc8ba1cb2f23d40b5a19fd606fcc3e50b%2F%3Fgd_sdk_referrer_url%3Dhttps%3A%2F%2Fhttps%3A%2F%2Fhttps%3A%2F%2Fsites.google.com%2Fview%2Fsigmarizz%2Fhome%2F%7Bgame-path%7D&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL2h0bWw1LmdhbWVkaXN0cmlidXRpb24uY29tL2M4YmExY2IyZjIzZDQwYjVhMTlmZDYwNmZjYzNlNTBiLz9nZF9zZGtfcmVmZXJyZXJfdXJsPWh0dHBzOi8vaHR0cHM6Ly9odHRwczovL3NpdGVzLmdvb2dsZS5jb20vdmlldy9zaWdtYXJpenovaG9tZS97Z2FtZS1wYXRofSIsInBhcmVudERvbWFpbiI6Imh0bWw1LmdhbWVkaXN0cmlidXRpb24uY29tIiwidG9wRG9tYWluIjoidGhlZ3BvcnRhbC5uZW9jaXRpZXMub3JnIiwiaGFzSW1wcmVzc2lvbiI6ZmFsc2UsImxvYWRlckVuYWJsZWQiOnRydWUsImhvc3QiOiJodG1sNS5nYW1lZGlzdHJpYnV0aW9uLmNvbSIsInZlcnNpb24iOiIxLjUuMTcifQ%253D%253D')"><p style="font-size: 19;">Backrooms Skibidi Terrors</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://marketjs.cdn.start.gg/9n5cr504q14r/v6/index.html?msstart_sdk_init=eyJwYXJlbnRPcmlnaW4iOiJodHRwczovL3d3dy5tc24uY29tIiwiY2xpZW50SWQiOiIxRUJCNkMzRDNGQzg2QjZDMzQ0Nzc4RDEzRUQwNkFDQyIsImxvY2FsZSI6ImVuLXVzIiwiZW50cnlQb2ludElkIjoiIn0')"><p>Ball Drop</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://files.twoplayergames.org/files/games/other/Basket_Random/index.html')"><p>Basket Random</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.greatmathgame.com/game/play/1/big-tower-tiny-square/index.html')"><p>Big Tower Tiny Square</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.greatmathgame.com/game/play/1/big-tower-tiny-square-2/index.html')"><p>Big Tower Tiny Square 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ubg365.github.io/bitlife-life-simulator/play.html')"><p>Bitlife</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://blacket.org/')"><p>Blacket (Blooket Private Server)</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://blockblastonline.com/game/block-blast-v1/')"><p>Block Blast</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ikatchelo.github.io/blockpost/')"><p>Blockpost</p></a>
+
+<a class="hyperlink link txt c" onclick="aGameW('https://blooket.com/')"><p>Blooket</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.bubbleshooter.net/games/bloons-tower-defense-1.php?gd_sdk_referrer_url=https://www.bubbleshooter.net/game/bloons-tower-defense-1/')"><p>Bloons Tower Defense 1</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://f.silvergames.com/ruffle/player.php?id=20')"><p>Bloons Tower Defense 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ubg89.github.io/BloonsTowerDefense3/')"><p>Bloons Tower Defense 3</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://cdn2.addictinggames.com/addictinggames-content/ag-assets/content-items/html5-games/bloonstowerdefense4/index.html')"><p>Bloons Tower Defense 4</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://bloxd.io?mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&amp;mp_embed=0&amp;mp_game_id=240164&amp;mp_game_uid=bloxd-io&amp;mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fembed%2Fbloxd-io&amp;mp_int=1&amp;mp_locale=en_US&amp;mp_player_type=IFRAME&amp;mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&amp;mp_site_name=miniplay.com&amp;mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&amp;mp_timezone=America%2FChicago&amp;mp_view_type=')"><p>Bloxd.io</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://files.twoplayergames.org/files/games/other/Box_Tower/index.html')"><p>Box Tower</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/e8c02771085e4c8b9de3deda5e087e0e/?gd_sdk_referrer_url=https%3A%2F%2Fwww.twoplayergames.org%2Fgame%2Fboxing-random')"><p>Boxing Random</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('//ams.cdn.arkadiumhosted.com/assets/global/game/bubble-shooter?show_game_end=false&locale=en-US&device_type=pc&arena_name=SiteBaseUrl%20is%20empty&game_name=Arkadium%27s%20Bubble%20Shooter&events=game_start,game_end,pause_ready,event_change,abtest_init,reward_start&play_id=LTU0MTE=?show_game_end=false&locale=en-US&device_type=pc&arena_name=SiteBaseUrl%20is%20empty&game_name=Arkadium%27s%20Bubble%20Shooter&events=game_start,game_end,pause_ready,event_change,abtest_init,reward_start&play_id=LTU0MTE=')"><p>Bubble Shooter</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://narrow-one.github.io/n2/burger-bounty')"><p>Burger Bounty</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://planetalpha.pages.dev/burrito_bison/index.html?kongregate=1&amp;kongregate_user_id=0&amp;kongregate_username=Guest&amp;kongregate_game_auth_token=undefinedd')"><p style="font-size: 19;">Burrito Bison - Launcha Libre</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ext.minijuegosgratis.com/burrito-bison-revenge/game.html')"><p>Burrito Bison - Revenge</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://game.enjoy4fun.com/chaincube2048merge/v2/index.html?channel-id=home-action&amp;site-id=site_4&')"><p>Chain Cube 2048</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://character.ai/')"><p>Character.ai</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://kschuetz.github.io/checkers/')"><p>Checkers</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://abinbins.github.io/a7/master-chess')"><p>Chess</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ubg98.github.io/ClashOfTanks/')"><p>Clash of Tanks</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://codethislab.cdn.start.gg/9np2059nr3db/v25/index.html?msstart_sdk_init=eyJwYXJlbnRPcmlnaW4iOiJodHRwczovL3d3dy5tc24uY29tIiwiY2xpZW50SWQiOiIxRUJCNkMzRDNGQzg2QjZDMzQ0Nzc4RDEzRUQwNkFDQyIsImxvY2FsZSI6ImVuLXVzIiwiZW50cnlQb2ludElkIjoiIn0')"><p>Classic Nonogram</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://1games.io/game/cluster-rush/')"><p>Cluster Rush</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/47d6a67040324039ae661156b0e82f12/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Color Box</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/395c8a2196974c0eb855948abe49c3d8/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Color vs Block</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://media.safekidgames.com/connector/index.html')"><p>Connector</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://cookie-clicker-online.github.io/file/')"><p>Cookie Clicker (2013)</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://funnyhahagme.neocities.org/')"><p>Cookie Clicker (2022)</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://games-online.io/game/cake-maker/')"><p>Cookie Clicker 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.iqutest.com/games/coreball/index.html')"><p>Coreball</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/83adf20353ce43c79b7ee9635c4e7366/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Cowboy vs Skibidi Toilets</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://i.gamesgo.net/uploads/game/html5/4072/')"><p>Crossy Road</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://neuroid.co.uk/lab/cub/')"><p>CUB</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/f1703e694a694a058a690bd6d631f9ae/?gd_sdk_referrer_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fcube-adventure&mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=246445&mp_game_uid=cube-adventure&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fembed%2Fcube-adventure&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=America%2FChicago&mp_view_type=')"><p>Cube Adventure</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://smashkartsonlinegames.github.io/v88/cut-the-rope-time-travel')"><p>Cut the Rope - TT</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('//html5.gamedistribution.com/bbb90b6708274594bc919bc11e22f346/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p style="font-size: 17.2;">Dead Aim Skibidi Toilets Attack</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://deadshot.io/')"><p>Deadshot.io</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://digdig.io/')"><p>DigDig.io</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://blobby-boi.github.io/chrome-dino/')"><p>Dino Game</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://g.igroutka.ru/games/760/pP8hwNgq2r4z6L5E/b34682ee-a412-4acc-82b7-c8c45821975f/index.html')"><p>Disaster Arena</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://doodle-jump.co/game/doodle-jump/')"><p>Doodle Jump</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ext.minijuegosgratis.com/draw-climber/gameCode/index.html?mp_api_as3_url=https%3A%2F%2Fssl.minijuegosgratis.com%2Flechuck%2Fas3%2Flatest.swf&mp_api_as3_url_bck=https%3A%2F%2Fapi.minijuegos.com%2Flechuck%2Fclient-as%2F&mp_api_id=5454&mp_api_js_url=https%3A%2F%2Fssl.minijuegosgratis.com%2Flechuck%2Fjs%2Flatest.js&mp_api_js_url_bck=https%3A%2F%2Fapi.minijuegos.com%2Flechuck%2Fclient-js%2F&mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=233608&mp_game_uid=draw-climber&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fembed%2Fdraw-climber&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=America%2FChicago&mp_view_type=&mini_signature=cdcddab217582ff3cb10b1edcfc36e4a&xdm_e=https%3A%2F%2Fwww.miniplay.com&xdm_c=default3128&xdm_p=1')"><p>Draw Climber</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://cdn-orange.wouterplanet.com/draw_the_bridge/')"><p>Draw The Bridge</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('//html5.gamedistribution.com/rvvASMiM/db2ceffb071142e1af0438c44f91fd02/index.html?timestamp=-62135596800&amp;countryCode=en&amp;siteid=90&amp;channelid=3&amp;siteLocale=en&amp;locale=en&amp;gd_sdk_referrer_url=https%3A%2F%2Fwww.girlsgogames.com%2Fgame%2Fdraw-to-smash&amp;gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy5naXJsc2dvZ2FtZXMuY29tL2dhbWUvZHJhdy10by1zbWFzaCIsInBhcmVudERvbWFpbiI6ImdpcmxzZ29nYW1lcy5jb20iLCJ0b3BEb21haW4iOiJnaXJsc2dvZ2FtZXMuY29tIiwiaGFzSW1wcmVzc2lvbiI6ZmFsc2UsImxvYWRlckVuYWJsZWQiOnRydWUsImhvc3QiOiJodG1sNS5nYW1lZGlzdHJpYnV0aW9uLmNvbSIsInZlcnNpb24iOiIxLjUuMTcifQ%253D%253D')"><p>Draw To Smash!</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://driftbossonline.github.io/file/')"><p>Drift Boss</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.180sx.club/media/games/drift-hunters/drift-hunters-chromebook.html')"><p>Drift Hunters</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/41dee133f5b543f2944e1530aae028f0/?gd_sdk_referrer_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fdrop-n-merge&mp_api_as3_url=https%3A%2F%2Fssl.minijuegosgratis.com%2Flechuck%2Fas3%2Flatest.swf&mp_api_as3_url_bck=https%3A%2F%2Fapi.minijuegos.com%2Flechuck%2Fclient-as%2F&mp_api_id=4170&mp_api_js_url=https%3A%2F%2Fssl.minijuegosgratis.com%2Flechuck%2Fjs%2Flatest.js&mp_api_js_url_bck=https%3A%2F%2Fapi.minijuegos.com%2Flechuck%2Fclient-js%2F&mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=238798&mp_game_uid=drop-n-merge&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fembed%2Fdrop-n-merge&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=America%2FChicago&mp_view_type=&mini_signature=efbda72cf26a1a3590e0cb572c942bfc&xdm_e=https%3A%2F%2Fwww.miniplay.com&xdm_c=default1279&xdm_p=1')"><p>Drop n Merge</p></a>
+
+<a class="hyperlink link txt c" onclick="aGameW('https://glittering-brigadeiros-458b70.netlify.app/')"><p>Eaglercraft (Minecraft)</p></a>
+
+<a class="hyperlink link txt c" onclick="window.open('https://drive.google.com/file/d/1P-r3ZGoNtCc9C_kOFwGj9MBmbSy_2Ezc/view?usp=sharing')"><p>Eaglercraft (Minecraft) - Download</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://azgames.io/game/escape-road/')"><p>Escape Road</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://1games.io/game/escape-road-2/')"><p>Escape Road 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://game.azgame.io/escape-road-city-2/')"><p>Escape Road City 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/d1bcb3ebd1384f949465a0872685e53e/?gd_sdk_referrer_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fevermatch&mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=247069&mp_game_uid=evermatch&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fembed%2Fevermatch&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.minipla
+y.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=America%2FChicago&mp_view_type=')"><p>Evermatch</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://evoworld.io/')"><p>Evoworld.io</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://play.fancade.com/?gd_sdk_referrer_url=https://play.gilect.com/game?title=fancade')"><p>Fancade</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamemonetize.com/b5utcmt95x17yyia8qh295aoxuoo6oki/?mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=237255&mp_game_uid=fill-the-water&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fembed%2Ffill-the-water&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=America%2FChicago&mp_view_type=')"><p>Fill The Water</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/a55c9cc9c21e4fc683c8c6857f3d0c75/?gd_sdk_referrer_url=https%3A%2F%2Fwww.twoplayergames.org%2Fgame%2Ffireboy-and-watergirl-in-the-forest-temple')"><p>Fireboy & Watergirl</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://g.lax1dude.net/fnaw/')"><p>Five Nights at Winston's</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://flappybirdgame.github.io/file/')"><p>Flappy Bird</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://scratch.mit.edu/projects/940900267/embed')"><p>Floater</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://paveldogreat.github.io/WebGL-Fluid-Simulation/')"><p>Fluid Simulation</p></a>
+<a class="hyperlink link txt c" onclick="aGameCZ('https://foodstars.io/', '100%', '50')"><p>FoodStars.io</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://footballbros.biz/game/footballbros/index.html?v=271')"><p>Football Bros</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://freeriderhd.com/')"><p>Free Rider HD</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://sg.gamedistribution.com/games/free-the-ball/gamesites/99999/locale/?gd_sdk_referrer_url=https%3A%2F%2Fwww.iwin.com%2Fonline-games%2Fgame%2Fplay%2Ffree-the-ball&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy5pd2luLmNvbS9vbmxpbmUtZ2FtZXMvZ2FtZS9wbGF5L2ZyZWUtdGhlLWJhbGwiLCJwYXJlbnREb21haW4iOiJpd2luLmNvbSIsInRvcERvbWFpbiI6Iml3aW4uY29tIiwiaGFzSW1wcmVzc2lvbiI6ZmFsc2UsImxvYWRlckVuYWJsZWQiOnRydWUsImhvc3QiOiJodG1sNS5nYW1lZGlzdHJpYnV0aW9uLmNvbSIsInZlcnNpb24iOiIxLjUuMTcifQ%3D%3D')"><p>Free the Ball</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://fnf.kdata1.com/2024/fnf/5201/')"><p>Friday Night Funkin'</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://emulatoros.github.io/gfile/fruitninja')"><p>Fruit Ninja</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://htmlxm.github.io/h4/funny-shooter-2')"><p>Funny Shooter 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.free80sarcade.com/segamaster/main.php?Title=Gauntlet')"><p>Gauntlet (1985)</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://gba.js.org/')"><p>GBA Online</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/67fd9138d2e048b686c26d87dbe11360/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Geometry Hop</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://previews.envatousercontent.com/files/223637350/index.html')"><p>Geometry Rash</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('//html5.gamedistribution.com/rvvASMiM/02ff01e6e9f7451ba28d889a2a55eec9/index.html?gd_sdk_referrer_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fgolf-orbit&mp_api_as3_url=https%3A%2F%2Fssl.minijuegosgratis.com%2Flechuck%2Fas3%2Flatest.swf&mp_api_as3_url_bck=https%3A%2F%2Fapi.minijuegos.com%2Flechuck%2Fclient-as%2F&mp_api_id=7350&mp_api_js_url=https%3A%2F%2Fssl.minijuegosgratis.com%2Flechuck%2Fjs%2Flatest.js&mp_api_js_url_bck=https%3A%2F%2Fapi.minijuegos.com%2Flechuck%2Fclient-js%2F&mp_game_id=249739&mp_game_uid=golf-orbit&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fgolf-orbit%2Fplay&mp_int=1&mp_locale=en_US&mp_mobile=1&mp_player_type=IFRAME&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=America%2FChicago&mini_signature=12bd01c677ef8df0d899c134c776af34&xdm_e=https%3A%2F%2Fwww.miniplay.com&xdm_c=default7222&xdm_p=1&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy5taW5pcGxheS5jb20vZ2FtZS9nb2xmLW9yYml0IiwicGFyZW50RG9tYWluIjoibWluaXBsYXkuY29tIiwidG9wRG9tYWluIjoibWluaXBsYXkuY29tIiwiaGFzSW1wcmVzc2lvbiI6ZmFsc2UsImxvYWRlckVuYWJsZWQiOnRydWUsImhvc3QiOiJodG1sNS5nYW1lZGlzdHJpYnV0aW9uLmNvbSIsInZlcnNpb24iOiIxLjUuMTcifQ%253D%253D')"><p>Golf Orbit</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://i.gamesgo.net/uploads/game/html5/7551/index.html?mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=244349&mp_game_uid=buscaminas-google&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fembed%2Fbuscaminas-google&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=America%2FChicago&mp_view_type=')"><p>Google Minesweeper</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ext.minijuegosgratis.com/google-snake/game.html?mp_api_as3_url=https%3A%2F%2Fssl.minijuegosgratis.com%2Flechuck%2Fas3%2Flatest.swf&mp_api_as3_url_bck=https%3A%2F%2Fapi.minijuegos.com%2Flechuck%2Fclient-as%2F&mp_api_id=6220&mp_api_js_url=https%3A%2F%2Fssl.minijuegosgratis.com%2Flechuck%2Fjs%2Flatest.js&mp_api_js_url_bck=https%3A%2F%2Fapi.minijuegos.com%2Flechuck%2Fclient-js%2F&mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=246309&mp_game_uid=google-snake&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fembed%2Fgoogle-snake&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=America%2FChicago&mp_view_type=&mini_signature=9dbf2cb68005915ef0aa631973d8410a&xdm_e=https%3A%2F%2Fwww.miniplay.com&xdm_c=default5251&xdm_p=1')"><p>Google Snake</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.rapidwebapp.com/game/granny/index.html')"><p>Granny</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://f.silvergames.com/ruffle/player.php?id=242')"><p>Grow Island</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://gunmayhem.io/game/gun-mayhem/')"><p>Gun Mayhem</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.twoplayergames.org/gameframe/gun-mayhem-2-more-mayhem')"><p>Gun Mayhem 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://gun-spin.github.io/file/')"><p>GunSpin</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/1b8d7d6734e34cd39903eb5c8b7626e2/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Gyro Maze 3d</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://cbgamesdev.github.io/chilibowlflash/hw/index.html')"><p>Happy Wheels (Fan-Made)</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://hexgl.bkcore.com/play/')"><p>HexGL</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.ssuiteoffice.com/ssuitegames/Hextris/index.html')"><p>Hextris</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://1games.io/game/hill-climb-race/')"><p>Hillclimb Race</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://hole-io.com/index-gd.php?gd_sdk_referrer_url=https://html5.gamedistribution.com/bf10577cd0644646a2a0152fe3b4d586/?gd_sdk_referrer_url=https%3A%2F%2Fwww.twoplayergames.org%2Fgame%2Fhole-io')"><p>Hole.io</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.humanornot.ai/')"><p>Human or Not?</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://iknowtheworld.com/')"><p>I Know the World</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamemonetize.co/lqfb3zvgayq0yvxt01u7kqkr1cmsgqs1/')"><p>Idle Airline Tycoon</p></a>
+
+<a class="hyperlink link txt c" onclick="aGameCZ('https://idle-breakout.neocities.org/', '100%', '77')"><p>Idle Breakout</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.imperiaonline.org/')"><p>Imperia Online</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://infinite-craft.org/infinite-craft/')"><p>Infinite Craft</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://archive.org/')"><p>Internet Archive</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ubgfun.github.io/fighting/iron-snout')"><p>Iron Snout</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.rapidwebapp.com/game/jetpackjoyride/index.html')"><p>Jetpack Joyride</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/5bce7daa7c25409db587a293fabbb9a7/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Jigsaw Puzzle</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('//html5.gamedistribution.com/rvvASMiM/9dc8528f103b4a0a928739ba635bd5e1/index.html?gd_sdk_referrer_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fjohnny-trigger&mp_api_as3_url=https%3A%2F%2Fssl.minijuegosgratis.com%2Flechuck%2Fas3%2Flatest.swf&mp_api_as3_url_bck=https%3A%2F%2Fapi.minijuegos.com%2Flechuck%2Fclient-as%2F&mp_api_id=3732&mp_api_js_url=https%3A%2F%2Fssl.minijuegosgratis.com%2Flechuck%2Fjs%2Flatest.js&mp_api_js_url_bck=https%3A%2F%2Fapi.minijuegos.com%2Flechuck%2Fclient-js%2F&mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=232565&mp_game_uid=johnny-trigger&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fembed%2Fjohnny-trigger&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=America%2FChicago&mp_view_type=&mini_signature=b9b6f2f11af90959567344c99d3cb471&xdm_e=https%3A%2F%2Fwww.miniplay.com&xdm_c=default7572&xdm_p=1&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy5taW5pcGxheS5jb20vZ2FtZS9qb2hubnktdHJpZ2dlciIsInBhcmVudERvbWFpbiI6Im1pbmlwbGF5LmNvbSIsInRvcERvbWFpbiI6Im1pbmlwbGF5LmNvbSIsImhhc0ltcHJlc3Npb24iOmZhbHNlLCJsb2FkZXJFbmFibGVkIjp0cnVlLCJob3N0IjoiaHRtbDUuZ2FtZWRpc3RyaWJ1dGlvbi5jb20iLCJ2ZXJzaW9uIjoiMS41LjE3In0%253D')"><p>Johnny Trigger</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://edit.coolmathgames.com//sites/cmatgame/files/public_games/24166/')"><p>Just one Boss</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://kiz10.com/')"><p>Kiz10</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://kour.io/')"><p>Kour.io</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/0bdde9a490af443899d0f23a0550ec6b/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Laser Overload</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ad-freegames.github.io/flash/game/learn-to-fly.html')"><p>Learn to Fly</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://games.kidzsearch.com/computer/flashgame_data/ruffleplayer.html?game=learn-to-fly-idle-203284')"><p>Learn to Fly Idle</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://littlealchemy.com/')"><p>Little Alchemy</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://littlealchemy2.com/')"><p>Little Alchemy 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://data.gameonl.com/12fe7593-7027-494f-91ac-f57c6d2b08d9/index.html?noads=true')"><p>Madness: Project Nexus</p></a>
+
+<a class="hyperlink link txt c" onclick="aGameNB('https://thegportal.neocities.org/memeclicker.html')"><p>Meme Clicker</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/4b2b00756d1d4df58d1b5cfb2c3a39bd/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Merge Master Skibidi Bop</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/77cfeb8882304bc5825a447a8b7e45ea/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Microsoft Sudoku</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://turbowarp.org/208974963/embed?autoplay&addons=remove-curved-stage-border,pause')"><p>Money Clicker</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ubggo.github.io/ub-games/monkeymart/')"><p>Monkey Mart</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://monkey-mart.io/iframe/index.html')"><p>Monkey Mart (CRASH FREE)</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://mope.io/')"><p>Mope.io</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ubgfun.github.io/running/moto-x3m')"><p>Moto X3M</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://htmlxm.github.io/h/moto-x3m-spooky-land')"><p>Moto X3M - Spooky Land</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/88e9217f59d14aa3b477ba003fc9dd03/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://sites.google.com/view/ghub2024/{game-path}')"><p>Muscle Clicker 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.myinstants.com/en/index/us/')"><p>Myinstants (Soundboard)</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://loserboysonyt.github.io/')"><p>NFL Retro Bowl '25</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://landgreen.github.io/n-gon/')"><p>n-gon</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/3440dcb030fd4f7f9bd0911b7c8e2b52/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Nuts & Bolts Puzzle</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/98aa6330a34e442fbb4e0a1e22a284ad/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>One Line Only</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://sz-games.github.io/Games5/ovo')"><p>OvO</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://f.silvergames.com/ruffle/player.php?id=186')"><p>Pandemic 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://bitent.com/swf/papas_pizzeria/')"><p>Papa's Pizzeria</p></a>
+
+<a class="hyperlink link txt c" onclick="aGameCW('https://play.gilect.com/flashgame?flash=papassushiria', '59.5%')"><p>Papa's Sushiria</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://geography-lesson-4.org/files/paperio2/')"><p>Paper.io 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://sz-games.github.io/Games6/parking-fury-3')"><p>Parking Fury 3</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://hunar4321.github.io/particle-life/particle_life.html#91651088029')"><p>Particle Life</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://pcjs.org')"><p>PCJS.org</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://penaltyshooters.gitlab.io/new-game/')"><p>Penalty Shooters 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ubg89.github.io/PokemonFireredVersion/')"><p>Pokémon FireRed (GBA)</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://playpokerogue.com/play/')"><p>PokéRogue</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.kodub.com/apps/polytrack')"><p>PolyTrack</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://f.silvergames.com/ruffle/player.php?id=130')"><p>Portal - Flash Version</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/dc576ea951bf427ab9916e8d268fb8bb/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Puzzle Fever</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://game316009.konggames.com/gamez/0031/6009/live/index.html')"><p>Retro Bowl</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ethonion10.neocities.org/')"><p>Retro Bowl College</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://1xretro.pages.dev/')"><p>Retro Bowl HACKED</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://rooftop-snipers.github.io/file/')"><p>Rooftop Snipers</p></a>
+
+<a class="hyperlink link txt c" onclick="aGameCZ('https://coolubg2.github.io/coolubg-list/sandtris', '100%', '90')"><p>Sandtris</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/05d1d93b8036470ea48de0e003a1b8d9/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Sea Match</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://yolk.best/')"><p>Shell Shockers</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://yp3d.com/ships3d/')"><p>Ships 3D</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/68ed42bec4554877b0e277090d8c2435/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Skibidi Fishing</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/add115b2b3684b3fbcd9e232c20ceae1/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Skibidi Hero.io</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/4963fc0cf16f4a27be5f9cdd53f9b347/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Skibidi Hit Master</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/ab77c89c83614dedabbb9a844d9892fa/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Skibidi Survivor Rush</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/0a5d7f62d76d464592bc5f99c2032b58/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Skibidi Toilet Puzzle</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/e33e4e48056a49c1be1aabac4e573db2/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Skibidi Toilet Shooter Ch. 1</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/da604424b07747668fc79fbfe1bad252/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Skibidi Toilet vs Cameraman Sniper</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/d98e5f4ee1784419b71e5001f705476b/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Slant</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/efa941135635400f94bdb0b7430a92f4?gd_sdk_referrer_url=https://now.us/play/voodoo/51052/slice-it-all')"><p>Slice It All!</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/d38228d073c149af8fbe2a5ea1fd231e/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>SLIDE STONE</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://slopeio.org/game/slope')"><p>Slope</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://cdn.gh5t.com/games/slope2/')"><p>Slope 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://slopeonline.online/game/slope-3-v2/')"><p>Slope 3</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://slowroads.io/')"><p>Slowroads.io</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://smash-karts.com/game/smash-karts/')"><p>Smash Karts</p></a>
+
+<a class="hyperlink link txt c" onclick="aGameCW('https://itsvijaysingh.github.io/Snow-Rider3D/', '70%')"><p>Snow Rider 3D</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://soccerbros.gg/?msstart_sdk_init=eyJwYXJlbnRPcmlnaW4iOiJodHRwczovL3d3dy5tc24uY29tIiwiY2xpZW50SWQiOiIxRUJCNkMzRDNGQzg2QjZDMzQ0Nzc4RDEzRUQwNkFDQyIsImxvY2FsZSI6ImVuLXVzIiwiZW50cnlQb2ludElkIjoiIn0')"><p>Soccer Bros</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://files.twoplayergames.org/files/games/other/Soccer_Random/index.html')"><p>Soccer Random</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://script.google.com/a/macros/techmonkey.media/s/AKfycbzZN3jRO2eOgcp622_W0GYAeArMio71AmlfRhF8yFucC5hEbRnDFZ3NLiN8peebEdlhWw/exec')"><p>Spacebar Clicker</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ubg98.github.io/SpaceBarClicker/')"><p>Spacebar Clicker (AD FREE)</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://stickman.pro/iframe/index.html')"><p>Stickman Hook</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://szhong.4399.com/4399swf//upload_swf/ftp35/liuxinyu/20210324/jj01/index.html')"><p>Subway Surfers</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.gamenora.com/upload/games/html5/SuperHot/')"><p>SuperHot Prototype</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://23azostore.github.io/s3/super-liquid-soccer')"><p>Super Liquid Soccer</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://sm64-embed.glitch.me/start.html')"><p>Super Mario 64</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.yad.com/games/Survivor-Io/index.html?yad')"><p>Survivor.io</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://23azostore.github.io/s8/temple-run-2/')"><p>Temple Run 2</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://territorial.io/')"><p>Territorial.io</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://djblue.github.io/tetris/')"><p>Tetris</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://gswitch3.github.io/g8/the-impossible-quiz')"><p>The Impossible Quiz</p></a>
+
+<a class="hyperlink link txt c" onclick="aGameCZ('https://www.visitoregon.com/wp-content/plugins/OregonTrail/oregon.html', '100%', '140')"><p>The Oregon Trail</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://game258367.konggames.com/gamez/0025/8367/live/index.html?kongregate_game_version=1458928619\u0026kongregate_host=www.kongregate.com')"><p>There Is No Game</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://blobby-boi.github.io/blobesrc/games/flash/?game=this-is-the-only-level')"><p>This is the Only Level</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/ee227744d492407db7ddd610511915ec/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Tile Connect Club</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://andreashackel.de/tilt/#!/main')"><p>Tilt</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://legalizenuclearbombs5.github.io/games/Tiny%20Fishing')"><p>Tiny Fishing</p></a>
+
+<a class="hyperlink link txt c" onclick="aGameCW('https://slope-game.github.io/new5923/tomb/', '410')"><p>Tomb of the Mask</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://google-opensocial.googleusercontent.com/gadgets/ifr?container=ig&url=https://s3.amazonaws.com/production-assetsbucket-8ljvyr1xczmb/1ee20621-61bc-4ec8-a8ec-5e839c2e6edc/TossTheTurtle.xml')"><p>Toss the Turtle</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://trafficjam3d.github.io/traffic-jam-3d/')"><p>Traffic Jam 3D</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://traffictom.h5games.usercontent.goog/v/7c1a9fb2-2097-4c14-b7b1-052d80d41adb/?origin=https%3A%2F%2Fgamesnacks.com&amp;preStart=1727395428749')"><p>Traffic Tom</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://tribals.io/')"><p>Tribals.io</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://trucktrials.h5games.usercontent.goog/v/01347635-6b10-4fe1-ae85-53c0fb6a95bb/?origin=https%3A%2F%2Fgamesnacks.com&amp;preStart=1727396754700')"><p>Truck Trials</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://77pen.github.io/p/tunnel-rush')"><p>Tunnel Rush</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://bosorioo.github.io/wordle-unlimited/')"><p>Unlimited Wordle</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/6483de3746094aeb8b52d2e49fbaa8c4/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Upside Down</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://vexunblocked.github.io/3/')"><p>Vex 3</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://vexunblocked.github.io/4/')"><p>Vex 4</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://vex-5.github.io/gamevex2/vex5/')"><p>Vex 5</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://htmlxm.github.io/h9/vex-6')"><p>Vex 6</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ubg98.github.io/Vex7/')"><p>Vex 7</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ubg98.github.io/Vex8/')"><p>Vex 8</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://www.voicy.network/')"><p>Voicy Soundboard</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://23azostore.github.io/s9/volley-random')"><p>Volley Random</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://warbrokers.io/')"><p>WarBrokers.io</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/893500b2a6ac4d08889dd6a93cc08700/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://sites.google.com/view/ghub2024/{game-path}')"><p>Watermelon Suika Game</p></a>
+<a class="hyperlink link txt c" onclick="aGame('https://webecomewhatwebehold.io/game/webecomewhatwebehold/')"><p>We Become what we Behold</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://ubg365.github.io/wheely-7/play.html')"><p>Wheely 7 - Detective</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://html5.gamedistribution.com/c13ee9c06edc4f0a8d7f6f291a7c13d8/?gd_sdk_referrer_url=https://html5.gamedistribution.com/c8ba1cb2f23d40b5a19fd606fcc3e50b/?gd_sdk_referrer_url=https://https://https://sites.google.com/view/sigmarizz/home/{game-path}')"><p>Word Search</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://mikhad.github.io/wordle/#infinite')"><p>Wordle Plus</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://play.famobi.com/words-of-wonders/A-QU5FO')"><p>Words of Wonders</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://www.worldguessr.com/')"><p>Worldguessr</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://iclouds.space/FLASH/swf.php?filename=the_worlds_hardest_game_ad.swf')"><p>World's Hardest Game</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://yohoho.io/')"><p>YoHoHo.io (Pirate Battle Royale)</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://edumaths.github.io/s99/zeepkist-crash-2d/?gd_sdk_referrer_url=https://gamestoday.org/play/zeepkist-crash-2d')"><p>Zeepkist</p></a>
+
+<a class="hyperlink link txt c" onclick="aGame('https://zombsroyale.io/')"><p>Zombs Royale</p></a>
+
+</center>
+</div>
+
+<hr>
+
+<!--Contact-->
+
+<center>
+<!-- You can enter your contact information here so people can send you messages :) -->
+</center>
+
+<!-- <hr> -->
+
+<center>
+<div class="sect c" style="width: 75%">
+<center>
+<p class="c" style="margin: 6; padding: 6 0;">I did not create these games; all of the credit goes to the respective owners. I also haven't made any profit from this project.</p>
+</center>
+</div>
+</center>
+
+<hr>
+</div>
+
+<script>
+function executeOnCombo() {
+  window.location.replace("about:blank");
+  window.open("https://classroom.google.com/", "_parent");
+  return;
+}
+
+  const pressedKeys = new Set();
+         
+  document.addEventListener("keydown", function(event) {
+    pressedKeys.add(event.key); // Add the pressed key to the set
+             
+      if (pressedKeys.has("z") && pressedKeys.has("Alt")) {
+        executeOnCombo();
+      }
+  });
+         
+  document.addEventListener("keyup", function(event) {
+  pressedKeys.delete(event.key); // Remove the released key from the set
+});
+
+function setFavicon(url) {
+  let link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+  link.type = 'image/x-icon';
+  link.rel = 'shortcut icon';
+  link.href = url;
+  document.getElementsByTagName('head')[0].appendChild(link);
+}
+
+setFavicon('https://ssl.gstatic.com/classroom/favicon.png'); 
+
+document.getElementsByClassName("key").innerHTML = "Sigma";
+
+function emergency() { 
+  window.location.replace("about:blank");
+  window.open("https://classroom.google.com/", "_parent");
+  return;
+}
+
+function ukey(url) {
+  var ub = window.open('/');
+  ub.document.write(`<frameset><frame src="` + url + `" style="background: black;"></frameset>`);
+  ub.document.title = 'New Tab';
+}
+
+function ukeyW(url) {
+  var ub = window.open('/');
+  ub.document.write(`<frameset><frame src="` + url + `" style="background: white;"></frameset>`);
+  ub.document.title = 'New Tab';
+}
+
+function openGame() {
+var win = window.open()
+var url = "https://thegportal.neocities.org/"
+var object = win.document.createElement('object')
+object.style.width = "100vw";
+object.style.height = "100vh";
+object.style.margin = "0";
+object.style.overflow = "hidden";
+object.style.top = "0";
+object.style.left = "0";
+object.style.position = "absolute";
+object.data = url
+win.document.body.appendChild(object)
+}
+
+function openWindow(url) {
+    // Create the window
+    var win = window.open('about:blank', '_blank', 'width=9000,height=9000');
+    
+    // Add GHub to the new window
+    win.document.write(`
+        <object 
+            data="${url}" 
+            style="width:100%; height:100%; border:none; margin:0; padding:0; overflow:hidden; top:0; left:0; position:absolute;" 
+            allowfullscreen></object>
+    `);
+}
+
+function urlNo() {
+  var n = window.open('/');
+  n.document.write(`<frameset><frame src="https://thegportal.neocities.org/"></frameset>`);
+}
+
+function openBlock() {
+  var txt2 = document.getElementById("tarea");
+  var ti = document.getElementById("titlearea");
+  var title = ti.value
+  var u = txt2.value;
+  var fu = 'about:blank#' + u;
+  window.alert('You are about to launch GHub in ' + fu)
+  var block = window.open('about:blank#' + u);
+  block.document.write(`<frameset><frame src="https://thegportal.neocities.org/"></frameset>`);
+  if (title != "") {
+    block.document.title = title;
+  }
+}
+
+function openRandom() {
+  var r = [Math.floor(Math.random()*10000000000)];
+  var rti = document.getElementById("titlearea");
+  var rtitle = rti.value
+  var fru = 'about:blank#' + r;
+  window.alert('You are about to launch GHub in ' + fru)
+  var ran = window.open('about:blank#' + r);
+  ran.document.write(`<frameset><frame src="https://thegportal.neocities.org/"></frameset>`);
+  if (rtitle != "") {
+    ran.document.title = rtitle;
+  }
+}
+
+function aGame(url) {
+var apo = `'`;
+document.getElementById("frame").innerHTML = '<embed class="c" src="' + url + '" width="100%" height="94.3%" style="border-radius: 15px; background-color: black;">';
+document.getElementById("pframe").style.display = 'none';
+document.getElementById("buttons").innerHTML = '<button class="c ukey" onclick="ukey(' + apo + url + apo + ')" style="">Unblock (If blocked)</button><button class="c key" onclick="emergency()" style="">E-Key</button>';
+document.getElementById("lightv").style.display = 'none';
+}
+
+function aGameW(url) {
+var apo = `'`;
+document.getElementById("frame").innerHTML = '<embed class="c" src="' + url + '" width="100%" height="94.3%" style="border-radius: 15px; background-color: white;">';
+document.getElementById("pframe").style.display = 'none';
+document.getElementById("buttons").innerHTML = '<button class="c ukey" onclick="ukeyW(' + apo + url + apo + ')" style="">Unblock (If blocked)</button><button class="c key" onclick="emergency()" style="">E-Key</button>';
+document.getElementById("lightv").style.display = 'none';
+}
+
+function aGameCW(url, width) {
+var apo = `'`;
+document.getElementById("frame").innerHTML = '<center><embed class="c" src="' + url + '" width="' + width + '" height="94.3%" style="border-radius: 15px; background-color: black;"></center>';
+document.getElementById("pframe").style.display = 'none';
+document.getElementById("buttons").innerHTML = '<button class="c ukey" onclick="ukey(' + apo + url + apo + ')" style="">Unblock (If blocked)</button><button class="c key" onclick="emergency()" style="">E-Key</button>';
+document.getElementById("lightv").style.display = 'none';
+}
+
+function aGameCZ(url, width, zoom) {
+var apo = `'`;
+document.getElementById("frame").innerHTML = '<center><embed class="c" src="' + url + '" width="' + width + '" height="94.3%" style="border-radius: 15px; zoom:' + zoom + '%; background-color: black;"></center>';
+document.getElementById("pframe").style.display = 'none';
+document.getElementById("buttons").innerHTML = '<button class="c ukey" onclick="ukey(' + apo + url + apo + ')" style="">Unblock (If blocked)</button><button class="c key" onclick="emergency()" style="">E-Key</button>';
+document.getElementById("lightv").style.display = 'none';
+}
+
+function aGameNB(url) {
+var apo = `'`;
+document.getElementById("frame").innerHTML = '<center><embed class="c" src="' + url + '" width="100%" height="94.3%" style="background-color: black;"></center>';
+document.getElementById("pframe").style.display = 'none';
+document.getElementById("buttons").innerHTML = '<button class="c ukey" onclick="ukey(' + apo + url + apo + ')" style="">Unblock (If blocked)</button><button class="c key" onclick="emergency()" style="">E-Key</button>';
+document.getElementById("lightv").style.display = 'none';
+}
+
+function urlNoCloak() {
+  var c = document.getElementById("html");
+  var code = c.value;
+  var c = document.getElementById("html");
+  var code = c.value;
+  var n = window.open('/');
+  n.document.write(code);
+}
+
+function cloakHTML() {
+  var c = document.getElementById("html");
+  var code = c.value;
+  var c = document.getElementById("html");
+  var code = c.value;
+  var n = window.open('about:blank');
+  n.document.write(code);
+}
+
+var home = document.getElementById('frame').innerHTML;
+
+function jsver() {
+  document.getElementById('frame').innerHTML = '<center><div class="sect c" style="width: 80%; margin: 6;"><p class="tc" style="margin: 0;">The JavaScript version is made for strict filters!</p><p class="tc" style="margin: 0; padding: 6 0;">Methods to get on it:</p><p class="tc" style="margin: 0; text-align: left;">-1. Download the latest version in <a href="https://drive.google.com/drive/folders/1ag2-UE0z4g8JR7yg_RpKHg1kjAQJZ7tI?usp=sharing" target="_blank" style="text-decoration: underline; color: #eb34e1">this Google Drive folder</a>, use Ctrl+O to open it.</p><p class="tc" style="margin: 0; text-align: left;">-2. If you can\'t download the file or the file doesn\'t work, copy the code from the latest version in <a href="https://drive.google.com/drive/folders/1ag2-UE0z4g8JR7yg_RpKHg1kjAQJZ7tI?usp=sharing" target="_blank" style="text-decoration: underline; color: #eb34e1">this Google Drive folder</a>. Then, paste the code into an HTML Editor & run it. (Examples of HTML Editors: <a href="https://www.w3schools.com/tryit/tryit.asp?filename=tryhtml_hello" target="_blank" style="text-decoration: underline; color: #eb34e1">W3Schools Tryit Editor</a>, <a href="https://html-online.com/" target="_blank" style="text-decoration: underline; color: #eb34e1">html-online.com</a>)</p><p class="tc" style="margin: 0; text-align: left; padding: 6 0; margin-top: -6;">-3. You can also embed the code into a Google Site or any website builder that allows embedding. :)</p></div></center>';
+  document.getElementById("lightv").style.display = 'none';
+}
+
+function goHome() {
+document.getElementById("frame").innerHTML = home;
+checkp();
+document.getElementById("buttons").innerHTML = '<button class="c key" onclick="emergency()" style="">E-Key</button>';
+document.getElementById("lightv").style.display = 'block';
+sn = 0;
+qw = 0;
+}
+
+function aHTMLE() {
+document.getElementById("frame").innerHTML = '<center><div><textarea id="html" placeholder="HTML/CSS/JavaScript code goes here" style="border-radius: 7px; border: none; resize: none; margin-bottom: 6; width: 100%; height: 80%;"></textarea></div><button class="button btn" onclick="cloakHTML()" style="font-family: oxanium; width: 300; height: 30; margin: 6; margin-top: 0;">Cloak in an about:blank tab</button><button class="btn button c" style=" font-family: oxanium; width: 300; height: 30; margin: 6; margin-top: 0;" onclick="urlNoCloak()">Cloak in a No URL Tab</button></center>';
+document.getElementById("pframe").style.display = 'none';
+document.getElementById("lightv").style.display = 'none';
+}
+
+function cuContent() {
+document.getElementById("frame").innerHTML = '<style>.btn {width: 215px;}</style><center><p class="c" style="font-size: 30; width: 232; margin: 6;">Custom Content</p><div class="c sect" style="width: 85%;"><p class="c" style="padding: 6 0; margin: 6;">Info: This is not necessarily an unblocker. Certain filters can still block content even after the \'Unblock\' button has been pressed.</p></div><div id="addContent" style="margin: 6;"><input id="nameid" class="c" style="border: none; border-radius: 10px; height: 20px; width: 300px; font-family: oxanium; margin: 2px; margin-bottom: 1px;" type="text" placeholder="Enter the name here"><input id="urlid" class="c" style="border: none; border-radius: 10px; height: 20px; width: 300px; font-family: oxanium; margin: 2px; margin-bottom: 1px;" type="text" placeholder="Enter the URL here"></div><div id="warning" style="color: red; margin-bottom: 4px; padding: 6 0; display: none;" class="c sect"></div><button class="c btn" onclick="add()" style="margin: 2px; font-family: oxanium;">Add Content</button><button class="c btn" onclick="deleteA()" style="margin: 2px; margin-top: 0; font-family: oxanium;">Delete All</button><button class="c btn" onclick="closeC()" style="margin: 2px; font-family: oxanium; margin-top: 0;">Close Content</button><div class="c" id="contentselect" style="margin: 6; z-index: 0;"></div><div class="c" id="ubButton"></div><div class="c" id="contentFrame" style="width: 100%; height: 96.5%; display: none; background: white;"></div></center>';
+document.getElementById("lightv").style.display = 'none';
+}
+
+function particlesb() {
+  document.getElementById("frame").innerHTML = '';
+  document.getElementById("pframe").style.display = 'block';
+  document.getElementById("lightv").style.display = 'none';
+}
+</script>
+
+<script>
+getContent();
+
+var cs = localStorage.getItem('contents');
+document.getElementById('contentselect').innerHTML = cs;
+
+function add() {
+  var name = document.getElementById('nameid').value;
+  if (name === '') {
+    document.getElementById('warning').style.display = 'block';
+    document.getElementById('warning').innerHTML = 'A name is needed.';
+  } else {
+    var link = document.getElementById('urlid').value;
+    if (link.includes('.')) {
+      if (link.includes('http://')) {
+        document.getElementById('warning').style.display = 'block';
+        document.getElementById('warning').innerHTML = 'URL is invalid. (Invalid protocol; "http://" is used.)';
+      } else {
+        if (link.includes('https://')) {
+          link = link;
+        } else {
+          link = 'https://' + link;
+        }
+        contentselect.innerHTML = contentselect.innerHTML + '<a class="hyperlink link txt" onclick="openContent(\'' + link + '\')" style="word-wrap: break-word; margin: 6; z-index: 10;" title="' + name + ' (' + link + ')">' + name + '</a>';
+        localStorage.setItem('contents', contentselect.innerHTML);
+        document.getElementById('warning').innerHTML = '';
+        document.getElementById('warning').style.display = 'none';
+      }
+    } else {
+      document.getElementById('warning').style.display = 'block';
+      document.getElementById('warning').innerHTML = 'URL is invalid. (Invalid domain)';
+    }
+  }
+  
+}
+
+function deleteA() {
+  document.getElementById('warning').style.display = 'block';
+  document.getElementById('warning').innerHTML = '<button class="c btn" onclick="deleteB()" style="font-family: oxanium;">Confirm Deletion</button><button class="c btn" onclick="cancelD()" style="font-family: oxanium;">Cancel</button>';
+}
+
+function deleteB() {
+  contentselect.innerHTML = '';
+  localStorage.setItem('contents', contentselect.innerHTML);
+  document.getElementById('warning').innerHTML = '';
+  document.getElementById('warning').style.display = 'none';
+}
+
+function cancelD() {
+  document.getElementById('warning').innerHTML = '';
+  document.getElementById('warning').style.display = 'none';
+}
+
+function openContent(url) {
+  ubButton.innerHTML = '<button class="c btn" onclick="unblockC(\'' + url + '\')" style="margin: 6; margin-top: 0; font-family: oxanium; width: 215px;">Unblock (If blocked)</button>';
+  contentFrame.innerHTML = '<hr style="margin: 0; width: 100%; border-radius: 0; background: black;">' + '<p style="position: absolute; width: 100%; text-align: center; color: black;">If your content doesn\'t load, that either means that you made a typo in your URL, or the site refused to connect.</p><object class="c" style="width: 100%; height: 100%;" data="' + url + '"></object>';
+  contentFrame.style.display = "block";
+}
+
+function unblockC(url) {
+  var cwindow = window.open('/');
+  cwindow.document.write(`<frameset><frame src="`+ url + `"></frameset>`);
+}
+
+function mlinks() {
+  document.getElementById("frame").innerHTML = '<div id="linkinfo">Cannot connect to the script :(</div>';
+  getInfo();
+  document.getElementById("lightv").style.display = 'none';
+}
+
+function gblog() {
+  document.getElementById("frame").innerHTML = '<div id="bloginfo">Cannot connect to the script :(</div>';
+  getBlogInfo();
+  document.getElementById("lightv").style.display = 'none';
+}
+</script>
+
+<script src="https://thegportal.neocities.org/members.js"></script>
+
+</body>
+
+</html>
