@@ -79,6 +79,10 @@ var items = [
   {
     "name": "item_idk",
     "price": "99999999999999999"
+  },
+    {
+    "name": "item_free",
+    "price": "0"
   }
 ]
 
