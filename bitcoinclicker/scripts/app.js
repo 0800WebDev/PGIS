@@ -75,6 +75,10 @@ var items = [
   {
     "name": "item_blackHolePoweredMiner",
     "price": "750000000000"
+  },
+  {
+    "name": "item_idk",
+    "price": "9999999999999999"
   }
 ]
 
