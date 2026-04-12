@@ -73,6 +73,7 @@
 
 <script>
 function exportLocalStorage() {
+   alert("data exported")
   const data = JSON.stringify(localStorage);
   const blob = new Blob([data], { type: "application/json" });
   const url = URL.createObjectURL(blob);
