@@ -18,7 +18,8 @@
     justify-content: center;
     align-items: center;
     backdrop-filter: blur(2px); /* optional, makes it smoother */}
-     button { cursor: pointer;
+     button, input { 
+        cursor: pointer;
       background-color: #444;
        color: whitesmoke;
         border: none; }
@@ -84,7 +85,8 @@ function exportLocalStorage() {
   URL.revokeObjectURL(url);
 }
 </script>
-        <input type="file" onchange="importLocalStorage(event)">
+         <br>
+        <input placeholder="Import" type="file" onchange="importLocalStorage(event)">
 
 <script>
 function importLocalStorage(event) {
