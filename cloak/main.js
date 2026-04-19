@@ -1,8 +1,7 @@
 async function openCustom() {
     const html = textarea.value;
-    const mode = "replace"; // or "add", you could add a select later
+    const mode = "replace";
 
-    // Send HTML to backend to generate the JS file
     const res = await fetch("https://pgis-backend.vercel.app/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -10,9 +9,9 @@ async function openCustom() {
     });
 
     const data = await res.json();
-    const scriptURL = data.url;
 
-    // Show the <script> tag so users can copy it
+    const scriptURL = `https://pgis-backend.vercel.app${data.url}`;
+
     const resultContainer = document.getElementById("result");
     resultContainer.innerHTML = `
 <label>Copy this script tag:</label><br>
