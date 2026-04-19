@@ -10,7 +10,7 @@ async function openCustom() {
 
     const data = await res.json();
 
-    const scriptURL = `https://pgis-backend.vercel.app${data.url}`;
+    const scriptURL = data.url;
 
     const resultContainer = document.getElementById("result");
     resultContainer.innerHTML = `
