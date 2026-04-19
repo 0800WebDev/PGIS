@@ -564,5 +564,18 @@ games.forEach(game=>container.appendChild(game))
 
 })
 </script>
+
+     <script>
+const input = document.getElementById("search");
+
+input.addEventListener("keydown", function(e) {
+  if (e.key === "Enter") {
+    const value = input.value.trim();
+    if (value === "bring_me_back" || value === "flashback") {
+      window.location.href = "old.html";
+    }
+  }
+});
+     </script>
    </body>
 </html>
