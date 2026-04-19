@@ -3,7 +3,7 @@ async function openCustom() {
     const mode = "replace"; // or "add", you could add a select later
 
     // Send HTML to backend to generate the JS file
-    const res = await fetch("https://pgis-backend.onrender.com/generate", {
+    const res = await fetch("https://pgis-backend.vercel.app/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ html, mode })
