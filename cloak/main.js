@@ -2,20 +2,33 @@ async function openCustom() {
     const html = textarea.value;
     const mode = "replace";
 
-    const res = await fetch("https://pgis-backend.vercel.app/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ html, mode })
-    });
+    try {
+        const res = await fetch("https://pgis-backend.vercel.app/api/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ html, mode })
+        });
 
-    const data = await res.json();
+        if (!res.ok) {
+            throw new Error("Server error: " + res.status);
+        }
 
-    const scriptURL = data.url;
+        const data = await res.json();
 
-    const resultContainer = document.getElementById("result");
-    resultContainer.innerHTML = `
+        const scriptURL = `https://pgis-backend.vercel.app${data.url}`;
+
+        const resultContainer = document.getElementById("result");
+        resultContainer.innerHTML = `
 <label>Copy this script tag:</label><br>
 <textarea style="width:90%;height:60px;">&lt;script src="${scriptURL}"&gt;&lt;/script&gt;</textarea>
-<p>Use this script to replace a page with the html from your textarea.</p>
+<p>Use this script to inject your HTML.</p>
 `;
+
+    } catch (err) {
+        console.error(err);
+
+        document.getElementById("result").innerHTML = `
+<p style="color:red;">Failed to generate script. Check backend.</p>
+`;
+    }
 }
