@@ -302,4 +302,38 @@ navigator.getBattery().then(battery => {
 
 
 
+(() => {
+  const hasIframe = document.querySelectorAll("iframe").length > 0;
+  if (!hasIframe) return;
 
+  const btn = document.createElement("button");
+  btn.textContent = "Open in about:blank";
+  btn.style.position = "fixed";
+  btn.style.top = "20px";
+  btn.style.left = "360px";
+  btn.style.zIndex = "999999";
+  btn.style.padding = "10px 14px";
+  btn.style.cursor = "pointer";
+
+  document.body.appendChild(btn);
+
+  const origin = location.origin;
+
+  function absolutize(html) {
+    return html
+      .replace(/(src|href)=["']\/(?!\/)/g, (m, attr) => `${attr}="${origin}/`)
+      .replace(/url\(["']?\/(?!\/)/g, (m) => `url("${origin}/`);
+  }
+
+  btn.onclick = () => {
+    const win = window.open("about:blank");
+    if (!win) return;
+
+    const html = document.documentElement.outerHTML;
+    const fixed = absolutize(html);
+
+    win.document.open();
+    win.document.write(fixed);
+    win.document.close();
+  };
+})();
