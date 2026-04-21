@@ -369,7 +369,7 @@ btn.style.position = "fixed"
     toggled = !toggled;
 
     if (toggled) {
-      document.title ="Google Classroom";
+      document.title = "Google Classroom";
       setFavicon("https://www.google.com/favicon.ico");
     } else {
       document.title = originalTitle;
