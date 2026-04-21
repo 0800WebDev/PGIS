@@ -306,16 +306,15 @@ navigator.getBattery().then(battery => {
 
   const btn = document.createElement("button");
   btn.textContent = "Open in about:blank";
-  btn.style.position = "fixed";
-  btn.style.top = "20px";
-  btn.style.left = "420px";
-  btn.style.zIndex = "999999";
-  btn.style.padding = "10px 14px";
-  btn.style.cursor = "pointer";
+btn.style.position = "fixed"
+  btn.style.top = "20px"
+  btn.style.left = "410px"
+  btn.style.zIndex = "9999"
+  btn.style.border = "none"
+  btn.style.cursor = "pointer"
   btn.style.backgroundColor = "#444"
   btn.style.color = "whitesmoke"
   btn.style.borderRadius = "5px"
-  btn.style.border = "none"
   document.body.appendChild(btn);
 
   const origin = location.origin;
