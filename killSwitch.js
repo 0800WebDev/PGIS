@@ -339,3 +339,54 @@ btn.style.position = "fixed"
 })();
 
 
+
+(function () {
+  const originalTitle = document.title;
+
+  const faviconEl =
+    document.querySelector("link[rel~='icon']") ||
+    document.createElement("link");
+
+  const originalFavicon = faviconEl.href || "";
+
+  let toggled = false;
+
+  const btn = document.createElement("button");
+  btn.textContent = "Cloak tab";
+  btn.style.position = "fixed"
+  btn.style.top = "20px"
+  btn.style.left = "440px"
+  btn.style.zIndex = "999"
+  btn.style.border = "none"
+  btn.style.cursor = "pointer"
+  btn.style.backgroundColor = "#444"
+  btn.style.color = "whitesmoke"
+  btn.style.borderRadius = "5px"
+
+  document.body.appendChild(btn);
+
+  btn.onclick = () => {
+    toggled = !toggled;
+
+    if (toggled) {
+      document.title ="Google Classroom";
+      setFavicon("https://www.google.com/favicon.ico");
+    } else {
+      document.title = originalTitle;
+      setFavicon(originalFavicon);
+    }
+  };
+
+  function setFavicon(url) {
+    let link =
+      document.querySelector("link[rel~='icon']") ||
+      document.createElement("link");
+
+    link.type = "image/x-icon";
+    link.rel = "icon";
+    link.href = url;
+
+    document.head.appendChild(link);
+  }
+})();
+
