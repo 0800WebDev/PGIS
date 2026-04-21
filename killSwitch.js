@@ -276,6 +276,30 @@ window.addEventListener("load", () => {
 })
 
 
+
+
+
+
+
+navigator.getBattery().then(battery => {
+  let alerted = false;
+
+  function checkBattery() {
+    if (battery.level <= 0.1 && !alerted) {
+      alert("Battery is below 10%");
+      alerted = true;
+    }
+
+    if (battery.level > 0.1) {
+      alerted = false;
+    }
+  }
+
+  battery.addEventListener("levelchange", checkBattery);
+  checkBattery();
+});
+
+
 (() => {
   const hasIframe = document.querySelectorAll("iframe").length > 0;
   if (!hasIframe) return;
@@ -314,29 +338,5 @@ window.addEventListener("load", () => {
     win.document.close();
   };
 })();
-
-
-
-
-navigator.getBattery().then(battery => {
-  let alerted = false;
-
-  function checkBattery() {
-    if (battery.level <= 0.1 && !alerted) {
-      alert("Battery is below 10%");
-      alerted = true;
-    }
-
-    if (battery.level > 0.1) {
-      alerted = false;
-    }
-  }
-
-  battery.addEventListener("levelchange", checkBattery);
-  checkBattery();
-});
-
-
-
 
 
