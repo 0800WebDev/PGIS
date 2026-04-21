@@ -276,32 +276,6 @@ window.addEventListener("load", () => {
 })
 
 
-
-
-
-
-navigator.getBattery().then(battery => {
-  let alerted = false;
-
-  function checkBattery() {
-    if (battery.level <= 0.1 && !alerted) {
-      alert("Battery is below 10%");
-      alerted = true;
-    }
-
-    if (battery.level > 0.1) {
-      alerted = false;
-    }
-  }
-
-  battery.addEventListener("levelchange", checkBattery);
-  checkBattery();
-});
-
-
-
-
-
 (() => {
   const hasIframe = document.querySelectorAll("iframe").length > 0;
   if (!hasIframe) return;
@@ -310,7 +284,7 @@ navigator.getBattery().then(battery => {
   btn.textContent = "Open in about:blank";
   btn.style.position = "fixed";
   btn.style.top = "20px";
-  btn.style.left = "380px";
+  btn.style.left = "420px";
   btn.style.zIndex = "999999";
   btn.style.padding = "10px 14px";
   btn.style.cursor = "pointer";
@@ -340,3 +314,29 @@ navigator.getBattery().then(battery => {
     win.document.close();
   };
 })();
+
+
+
+
+navigator.getBattery().then(battery => {
+  let alerted = false;
+
+  function checkBattery() {
+    if (battery.level <= 0.1 && !alerted) {
+      alert("Battery is below 10%");
+      alerted = true;
+    }
+
+    if (battery.level > 0.1) {
+      alerted = false;
+    }
+  }
+
+  battery.addEventListener("levelchange", checkBattery);
+  checkBattery();
+});
+
+
+
+
+
