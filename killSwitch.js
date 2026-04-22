@@ -390,3 +390,41 @@ btn.style.position = "fixed"
   }
 })();
 
+
+<script>
+(function () {
+  if (!location.hostname.endsWith("github.io")) return;
+
+  function rewrite(url) {
+    if (!url) return url;
+
+    if (url.startsWith("/") && !url.startsWith("//")) {
+      return "PGIS" + url;
+    }
+
+    return url;
+  }
+
+  function processElement(el, attr) {
+    const val = el.getAttribute(attr);
+    if (!val) return;
+
+    const newVal = rewrite(val);
+    if (newVal !== val) {
+      el.setAttribute(attr, newVal);
+    }
+  }
+
+  function run() {
+    document.querySelectorAll("[src]").forEach(el => processElement(el, "src"));
+    document.querySelectorAll("[href]").forEach(el => processElement(el, "href"));
+    document.querySelectorAll("[action]").forEach(el => processElement(el, "action"));
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", run);
+  } else {
+    run();
+  }
+})();
+</script>
