@@ -1,98 +1,257 @@
-<Module>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+     Chess Game - Play Classic Chess in Browser
+    </title>
+    <meta name="title" content="Live Preview - Chess Game - Play Classic Chess in Browser" />
+    <meta name="description" content="Play a classic chess game built with HTML, CSS, and JavaScript. Enjoy two-player local gameplay with move validation, clean design, and a responsive board. Live Preview" />
+    <meta name="keywords" content="Chess Game, JavaScript Chess, Chess Game Online, markup stylesheet JS Game, Online Chess Project, Chess Board Game, Web Chess, Classic Chess Game, Frontend Game, Play Chess Online, Chess Multiplayer" />
+    <meta name="author" content="CodeTap" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Chess Game - Play Classic Chess in Browser" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://codetap.org/storage/projects/chess-game.png" />
+    <meta property="og:url" content="https://codetap.org/project/chess-game/live-preview" />
+    <meta property="og:description" content="Play a classic chess game built with HTML, CSS, and JavaScript. Enjoy two-player local gameplay with move validation, clean design, and a responsive board." />
+    <meta property="twitter:title" content="Chess Game - Play Classic Chess in Browser" />
+    <meta property="og:url" content="https://codetap.org/project/chess-game/live-preview" />
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:image" content="https://codetap.org/storage/projects/chess-game.png" />
+    <meta property="twitter:site" content="@monishroy010" />
+    <meta name="twitter:creator" content="@monishroy010" />
+    <meta property="twitter:description" content="Play a classic chess game built with HTML, CSS, and JavaScript. Enjoy two-player local gameplay with move validation, clean design, and a responsive board." />
+    <meta name="google-adsense-account" content="" />
+    <link rel="image_src" href="https://codetap.org/storage/projects/chess-game.png" />
+    <link rel="canonical" href="https://codetap.org/project/chess-game/live-preview" />
+    <!-- App favicon -->
+    <link rel="icon" type="image/png" href="/assets/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/assets/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="CodeTap" />
+    <link rel="manifest" href="/assets/favicon/site.webmanifest" />
+    <!-- Optional Font Awesome for Fullscreen Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <style>
+      * {
+            box-sizing: border-box;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+        }
+
+        body {
+            margin: 0;
+            font-family: &#39;Segoe UI&#39;, Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        iframe {
+            flex-grow: 1;
+            border: none;
+            width: 100%;
+            pointer-events: auto;
+        }
+
+        .fallback {
+            padding: 20px;
+            text-align: center;
+            color: #666;
+        }
+
+        .topbar {
+            background: #000;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            /* removed vertical padding */
+            color: #fff;
+            position: relative;
+            height: 0px;
+            /* fixed height ensures vertical alignment */
+        }
+
+        .topbar h1 {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            margin: 0;
+            font-weight: 600;
+            color: #fff;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .topbar a {
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
 
 
-<!-- Ultimate Game Stash file--> 
-<!-- For the regularly updating doc go to https://docs.google.com/document/d/1_FmH3BlSBQI7FGgAQL59-ZPe8eCxs35wel6JUyVaG8Q/ -->
+        .topbar a img {
+            height: 28px;
+        }
+
+        .fullscreen-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .fullscreen-btn:hover {
+            color: #ccc;
+        }
 
 
 
+        @media (max-width: 800px) {
+            .topbar h1 {
+                display: none;
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="topbar">
+        
+      </div>
+    </header>
+    <!-- Iframe Container -->
+    <iframe id="projectFrame" src="https://codetap-org.github.io/web-games/34-Chess-Game/" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" allowfullscreen="" loading="lazy">
+    </iframe>
+    <script type="61d40ed3ef476ebcd370e48c-text/javascript">
+      function toggleFullscreen() {
+            const iframe = document.getElementById(&#39;projectFrame&#39;);
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            } else {
+                alert(&#39;Your browser does not support fullscreen.&#39;);
+            }
+        }
+    </script>
+    <script type="61d40ed3ef476ebcd370e48c-text/javascript">
+      (function() {
+            &#34;use strict&#34;;
 
-</style><style type="text/css">#button {
-  display:none;
-}
-.imgb_vis {
-  animation: imgb-animation 7s linear;
-}
-@keyframes imgb-animation {
-  10% {
-    transform: translateX(0);
-  }
-  20% {
-    transform: translateX(100px);
-  }
-  90% {
-    transform: translateX(100px);
-  }
-  100% {
-    transform: translateX(0);
-  }
-}</style></head><body dir="ltr"><script>
-		var gameConfig = {
-			swfUrl: "https://cdn.jsdelivr.net/gh/AlbertKraus/maui@2ff9d96543fae94d4e239304d8d39f6ac137a380/src/Controls/src/Dat/462874.dat"		
-		}
-</script>
-<div id="waflashContainer">
-<canvas class="waflashCanvas" id="canvas" tabindex="1" width="1879" height="931" style="cursor: default; --waf-content-width: 360px; --waf-content-height: 225px;" waf-content-width="360" waf-content-height="225" waf-content-fps="30"></canvas>
-<div id="waflashStatus" style="display: none;">Playing..</div>
-<script>
-		var ua = navigator.userAgent.toLowerCase();
-		if ( (navigator.appName =='Netscape' && ua.indexOf('trident') != -1) || (ua.indexOf("msie") != -1)) {
-    		var waf = document.getElementById('waflashStatus');
-			waf.style.display ='block';
-			waf.innerText ='??? ?????(IE) ??? ??? ???? ???? !\n??, ???? ?? ????? ??????.';
-			gtag('event', 'connect_from_ie', {'event_category': 'error', 'event_label': ua });
-		}
-	</script>
-<script crossorigin="anonymous" type="module">
-		let is_mobile = /Mobi/i.test(window.navigator.userAgent);
-		if (is_mobile) {
-			function scrollToSubject() {
-				try {
-					window.scrollTo({
-						top: 100,
-						left: 0,
-						behavior: 'smooth'
-					});
-				} catch (e) {}
-			}
-			scrollToSubject();
-			window.addEventListener("orientationchange", function() {
-				setTimeout(scrollToSubject, 100);
-			});
-		} else {
-			document.getElementById('canvas').focus();
-		}
-		document.getElementById('canvas').addEventListener("keydown", function(ev) {
-			ev.preventDefault();
-			ev.stopPropagation();
-		});
-		document.getElementById('canvas').addEventListener("click", function() {
-			document.getElementById('canvas').focus();
-		});
-		document.addEventListener("mousedown", (function() {
-			const canvasElement = document.getElementById('canvas');
-			let focused = false;
-			return function(ev) {
-				if (ev.target == canvasElement) {
-					if (!focused) {
-						canvasElement.focus();
-						focused = true;
-					}
-				} else {
-					if (focused) {
-						focused = false;
-					}
-				}
-				return true;
-			}
-		})());
-		import {
-			createWaflash
-		} from 'https://cdn.jsdelivr.net/gh/zhit73/wafedit@d04643423eb15794748adbb8921f8a3ee3f41437/wasm/waflash-player.min.js';
-		createWaflash(gameConfig.swfUrl, window.wafOptions || {});
-	</script>
-</div>
-<script src=""></script>
+            // Disable Right Click
+            document.addEventListener(&#34;contextmenu&#34;, function(e) {
+                e.preventDefault();
+            });
 
-<script>gadgets.util.runOnLoadHandlers();</script><script>window.google.csi.tickDl();
-</script></body></html>
+            // Disable Key Shortcuts
+            document.addEventListener(&#34;keydown&#34;, function(e) {
+
+                // F12
+                if (e.key === &#34;F12&#34;) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Ctrl+Shift+I, J, C
+                if (e.ctrlKey &amp;&amp; e.shiftKey &amp;&amp; [&#34;I&#34;, &#34;J&#34;, &#34;C&#34;].includes(e.key)) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Ctrl+U (View Source)
+                if (e.ctrlKey &amp;&amp; e.key.toLowerCase() === &#34;u&#34;) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Ctrl+S (Save)
+                if (e.ctrlKey &amp;&amp; e.key.toLowerCase() === &#34;s&#34;) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Ctrl+A (Select All)
+                if (e.ctrlKey &amp;&amp; e.key.toLowerCase() === &#34;a&#34;) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Ctrl+C (Copy)
+                if (e.ctrlKey &amp;&amp; e.key.toLowerCase() === &#34;c&#34;) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Ctrl+X (Cut)
+                if (e.ctrlKey &amp;&amp; e.key.toLowerCase() === &#34;x&#34;) {
+                    e.preventDefault();
+                    return false;
+                }
+
+                // Ctrl+P (Print)
+                if (e.ctrlKey &amp;&amp; e.key.toLowerCase() === &#34;p&#34;) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // Disable Text Selection
+            document.addEventListener(&#34;selectstart&#34;, function(e) {
+                e.preventDefault();
+            });
+
+            // Disable Copy Event
+            document.addEventListener(&#34;copy&#34;, function(e) {
+                e.preventDefault();
+            });
+
+            // Disable Drag
+            document.addEventListener(&#34;dragstart&#34;, function(e) {
+                e.preventDefault();
+            });
+
+            // Detect DevTools
+            function detectDevTools() {
+                let threshold = 160;
+                if (
+                    window.outerWidth - window.innerWidth &gt; threshold ||
+                    window.outerHeight - window.innerHeight &gt; threshold
+                ) {
+                    document.body.innerHTML = &#34;&lt;h1 style=&#39;text-align:center;margin-top:20%;&#39;&gt;Access Denied&lt;/h1&gt;&#34;;
+                }
+            }
+
+            setInterval(detectDevTools, 1000);
+
+            // Disable Console
+            console.log = function() {};
+            console.warn = function() {};
+            console.error = function() {};
+            console.info = function() {};
+
+        })();
+    </script>
+    <script src="/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="61d40ed3ef476ebcd370e48c-|49" defer="">
+    </script>
+    <script defer="" src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon="{&#34;version&#34;:&#34;2024.11.0&#34;,&#34;token&#34;:&#34;10a162dc3ddf4f7a9798405f6bed60e6&#34;,&#34;r&#34;:1,&#34;server_timing&#34;:{&#34;name&#34;:{&#34;cfCacheStatus&#34;:true,&#34;cfEdge&#34;:true,&#34;cfExtPri&#34;:true,&#34;cfL4&#34;:true,&#34;cfOrigin&#34;:true,&#34;cfSpeedBrain&#34;:true},&#34;location_startswith&#34;:null}}" crossorigin="anonymous">
+    </script>
+    <script>
+      (function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement(&#39;script&#39;);d.innerHTML=&#34;window.__CF$cv$params={r:&#39;9f061ed83db67032&#39;,t:&#39;MTc3Njg3NjU1Mg==&#39;};var a=document.createElement(&#39;script&#39;);a.src=&#39;/cdn-cgi/challenge-platform/scripts/jsd/main.js&#39;;document.getElementsByTagName(&#39;head&#39;)[0].appendChild(a);&#34;;b.getElementsByTagName(&#39;head&#39;)[0].appendChild(d)}}if(document.body){var a=document.createElement(&#39;iframe&#39;);a.height=1;a.width=1;a.style.position=&#39;absolute&#39;;a.style.top=0;a.style.left=0;a.style.border=&#39;none&#39;;a.style.visibility=&#39;hidden&#39;;document.body.appendChild(a);if(&#39;loading&#39;!==document.readyState)c();else if(window.addEventListener)document.addEventListener(&#39;DOMContentLoaded&#39;,c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);&#39;loading&#39;!==document.readyState&amp;&amp;(document.onreadystatechange=e,c())}}}})();
+    </script>
+  </body>
+</html>
