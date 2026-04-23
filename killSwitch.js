@@ -391,7 +391,7 @@ btn.style.position = "fixed"
 })();
 
 
-<script>
+
 (function () {
   if (!location.hostname.endsWith("github.io")) return;
 
@@ -427,4 +427,4 @@ btn.style.position = "fixed"
     run();
   }
 })();
-</script>
+
