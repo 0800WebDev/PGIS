@@ -91,10 +91,14 @@ window.addEventListener("load", () => {
   btn.textContent = "↺"
   btn.style.position = "fixed"
   btn.style.top = "40px"
-  btn.style.left = "10px"
-  btn.style.zIndex = "9999"
-  btn.style.padding = "8px 12px"
-  btn.style.cursor = "pointer"
+  btn.style.right = "10px"
+  btn.style.zIndex = "99999999"
+  btn.style.padding = "8px 12px";
+  btn.style.cursor = "pointer";
+  btn.style.backgroundColor = "#444";
+  btn.style.color = "whitesmoke";
+  btn.style.border = "none";
+  btn.style.borderRadius = "5px";
 
   btn.onclick = async () => {
     const res = await fetch(location.href)
