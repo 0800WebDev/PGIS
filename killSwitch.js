@@ -1,434 +1,207 @@
-//this is basicly just a global script
+//basically a global script
 
 
+const safe = (fn) => {
+  try { fn(); } catch (e) { console.warn("Script error:", e); }
+};
 
+// Meta charset (safe head check)
+safe(() => {
+  const meta = document.createElement("meta");
+  meta.setAttribute("charset", "UTF-8");
 
+  if (document.head) {
+    document.head.insertBefore(meta, document.head.firstChild);
+  }
+});
 
-// Create a meta element
-  const meta = document.createElement('meta');
-  meta.setAttribute('charset', 'UTF-8');
-
-  // Insert it at the beginning of the head
-  const head = document.head;
-  head.insertBefore(meta, head.firstChild);
-
-
-
-
-
-
-window.addEventListener("load", () => {
-  // CREATE LIGHT/DARK TOGGLE BUTTON
-  const toggleBtn = document.createElement('button');
+// LIGHT / DARK MODE + BUTTON
+window.addEventListener("load", () => safe(() => {
+  const toggleBtn = document.createElement("button");
   toggleBtn.textContent = "Light Mode";
-  toggleBtn.id = "lightDarkToggle";
-  toggleBtn.style.position = "fixed";
-  toggleBtn.style.top = "10px";
-  toggleBtn.style.right = "10px";
-  toggleBtn.style.zIndex = "9999";
-  toggleBtn.style.padding = "8px 12px";
-  toggleBtn.style.cursor = "pointer";
-  toggleBtn.style.backgroundColor = "#444";
-  toggleBtn.style.color = "whitesmoke";
-  toggleBtn.style.border = "none";
-  toggleBtn.style.borderRadius = "5px";
+
+  Object.assign(toggleBtn.style, {
+    position: "fixed",
+    top: "10px",
+    right: "10px",
+    zIndex: "999999",
+    padding: "8px 12px",
+    cursor: "pointer",
+    backgroundColor: "#444",
+    color: "white",
+    border: "none",
+    borderRadius: "5px"
+  });
+
   document.body.appendChild(toggleBtn);
 
-  // CREATE STYLE TAG FOR LIGHT MODE
-  const styleTag = document.createElement('style');
+  const styleTag = document.createElement("style");
   styleTag.textContent = `
-    body.light-mode {
-      background-color: white !important;
-      color: black !important;
-    }
-    body.light-mode a {
-      color: black !important;
-    }
-    body.light-mode button {
-      background-color: black !important;
-      color: white !important;
-    }
-    body.light-mode button:hover {
-      background-color: white !important;
-      color: black !important;
-    }
+    body.light-mode { background: white !important; color: black !important; }
+    body.light-mode a { color: black !important; }
   `;
-  document.head.appendChild(styleTag);
+  document.head?.appendChild(styleTag);
 
-  // FUNCTION TO APPLY LIGHT MODE
-  function applyLightMode() {
+  let lightMode = localStorage.getItem("lightMode") === "true";
+
+  const applyLight = () => {
     document.body.classList.add("light-mode");
     toggleBtn.textContent = "Dark Mode";
     localStorage.setItem("lightMode", "true");
-  }
+  };
 
-  // FUNCTION TO APPLY DARK MODE (REMOVE LIGHT MODE CLASS)
-  function applyDarkMode() {
+  const applyDark = () => {
     document.body.classList.remove("light-mode");
     toggleBtn.textContent = "Light Mode";
     localStorage.setItem("lightMode", "false");
-  }
+  };
 
-  // LOAD PREFERENCE
-  let lightMode = localStorage.getItem("lightMode") === "true";
-  if (lightMode) applyLightMode();
+  if (lightMode) applyLight();
 
-  // TOGGLE CLICK
   toggleBtn.addEventListener("click", () => {
     lightMode = !lightMode;
-    if (lightMode) applyLightMode();
-    else applyDarkMode();
+    lightMode ? applyLight() : applyDark();
   });
+}));
+
+// RELOAD BUTTON (safe + no DOM replacement issues)
+window.addEventListener("load", () => safe(() => {
+  const btn = document.createElement("button");
+  btn.textContent = "↺";
+
+  Object.assign(btn.style, {
+    position: "fixed",
+    top: "40px",
+    right: "10px",
+    zIndex: "999999",
+    padding: "8px 12px",
+    cursor: "pointer",
+    background: "#444",
+    color: "white",
+    border: "none",
+    borderRadius: "5px"
+  });
+
+  btn.onclick = () => location.reload();
+
+  document.body.appendChild(btn);
+}));
+
+// KILLSWITCH (fully safe)
+safe(() => {
+  fetch("/killswitch.json", { cache: "no-store" })
+    .then(r => r.json().catch(() => null))
+    .then(cfg => {
+      if (!cfg || cfg.enabled) return;
+      startShutdownTimer(cfg.timer || 1);
+    })
+    .catch(() => {});
 });
 
-
-
-
-
-// reload button
-window.addEventListener("load", () => {
-    const btn = document.createElement("button")
-  btn.textContent = "↺"
-  btn.style.position = "fixed"
-  btn.style.top = "40px"
-  btn.style.right = "10px"
-  btn.style.zIndex = "99999999"
-  btn.style.padding = "8px 12px";
-  btn.style.cursor = "pointer";
-  btn.style.backgroundColor = "#444";
-  btn.style.color = "whitesmoke";
-  btn.style.border = "none";
-  btn.style.borderRadius = "5px";
- 
-  btn.onclick = async () => {
-    const res = await fetch(location.href)
-    const text = await res.text()
-
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(text, "text/html")
-
-    document.documentElement.innerHTML = doc.documentElement.innerHTML
-
-    const scripts = document.querySelectorAll("script")
-    scripts.forEach(oldScript => {
-      const newScript = document.createElement("script")
-
-      if (oldScript.src) {
-        newScript.src = oldScript.src
-      } else {
-        newScript.textContent = oldScript.textContent
-      }
-
-      document.body.appendChild(newScript)
-      oldScript.remove()
-    })
-  }
-
-  document.body.appendChild(btn)
-})
-
-
-
-
-
-
-fetch("/killswitch.json", { cache: "no-store" })
-  .then(r => r.json())
-  .then(cfg => {
-    if (!cfg.enabled) {
-      startShutdownTimer(cfg.timer);
-    }
-  });
-
 function startShutdownTimer(minutes) {
-  let remaining = minutes * 60; // seconds
+  safe(() => {
+    let remaining = minutes * 60;
 
-  // Create warning banner
-  const banner = document.createElement("div");
-  banner.style.position = "fixed";
-  banner.style.bottom = "0";
-  banner.style.left = "0";
-  banner.style.width = "100%";
-  banner.style.padding = "12px";
-  banner.style.background = "black";
-  banner.style.color = "white";
-  banner.style.fontFamily = "monospace";
-  banner.style.textAlign = "center";
-  banner.style.zIndex = "999999";
-  document.body.appendChild(banner);
+    const banner = document.createElement("div");
+    Object.assign(banner.style, {
+      position: "fixed",
+      bottom: "0",
+      left: "0",
+      width: "100%",
+      padding: "10px",
+      background: "black",
+      color: "white",
+      zIndex: "999999",
+      fontFamily: "monospace",
+      textAlign: "center"
+    });
 
-  const interval = setInterval(() => {
-    const min = Math.floor(remaining / 60);
-    const sec = remaining % 60;
+    document.body?.appendChild(banner);
 
-    banner.innerHTML =
-      `This page is closing temporarily in ${min} minutes and ${sec} seconds please click <a href="/info.txt">here</a> for more info`;
+    const interval = setInterval(() => {
+      if (!banner) return;
 
-    if (remaining <= 0) {
-      clearInterval(interval);
-      killPage();
-    }
+      const m = Math.floor(remaining / 60);
+      const s = remaining % 60;
 
-    remaining--;
-  }, 1000);
+      banner.innerHTML = `Closing in ${m}:${s}`;
+
+      if (remaining-- <= 0) {
+        clearInterval(interval);
+        killPage();
+      }
+    }, 1000);
+  });
 }
 
 function killPage() {
-  // Stop loading/execution
-  window.stop();
-
-  // Clear storage
-  try {
+  safe(() => {
+    window.stop();
     localStorage.clear();
     sessionStorage.clear();
-  } catch {}
-
-  // Blank the page
-  document.documentElement.innerHTML = "";
-
-  // Redirect to blank
-  location.replace("about:blank");
-
-  // Attempt close (will only work if JS-opened)
-  setTimeout(() => {
-    window.close();
-  }, 100);
+    document.documentElement.innerHTML = "";
+    location.replace("about:blank");
+  });
 }
 
+// IFRAME HOTKEY (safe)
+safe(() => {
+  const iframe = document.querySelector("iframe");
+  if (!iframe) return;
 
-
-
-
-const iframe = document.querySelector("iframe");
-
-iframe.addEventListener("load", () => {
-    iframe.contentWindow.addEventListener("keydown", function(e) {
+  iframe.addEventListener("load", () => {
+    try {
+      iframe.contentWindow?.addEventListener("keydown", (e) => {
         if (e.ctrlKey && e.key.toLowerCase() === "q") {
-            window.location.href = "https://www.google.com";
+          location.href = "https://www.google.com";
         }
-    });
-});
-
-
-
-const s=document.createElement("script")
-s.async=true
-s.src="https://plausible.io/js/pa-7RQ-wKkPtManKgQ5IRQrg.js"
-document.head.appendChild(s)
-
-window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)}
-plausible.init=plausible.init||function(i){plausible.o=i||{}}
-plausible.init()
-
-document.addEventListener("DOMContentLoaded", function () {
-  var hasIframe = document.querySelector("iframe") !== null;
-
-  plausible("pageview", {
-    props: {
-      has_iframe: hasIframe ? "yes" : "no"
-    }
+      });
+    } catch {}
   });
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  plausible("pageview", {
-    props: {
-      site_domain: location.hostname
-    }
+// FULLSCREEN BUTTON (safe)
+window.addEventListener("load", () => safe(() => {
+  const iframe = document.querySelector("iframe");
+  if (!iframe) return;
+
+  iframe.id = "gameIframe";
+
+  const btn = document.createElement("button");
+  btn.textContent = "Fullscreen";
+
+  Object.assign(btn.style, {
+    position: "fixed",
+    top: "20px",
+    left: "330px",
+    zIndex: "999999"
+  });
+
+  btn.onclick = () => {
+    const f = document.getElementById("gameIframe");
+    if (!f) return;
+    f.requestFullscreen?.();
+  };
+
+  document.body.appendChild(btn);
+}));
+
+// BATTERY (safe API check)
+safe(() => {
+  if (!navigator.getBattery) return;
+
+  navigator.getBattery().then(battery => {
+    let alerted = false;
+
+    const check = () => {
+      if (battery.level <= 0.1 && !alerted) {
+        alert("Battery below 10%");
+        alerted = true;
+      }
+      if (battery.level > 0.1) alerted = false;
+    };
+
+    battery.addEventListener("levelchange", check);
+    check();
   });
 });
-
-
-
-
-
-
-
-
-window.addEventListener("load", () => {
-  const iframe = document.querySelector("iframe")
-  if (!iframe) return
-
-  // Give the iframe an id
-  iframe.id = "gameIframe"
-
-  // Create fullscreen button
-  const btn = document.createElement("button")
-  btn.textContent = "Fullscreen"
-  btn.style.position = "fixed"
-  btn.style.top = "20px"
-  btn.style.left = "330px"
-  btn.style.zIndex = "9999"
-  btn.style.border = "none"
-  btn.style.cursor = "pointer"
-  btn.style.backgroundColor = "#444"
-  btn.style.color = "whitesmoke"
-  btn.style.borderRadius = "5px"
-
-
-
-  btn.addEventListener("click", () => {
-    const f = document.getElementById("gameIframe")
-    if (!f) return
-
-    if (f.requestFullscreen) f.requestFullscreen()
-    else if (f.webkitRequestFullscreen) f.webkitRequestFullscreen()
-    else if (f.msRequestFullscreen) f.msRequestFullscreen()
-  })
-
-  document.body.appendChild(btn)
-})
-
-
-
-
-
-
-
-navigator.getBattery().then(battery => {
-  let alerted = false;
-
-  function checkBattery() {
-    if (battery.level <= 0.1 && !alerted) {
-      alert("Battery is below 10%");
-      alerted = true;
-    }
-
-    if (battery.level > 0.1) {
-      alerted = false;
-    }
-  }
-
-  battery.addEventListener("levelchange", checkBattery);
-  checkBattery();
-});
-
-
-(() => {
-  const hasIframe = document.querySelectorAll("iframe").length > 0;
-  if (!hasIframe) return;
-
-  const btn = document.createElement("button");
-  btn.textContent = "Open in about:blank";
-btn.style.position = "fixed"
-  btn.style.top = "20px"
-  btn.style.left = "410px"
-  btn.style.zIndex = "9999"
-  btn.style.border = "none"
-  btn.style.cursor = "pointer"
-  btn.style.backgroundColor = "#444"
-  btn.style.color = "whitesmoke"
-  btn.style.borderRadius = "5px"
-  document.body.appendChild(btn);
-
-  const origin = location.origin;
-
-  function absolutize(html) {
-    return html
-      .replace(/(src|href)=["']\/(?!\/)/g, (m, attr) => `${attr}="${origin}/`)
-      .replace(/url\(["']?\/(?!\/)/g, (m) => `url("${origin}/`);
-  }
-
-  btn.onclick = () => {
-    const win = window.open("about:blank");
-    if (!win) return;
-
-    const html = document.documentElement.outerHTML;
-    const fixed = absolutize(html);
-
-    win.document.open();
-    win.document.write(fixed);
-    win.document.close();
-  };
-})();
-
-
-
-(function () {
-  const originalTitle = document.title;
-
-  const faviconEl =
-    document.querySelector("link[rel~='icon']") ||
-    document.createElement("link");
-
-  const originalFavicon = faviconEl.href || "";
-
-  let toggled = false;
-
-  const btn = document.createElement("button");
-  btn.textContent = "Cloak tab";
-  btn.style.position = "fixed"
-  btn.style.top = "20px"
-  btn.style.left = "548px"
-  btn.style.zIndex = "99999"
-  btn.style.border = "none"
-  btn.style.cursor = "pointer"
-  btn.style.backgroundColor = "#444"
-  btn.style.color = "whitesmoke"
-  btn.style.borderRadius = "5px"
-
-  document.body.appendChild(btn);
-
-  btn.onclick = () => {
-    toggled = !toggled;
-
-    if (toggled) {
-      document.title = "Google Classroom";
-      setFavicon("https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://staticin.pages.dev/settings&size=16");
-    } else {
-      document.title = originalTitle;
-      setFavicon(originalFavicon);
-    }
-  };
-
-  function setFavicon(url) {
-    let link =
-      document.querySelector("link[rel~='icon']") ||
-      document.createElement("link");
-
-    link.type = "image/x-icon";
-    link.rel = "icon";
-    link.href = url;
-
-    document.head.appendChild(link);
-  }
-})();
-
-
-
-(function () {
-  if (!location.hostname.endsWith("github.io")) return;
-
-  function rewrite(url) {
-    if (!url) return url;
-
-    if (url.startsWith("/") && !url.startsWith("//")) {
-      return "PGIS" + url;
-    }
-
-    return url;
-  }
-
-  function processElement(el, attr) {
-    const val = el.getAttribute(attr);
-    if (!val) return;
-
-    const newVal = rewrite(val);
-    if (newVal !== val) {
-      el.setAttribute(attr, newVal);
-    }
-  }
-
-  function run() {
-    document.querySelectorAll("[src]").forEach(el => processElement(el, "src"));
-    document.querySelectorAll("[href]").forEach(el => processElement(el, "href"));
-    document.querySelectorAll("[action]").forEach(el => processElement(el, "action"));
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", run);
-  } else {
-    run();
-  }
-})();
-
