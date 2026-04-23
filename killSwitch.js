@@ -79,7 +79,7 @@ window.addEventListener("load", () => runSafely(() => {
   };
 }));
 
-// SOFT RELOAD BUTTON (your original logic preserved)
+// RELOAD BUTTON 
 window.addEventListener("load", () => runSafely(() => {
   const btn = document.createElement("button");
   btn.textContent = "↺";
@@ -204,9 +204,14 @@ window.addEventListener("load", () => runSafely(() => {
 
   Object.assign(btn.style, {
     position: "fixed",
-    top: "20px",
-    left: "330px",
-    zIndex: "999999"
+  top: "20px",
+  left: "330px",
+  zIndex: "999999",
+  border: "none",
+  cursor: "pointer",
+  backgroundColor: "#444",
+  color: "whitesmoke",
+  borderRadius: "5px"
   });
 
   btn.onclick = () => {
