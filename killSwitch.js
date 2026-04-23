@@ -274,3 +274,55 @@ runSafely(() => {
     win.document.close();
   };
 })();
+
+
+
+(function () {
+  const originalTitle = document.title;
+
+  const btn = document.createElement("button");
+  btn.textContent = "Cloak tab";
+
+  Object.assign(btn.style, {
+    position: "fixed",
+    top: "20px",
+    left: "548px",
+    zIndex: "99999",
+    border: "none",
+    cursor: "pointer",
+    backgroundColor: "#444",
+    color: "whitesmoke",
+    borderRadius: "5px"
+  });
+
+  document.body?.appendChild(btn);
+
+  let toggled = false;
+
+  function setFavicon(url) {
+    let link =
+      document.querySelector("link[rel~='icon']") ||
+      document.createElement("link");
+
+    link.type = "image/x-icon";
+    link.rel = "icon";
+    link.href = url;
+
+    document.head?.appendChild(link);
+  }
+
+  const originalFavicon =
+    document.querySelector("link[rel~='icon']")?.href || "";
+
+  btn.onclick = () => {
+    toggled = !toggled;
+
+    if (toggled) {
+      document.title = "Google Classroom";
+      setFavicon("https://t0.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=https://staticin.pages.dev/settings&size=16");
+    } else {
+      document.title = originalTitle;
+      setFavicon(originalFavicon);
+    }
+  };
+})();
