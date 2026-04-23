@@ -86,7 +86,7 @@ window.addEventListener("load", () => runSafely(() => {
 
   Object.assign(btn.style, {
     position: "fixed",
-    top: "40px",
+    top: "45px",
     right: "10px",
     zIndex: "999999",
     padding: "8px 12px",
