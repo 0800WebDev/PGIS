@@ -99,7 +99,7 @@ window.addEventListener("load", () => {
   btn.style.color = "whitesmoke";
   btn.style.border = "none";
   btn.style.borderRadius = "5px";
-
+ 
   btn.onclick = async () => {
     const res = await fetch(location.href)
     const text = await res.text()
