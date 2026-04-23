@@ -277,7 +277,20 @@ runSafely(() => {
 
 
 
+
+
+
+
+
+
+
+
+
+
 (function () {
+  const hasIframe = document.querySelector("iframe");
+  if (!hasIframe) return;
+
   const originalTitle = document.title;
 
   const btn = document.createElement("button");
