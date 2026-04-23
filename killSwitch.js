@@ -1,22 +1,37 @@
-//basically a global script
+// Global script
 
 
-const safe = (fn) => {
-  try { fn(); } catch (e) { console.warn("Script error:", e); }
+const runSafely = (fn) => {
+  try { fn(); } catch (e) { console.warn(e); }
 };
 
-// Meta charset (safe head check)
-safe(() => {
+function reexecuteScripts() {
+  const scripts = document.querySelectorAll("script");
+
+  scripts.forEach(oldScript => {
+    const newScript = document.createElement("script");
+
+    if (oldScript.src) {
+      newScript.src = oldScript.src;
+      newScript.async = false;
+    } else {
+      newScript.textContent = oldScript.textContent;
+    }
+
+    oldScript.remove();
+    document.body.appendChild(newScript);
+  });
+}
+
+// META
+runSafely(() => {
   const meta = document.createElement("meta");
   meta.setAttribute("charset", "UTF-8");
-
-  if (document.head) {
-    document.head.insertBefore(meta, document.head.firstChild);
-  }
+  document.head?.insertBefore(meta, document.head.firstChild);
 });
 
-// LIGHT / DARK MODE + BUTTON
-window.addEventListener("load", () => safe(() => {
+// LIGHT / DARK MODE
+window.addEventListener("load", () => runSafely(() => {
   const toggleBtn = document.createElement("button");
   toggleBtn.textContent = "Light Mode";
 
@@ -28,7 +43,7 @@ window.addEventListener("load", () => safe(() => {
     padding: "8px 12px",
     cursor: "pointer",
     backgroundColor: "#444",
-    color: "white",
+    color: "whitesmoke",
     border: "none",
     borderRadius: "5px"
   });
@@ -37,8 +52,8 @@ window.addEventListener("load", () => safe(() => {
 
   const styleTag = document.createElement("style");
   styleTag.textContent = `
-    body.light-mode { background: white !important; color: black !important; }
-    body.light-mode a { color: black !important; }
+    body.light-mode { background:white !important; color:black !important; }
+    body.light-mode a { color:black !important; }
   `;
   document.head?.appendChild(styleTag);
 
@@ -58,14 +73,14 @@ window.addEventListener("load", () => safe(() => {
 
   if (lightMode) applyLight();
 
-  toggleBtn.addEventListener("click", () => {
+  toggleBtn.onclick = () => {
     lightMode = !lightMode;
     lightMode ? applyLight() : applyDark();
-  });
+  };
 }));
 
-// RELOAD BUTTON (safe + no DOM replacement issues)
-window.addEventListener("load", () => safe(() => {
+// SOFT RELOAD BUTTON (your original logic preserved)
+window.addEventListener("load", () => runSafely(() => {
   const btn = document.createElement("button");
   btn.textContent = "↺";
 
@@ -76,19 +91,37 @@ window.addEventListener("load", () => safe(() => {
     zIndex: "999999",
     padding: "8px 12px",
     cursor: "pointer",
-    background: "#444",
-    color: "white",
+    backgroundColor: "#444",
+    color: "whitesmoke",
     border: "none",
     borderRadius: "5px"
   });
 
-  btn.onclick = () => location.reload();
+  btn.onclick = async () => {
+    try {
+      const res = await fetch(location.href, { cache: "no-store" });
+      const text = await res.text();
+
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, "text/html");
+
+      const newHTML = doc.documentElement;
+
+      // replace page
+      document.documentElement.replaceWith(newHTML);
+
+      // re-run scripts after DOM swap
+      setTimeout(reexecuteScripts, 0);
+    } catch (e) {
+      console.warn("Soft reload failed:", e);
+    }
+  };
 
   document.body.appendChild(btn);
 }));
 
-// KILLSWITCH (fully safe)
-safe(() => {
+// KILLSWITCH
+runSafely(() => {
   fetch("/killswitch.json", { cache: "no-store" })
     .then(r => r.json().catch(() => null))
     .then(cfg => {
@@ -99,28 +132,27 @@ safe(() => {
 });
 
 function startShutdownTimer(minutes) {
-  safe(() => {
+  runSafely(() => {
     let remaining = minutes * 60;
 
     const banner = document.createElement("div");
+
     Object.assign(banner.style, {
       position: "fixed",
       bottom: "0",
       left: "0",
       width: "100%",
-      padding: "10px",
       background: "black",
       color: "white",
       zIndex: "999999",
-      fontFamily: "monospace",
-      textAlign: "center"
+      padding: "10px",
+      textAlign: "center",
+      fontFamily: "monospace"
     });
 
-    document.body?.appendChild(banner);
+    document.body.appendChild(banner);
 
     const interval = setInterval(() => {
-      if (!banner) return;
-
       const m = Math.floor(remaining / 60);
       const s = remaining % 60;
 
@@ -135,7 +167,7 @@ function startShutdownTimer(minutes) {
 }
 
 function killPage() {
-  safe(() => {
+  runSafely(() => {
     window.stop();
     localStorage.clear();
     sessionStorage.clear();
@@ -144,8 +176,8 @@ function killPage() {
   });
 }
 
-// IFRAME HOTKEY (safe)
-safe(() => {
+// IFRAME HOTKEY
+runSafely(() => {
   const iframe = document.querySelector("iframe");
   if (!iframe) return;
 
@@ -160,8 +192,8 @@ safe(() => {
   });
 });
 
-// FULLSCREEN BUTTON (safe)
-window.addEventListener("load", () => safe(() => {
+// FULLSCREEN BUTTON
+window.addEventListener("load", () => runSafely(() => {
   const iframe = document.querySelector("iframe");
   if (!iframe) return;
 
@@ -186,8 +218,8 @@ window.addEventListener("load", () => safe(() => {
   document.body.appendChild(btn);
 }));
 
-// BATTERY (safe API check)
-safe(() => {
+// BATTERY
+runSafely(() => {
   if (!navigator.getBattery) return;
 
   navigator.getBattery().then(battery => {
@@ -205,3 +237,35 @@ safe(() => {
     check();
   });
 });
+
+// ABOUT:BLANK LAUNCH
+(() => {
+  const hasIframe = document.querySelector("iframe");
+  if (!hasIframe) return;
+
+  const btn = document.createElement("button");
+  btn.textContent = "Open in about:blank";
+
+  Object.assign(btn.style, {
+    position: "fixed",
+    top: "20px",
+    left: "410px",
+    zIndex: "999999",
+    background: "#444",
+    color: "whitesmoke",
+    borderRadius: "5px",
+    border: "none",
+    cursor: "pointer"
+  });
+
+  document.body.appendChild(btn);
+
+  btn.onclick = () => {
+    const win = window.open("about:blank");
+    if (!win) return;
+
+    win.document.open();
+    win.document.write(document.documentElement.outerHTML);
+    win.document.close();
+  };
+})();
