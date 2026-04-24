@@ -204,7 +204,7 @@ runSafely(() => {
       iframe.id = "gameIframe";
 
       btn = document.createElement("button");
-      btn.textContent = "Fullscreen";
+      btn.textContent = "Fullscreen.";
 
       Object.assign(btn.style, {
         position: "fixed",
