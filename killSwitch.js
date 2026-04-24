@@ -196,53 +196,32 @@ runSafely(() => {
 
 
 // FULLSCREEN BUTTON
-
-
 (function () {
-  function syncFullscreen() {
-    const iframe = document.querySelector("iframe");
-    const existing = document.getElementById("fullscreenBtn");
+  function debugIframe() {
+    const iframes = document.querySelectorAll("iframe");
 
-    if (iframe && !existing) {
-      iframe.id = "gameIframe";
-
-      const btn = document.createElement("button");
-      btn.id = "fullscreenBtn";
-      btn.textContent = "Fullscreen.";
-
-      Object.assign(btn.style, {
-        position: "fixed",
-        top: "20px",
-        left: "330px",
-        zIndex: "999999",
-        border: "none",
-        cursor: "pointer",
-        backgroundColor: "#444",
-        color: "whitesmoke",
-        borderRadius: "5px"
-      });
-
-      btn.onclick = () => {
-        const f = document.getElementById("gameIframe");
-        if (!f) return;
-        f.requestFullscreen?.();
-      };
-
-      document.body.appendChild(btn);
+    if (iframes.length === 0) {
+      alert("No iframes found");
+      return;
     }
 
-    if (!iframe && existing) {
-      existing.remove();
-    }
+    iframes.forEach((iframe, i) => {
+      const src = iframe.getAttribute("src") || "NO SRC";
+
+      const info =
+        "IFRAME DEBUG\n\n" +
+        "Index: " + i + "\n" +
+        "Src: " + src + "\n\n" +
+        "Attributes:\n" +
+        [...iframe.attributes]
+          .map(a => `${a.name} = ${a.value}`)
+          .join("\n");
+
+      alert(info);
+    });
   }
 
-  syncFullscreen();
-
-  const obs = new MutationObserver(syncFullscreen);
-  obs.observe(document.documentElement, {
-    childList: true,
-    subtree: true
-  });
+  window.addEventListener("load", debugIframe);
 })();
 
 
