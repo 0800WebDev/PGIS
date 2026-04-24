@@ -208,7 +208,7 @@ runSafely(() => {
 
       const btn = document.createElement("button");
       btn.id = "fullscreenBtn";
-      btn.textContent = "Fullscreen";
+      btn.textContent = "Fullscreen.";
 
       Object.assign(btn.style, {
         position: "fixed",
