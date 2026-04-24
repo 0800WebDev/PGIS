@@ -192,44 +192,67 @@ runSafely(() => {
   });
 });
 
+
+
+
 // FULLSCREEN BUTTON
-if (!window.__FULLSCREEN_BTN__) {
-  window.__FULLSCREEN_BTN__ = true;
 
-  window.addEventListener("load", () => {
+
+(function () {
+  function syncFullscreen() {
     const iframe = document.querySelector("iframe");
-    if (!iframe) return;
+    const existing = document.getElementById("fullscreenBtn");
 
-    // prevent duplicates if script runs again
-    if (document.getElementById("fullscreenBtn")) return;
+    if (iframe && !existing) {
+      iframe.id = "gameIframe";
 
-    iframe.id = "gameIframe";
+      const btn = document.createElement("button");
+      btn.id = "fullscreenBtn";
+      btn.textContent = "Fullscreen";
 
-    const btn = document.createElement("button");
-    btn.id = "fullscreenBtn";
-    btn.textContent = "Fullscreen";
+      Object.assign(btn.style, {
+        position: "fixed",
+        top: "20px",
+        left: "330px",
+        zIndex: "999999",
+        border: "none",
+        cursor: "pointer",
+        backgroundColor: "#444",
+        color: "whitesmoke",
+        borderRadius: "5px"
+      });
 
-    Object.assign(btn.style, {
-      position: "fixed",
-      top: "20px",
-      left: "330px",
-      zIndex: "999999",
-      border: "none",
-      cursor: "pointer",
-      backgroundColor: "#444",
-      color: "whitesmoke",
-      borderRadius: "5px"
-    });
+      btn.onclick = () => {
+        const f = document.getElementById("gameIframe");
+        if (!f) return;
+        f.requestFullscreen?.();
+      };
 
-    btn.onclick = () => {
-      const f = document.getElementById("gameIframe");
-      if (!f) return;
-      f.requestFullscreen?.();
-    };
+      document.body.appendChild(btn);
+    }
 
-    document.body.appendChild(btn);
+    if (!iframe && existing) {
+      existing.remove();
+    }
+  }
+
+  syncFullscreen();
+
+  const obs = new MutationObserver(syncFullscreen);
+  obs.observe(document.documentElement, {
+    childList: true,
+    subtree: true
   });
-}
+})();
+
+
+
+
+
+
+
+
+
 // BATTERY
 runSafely(() => {
   if (!navigator.getBattery) return;
