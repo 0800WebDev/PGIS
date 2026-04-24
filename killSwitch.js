@@ -193,61 +193,43 @@ runSafely(() => {
 });
 
 // FULLSCREEN BUTTON
-(function () {
-  let btn = null;
+if (!window.__FULLSCREEN_BTN__) {
+  window.__FULLSCREEN_BTN__ = true;
 
-  function update() {
+  window.addEventListener("load", () => {
     const iframe = document.querySelector("iframe");
+    if (!iframe) return;
 
-    // If iframe exists and button doesn't → create it
-    if (iframe && !btn) {
-      iframe.id = "gameIframe";
+    // prevent duplicates if script runs again
+    if (document.getElementById("fullscreenBtn")) return;
 
-      btn = document.createElement("button");
-      btn.textContent = "Fullscreen.";
+    iframe.id = "gameIframe";
 
-      Object.assign(btn.style, {
-        position: "fixed",
-        top: "20px",
-        left: "330px",
-        zIndex: "999999",
-        border: "none",
-        cursor: "pointer",
-        backgroundColor: "#444",
-        color: "whitesmoke",
-        borderRadius: "5px"
-      });
+    const btn = document.createElement("button");
+    btn.id = "fullscreenBtn";
+    btn.textContent = "Fullscreen";
 
-      btn.onclick = () => {
-        const f = document.getElementById("gameIframe");
-        if (!f) return;
-        f.requestFullscreen?.();
-      };
+    Object.assign(btn.style, {
+      position: "fixed",
+      top: "20px",
+      left: "330px",
+      zIndex: "999999",
+      border: "none",
+      cursor: "pointer",
+      backgroundColor: "#444",
+      color: "whitesmoke",
+      borderRadius: "5px"
+    });
 
-      document.body.appendChild(btn);
-    }
+    btn.onclick = () => {
+      const f = document.getElementById("gameIframe");
+      if (!f) return;
+      f.requestFullscreen?.();
+    };
 
-    // If no iframe but button exists → remove it
-    if (!iframe && btn) {
-      btn.remove();
-      btn = null;
-    }
-  }
-
-  // Initial run
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", update);
-  } else {
-    update();
-  }
-
-  // Watch for DOM changes (important for your reload system)
-  const observer = new MutationObserver(update);
-  observer.observe(document.documentElement, {
-    childList: true,
-    subtree: true
+    document.body.appendChild(btn);
   });
-})();
+}
 // BATTERY
 runSafely(() => {
   if (!navigator.getBattery) return;
