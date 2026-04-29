@@ -1,4 +1,8 @@
 // Global script
+console.log("global script: start")
+
+
+
 
 
 const runSafely = (fn) => {
@@ -392,3 +396,7 @@ runSafely(() => {
     init();
   }
 })();
+
+
+
+console.log("global script: end")
