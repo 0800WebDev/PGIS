@@ -5,6 +5,38 @@ console.log("global script: start")
 
 
 
+
+
+
+(function () {
+  function loadMatomo() {
+    window._paq = window._paq || [];
+    _paq.push(['trackPageView']);
+    _paq.push(['enableLinkTracking']);
+
+    var u = "https://pgis.matomo.cloud/";
+    _paq.push(['setTrackerUrl', u + 'matomo.php']);
+    _paq.push(['setSiteId', '1']);
+
+    var script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://cdn.matomo.cloud/pgis.matomo.cloud/matomo.js';
+
+    document.head.appendChild(script);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadMatomo);
+  } else {
+    loadMatomo();
+  }
+})();
+
+
+
+
+
+
 const runSafely = (fn) => {
   try { fn(); } catch (e) { console.warn(e); }
 };
