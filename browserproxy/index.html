@@ -19,7 +19,14 @@ ElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insert
 m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
 <!-- LikeBtn.com END -->
   <b>info</b>
-  <p> if blocked click reload inside the frame/embed</p>
+  <p> if blocked click reload inside the frame/embed, if its still blocked click <a onclick="setIframeSrc('https://example.com')">here</a></p>
 <script src="/killSwitch.js"></script>
+
+<script>
+function setIframeSrc(url){
+  document.querySelector("iframe").src = url
+}
+</script>
+  
 </body>
   </html>
