@@ -137,7 +137,7 @@ form.addEventListener("submit", async (event) => {
     }
 
     const url = search(address.value, searchEngine.value);
-    let wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
+   let wispUrl = "wss://education-qik3.onrender.com/wisp/";
 
     if ((await connection.getTransport()) !== "/libcurl/index.mjs") {
         await connection.setTransport("/libcurl/index.mjs", [{ websocket: wispUrl }]);
@@ -189,8 +189,8 @@ async function loadShortcut(targetUrl) {
         throw err;
     }
 
-    const shortConnection = new BareMux.BareMuxConnection("/baremux/worker.js");
-    let wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
+    const shortConnection = new BareMux.BareMuxConnection("https://education-qik3.onrender.com/baremux/worker.js");
+    let wispUrl = "wss://education-qik3.onrender.com/wisp/";
 
     if ((await shortConnection.getTransport()) !== "/libcurl/index.mjs") {
         await shortConnection.setTransport("/libcurl/index.mjs", [{ websocket: wispUrl }]);
