@@ -1,205 +1,121 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-		/>
-		<title>PGIS </title>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+<title>PGIS</title>
 
-				<link rel="shortcut icon" content="favicon.webp" />
-	
-		<script src="https://fuzzy-umbrella-696v6gx69x9phr4ww-8080.app.github.dev/scram/scramjet.all.js"></script>
-		<script src="https://fuzzy-umbrella-696v6gx69x9phr4ww-8080.app.github.dev/baremux/index.js"></script>
-		
-		<link rel="stylesheet" href="https://fuzzy-umbrella-696v6gx69x9phr4ww-8080.app.github.dev/index.css" />
-		<script src="https://fuzzy-umbrella-696v6gx69x9phr4ww-8080.app.github.dev/register-sw.js" defer></script>
-		<script src="https://fuzzy-umbrella-696v6gx69x9phr4ww-8080.app.github.dev/search.js" defer></script>
-		<script src="https://fuzzy-umbrella-696v6gx69x9phr4ww-8080.app.github.dev/index.js" defer></script>
+<link rel="shortcut icon" href="https://education-qik3.onrender.com/favicon.webp" />
 
-  <style> html, body { scroll-behavior: smooth; text-align: center; background-color: black; color: whitesmoke; } /* Container for the game divs */ .games-area {background-color: rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; position: relative; z-index: 1; } /* Each game div itself */ .gamediv {   width: 200px;
-    height: 150px;
-    background-color: rgba(0, 0, 0, 0.3); /* semi-transparent black */
-    background-size: cover;
-    background-position: center;
-    cursor: auto;
-    border: 1px solid #444;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(2px); /* optional, makes it smoother */}
-     button, input { 
-        cursor: pointer;
-      background-color: #444;
-       color: whitesmoke;
-        border: none; }
-         button:hover { 
-            cursor: pointer;
-             background-color: lightgray; 
-             color: black; border: none; }
-              a { color: white; } /* Particle background container */ #particles-js {
-                 position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;       /* keep behind the games */
-    pointer-events: none; /* so clicks go through */
-    background: transparent; /* make sure it’s not black */}
-    
-    
+<script src="https://education-qik3.onrender.com/scram/scramjet.all.js"></script>
+<script src="https://education-qik3.onrender.com/baremux/index.js"></script>
 
-#sj-search-engine {
-    width: 250px;
-    padding: 10px 15px;
-    font-size: 16px;
-    border: 1px solid #555;
-    border-radius: 8px;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: whitesmoke;
-    outline: none;
-    box-shadow: 0 0 5px rgba(255,255,255,0.2);
-    transition: all 0.3s ease;
-}
+<link rel="stylesheet" href="https://education-qik3.onrender.com/index.css" />
+<script src="https://education-qik3.onrender.com/register-sw.js"></script>
+<script src="https://education-qik3.onrender.com/search.js"></script>
 
-#sj-search-engine::placeholder {
-    color: #aaa;
-}
-
-#sj-search-engine:focus {
-    border-color: #fff;
-    box-shadow: 0 0 10px rgba(255,255,255,0.5);
-    background-color: rgba(0,0,0,0.8);
-}
+<style>
+html, body { scroll-behavior: smooth; text-align: center; background-color: black; color: whitesmoke; }
+#particles-js{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
 </style>
+</head>
 
+<body>
 
+<div id="particles-js"></div>
 
+<h1>PGIS proxy</h1>
 
+<form id="sj-form">
+<input id="sj-search-engine" value="https://duckduckgo.com/?q=%s" type="hidden"/>
+<input id="sj-address" type="text" placeholder="search or enter an url"/>
+</form>
 
+<p id="sj-error"></p>
+<pre id="sj-error-code"></pre>
 
-	</head>
+<script>
+const BASE = "https://education-qik3.onrender.com";
 
-	<body>
- <div id="particles-js"></div>
+const CODEC_KEY = "scramjet_codec_enabled";
 
+function isCodecEnabled() {
+    const val = localStorage.getItem(CODEC_KEY);
+    return val === null ? true : val === "true";
+}
 
+function setCodecEnabled(val) {
+    localStorage.setItem(CODEC_KEY, String(val));
+}
 
-		<div title="PGIS Logo" class="flex-center logo-wrapper header-center">
-			<img class="logo" src="https://fuzzy-umbrella-696v6gx69x9phr4ww-8080.app.github.dev/logo.png" alt="logo" />
-			<h1>P G I S    p r o x y</h1>
-		</div>
-		<div class="flex-center desc left-margin">
-			
-		</div>
-
-		<form id="sj-form" class="flex-center">
-			<input
-				id="sj-search-engine"
-				value="https://www.google.com/search?q=%s"
-				type="hidden"
-			/>
-			<input id="sj-address" type="text" placeholder="Search the web freely" />
-			<br>
-		</form>
-        <br><br>
-		<div>
-			<br>
-            <a style="padding: 12px;" href="https://fuzzy-umbrella-696v6gx69x9phr4ww-8080.app.github.dev/scramjet/https%3A%2F%2Fwww.google.com%2F"><img src="Google_btn.png" style="height: 40px;"></a>
-			<a style="padding: 12px;" href="https://fuzzy-umbrella-696v6gx69x9phr4ww-8080.app.github.dev/scramjet/https%3A%2F%2Fwww.youtube.com%2F"><img src="Youtube_btn.png" style="height: 40px;"></a>
-			<a style="padding: 12px;" href="https://fuzzy-umbrella-696v6gx69x9phr4ww-8080.app.github.dev/scramjet/https%3A%2F%2Fwww.tiktok.com%2F"><img src="Tiktok_btn.png" style="height: 40px;"></a>
-			<a style="padding: 12px;" href="https://fuzzy-umbrella-696v6gx69x9phr4ww-8080.app.github.dev/scramjet/https%3A%2F%2Fwww.github.com%2F"><img src="Github_btn.png" style="height: 40px;"></a>
-            <a style="padding: 12px;" href="https://fuzzy-umbrella-696v6gx69x9phr4ww-8080.app.github.dev/scramjet/https%3A%2F%2Fwww.now.gg%2F"><img src="Nowgg_btn.png" style="height: 40px;"></a>
-		</div>
-        
-
-		<div class="desc left-margin">
-			<p id="sj-error"></p>
-			<pre id="sj-error-code"></pre>
-		</div>
-		<footer>
-			<div>
-				
-				<a title="return" href="https://pgis.x10.mx">PGIS</a>
-		</footer>
-
-
-
-
-
-
-		
-
-
-      </div>
-      <script src="https://pgis.x10.mx/killSwitch.js"></script><script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> <script>
-         // GHUB-style particles with cursor fix
-particlesJS('particles-js', {
-  "particles": {
-    "number": {
-      "value": 100,
-      "density": { "enable": true, "value_area": 800 }
-    },
-    "color": { "value": "#ffffff" },
-    "shape": { "type": "circle", "stroke": { "width": 0 } },
-    "opacity": {
-      "value": 0.08,
-      "random": true,
-      "anim": { "enable": true, "speed": 1, "opacity_min": 0.3, "sync": false }
-    },
-    "size": {
-      "value": 3,
-      "random": true,
-      "anim": { "enable": true, "speed": 2, "size_min": 0.5, "sync": false }
-    },
-    "line_linked": {
-      "enable": true,
-      "distance": 150,
-      "color": "#ffffff",
-      "opacity": 0.4,
-      "width": 1
-    },
-    "move": {
-      "enable": true,
-      "speed": 1.5,
-      "direction": "none",
-      "straight": false,
-      "out_mode": "out"
+function getCodec(enabled) {
+    if (enabled) {
+        return {
+            encode: `(url)=>{try{const u=new URL(url);u.hostname=u.hostname.replace(/\\./g,",");return u.toString()}catch(e){return url}}`,
+            decode: `(encoded)=>{try{return encoded.replace(/:\\/\\/([^/]+)/,(m,h)=>"://"+h.replace(/,/g,"."))}catch(e){return encoded}}`
+        };
+    } else {
+        return {
+            encode: `(url)=>encodeURIComponent(url)`,
+            decode: `(encoded)=>decodeURIComponent(encoded)`
+        };
     }
-  },
-  "interactivity": {
-    "detect_on": "window", // ← cursor now works over all elements
-    "events": {
-      "onhover": { "enable": true, "mode": "repulse" },
-      "onclick": { "enable": false }
+}
+
+const form = document.getElementById("sj-form");
+const address = document.getElementById("sj-address");
+const searchEngine = document.getElementById("sj-search-engine");
+const error = document.getElementById("sj-error");
+const errorCode = document.getElementById("sj-error-code");
+
+const { ScramjetController } = $scramjetLoadController();
+
+const scramjet = new ScramjetController({
+    prefix: BASE + "/scramjet/",
+    codec: getCodec(isCodecEnabled()),
+    files: {
+        wasm: BASE + "/scram/scramjet.wasm.wasm",
+        all: BASE + "/scram/scramjet.all.js",
+        sync: BASE + "/scram/scramjet.sync.js",
     },
-    "modes": {
-      "repulse": { "distance": 120, "duration": 0.5 }
-    }
-  },
-  "retina_detect": true
 });
 
-      </script> 
-      <script>
-const searchInput = document.getElementById('search');
-const gameDivs = document.querySelectorAll('.gamediv');
+scramjet.init();
 
-searchInput.addEventListener('input', () => {
-    const query = searchInput.value.toLowerCase();
+const connection = new BareMux.BareMuxConnection(BASE + "/baremux/worker.js");
 
-    gameDivs.forEach(div => {
-        const gameName = div.querySelector('b').textContent.toLowerCase();
-        if (gameName.includes(query) || query === '') {
-            div.style.display = 'flex'; // show matching games
-        } else {
-            div.style.display = 'none'; // hide non-matching games
-        }
-    });
+form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    try {
+        await registerSW();
+    } catch (err) {
+        error.textContent = "SW failed";
+        errorCode.textContent = err.toString();
+        return;
+    }
+
+    const url = search(address.value, searchEngine.value);
+
+    let wispUrl = BASE.replace("https","wss") + "/wisp/";
+
+    if ((await connection.getTransport()) !== "/libcurl/index.mjs") {
+        await connection.setTransport(BASE + "/libcurl/index.mjs", [{ websocket: wispUrl }]);
+    }
+
+    const frame = scramjet.createFrame();
+    document.body.appendChild(frame.frame);
+    frame.go(url);
 });
 </script>
-	</body>
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+particlesJS('particles-js',{
+particles:{number:{value:60},size:{value:3}},
+interactivity:{events:{onhover:{enable:true,mode:"repulse"}}}
+});
+</script>
+
+</body>
 </html>
