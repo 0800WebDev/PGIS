@@ -8,7 +8,7 @@
 		/>
 		<title>PGIS </title>
 
-		<link rel="shortcut icon" href="https://education-qik3.onrender.com/favicon.webp" />
+				<link rel="shortcut icon" content="favicon.webp" />
 	
 		<script src="https://education-qik3.onrender.com/scram/scramjet.all.js"></script>
 		<script src="https://education-qik3.onrender.com/baremux/index.js"></script>
@@ -16,180 +16,462 @@
 		<link rel="stylesheet" href="https://education-qik3.onrender.com/index.css" />
 		<script src="https://education-qik3.onrender.com/register-sw.js" defer></script>
 		<script src="https://education-qik3.onrender.com/search.js" defer></script>
+		<script defer>
+			"use strict";
 
-<style>
-html, body { scroll-behavior: smooth; text-align: center; background-color: black; color: whitesmoke; font-variant-emoji: text;}
-.games-area {background-color: rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; position: relative; z-index: 1; }
-.gamediv {width: 200px;height: 150px;background-color: rgba(0, 0, 0, 0.3);background-size: cover;background-position: center;cursor: auto;border: 1px solid #444;border-radius: 5px;display: flex;flex-direction: column;justify-content: center;align-items: center;backdrop-filter: blur(2px);}
-button, input {cursor: pointer;background-color: #444;color: whitesmoke;border: none;}
-button:hover {cursor: pointer;background-color: lightgray;color: black;}
-a { color: white; cursor: pointer; }
+// --- Codec Toggle (saved in localStorage) ---
+const CODEC_KEY = "scramjet_codec_enabled";
 
-#particles-js {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 0;
-	pointer-events: none;
-	background: transparent;
+function isCodecEnabled() {
+    const val = localStorage.getItem(CODEC_KEY);
+    return val === null ? true : val === "true"; // default on
 }
+
+function setCodecEnabled(val) {
+    localStorage.setItem(CODEC_KEY, String(val));
+}
+
+function getCodec(enabled) {
+    if (enabled) {
+        return {
+            encode: `(url) => {
+                if (!url) return url;
+                try {
+                    const u = new URL(url);
+                    u.hostname = u.hostname.replace(/\\./g, ",");
+                    return u.toString();
+                } catch(e) {
+                    return url;
+                }
+            }`,
+            decode: `(encoded) => {
+                if (!encoded) return encoded;
+                try {
+                    const withDots = encoded.replace(/:\\/\\/([^/]+)/, (match, host) => {
+                        return "://" + host.replace(/,/g, ".");
+                    });
+                    return withDots;
+                } catch(e) {
+                    return encoded;
+                }
+            }`,
+        };
+    } else {
+        return {
+            encode: `(url) => { if (!url) return url; return encodeURIComponent(url); }`,
+            decode: `(encoded) => { if (!encoded) return encoded; try { return decodeURIComponent(encoded); } catch(e) { return encoded; } }`,
+        };
+    }
+}
+
+let currentUrl = "";
+let globalConnection;
+
+const form = document.getElementById("sj-form");
+const address = document.getElementById("sj-address");
+const searchEngine = document.getElementById("sj-search-engine");
+const error = document.getElementById("sj-error");
+const errorCode = document.getElementById("sj-error-code");
+
+const { ScramjetController } = $scramjetLoadController();
+const scramjet = new ScramjetController({
+    prefix: "/scramjet/",
+    codec: getCodec(isCodecEnabled()),
+    files: {
+        wasm: "https://education-qik3.onrender.com/scram/scramjet.wasm.wasm",
+        all: "https://education-qik3.onrender.com/scram/scramjet.all.js",
+        sync: "https://education-qik3.onrender.com/scram/scramjet.sync.js",
+    },
+});
+scramjet.init();
+
+const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
+
+// --- Inject toggle button into page ---
+function injectToggleButton() {
+    const existing = document.getElementById("codec-toggle-btn");
+    if (existing) existing.remove();
+
+    const enabled = isCodecEnabled();
+    const btn = document.createElement("button");
+    btn.id = "codec-toggle-btn";
+    btn.textContent = enabled ? "URL Mask: ON" : "URL Mask: OFF";
+    btn.title = "Toggle URL masking (requires page reload to take effect)";
+    btn.style.cssText = `
+        position: fixed;
+        top: 12px;
+        right: 12px;
+        z-index: 9999999;
+        background: ${enabled ? "rgba(0,180,80,0.85)" : "rgba(180,0,0,0.75)"};
+        color: white;
+        border: none;
+        border-radius: 6px;
+        padding: 6px 12px;
+        font-size: 13px;
+        cursor: pointer;
+        backdrop-filter: blur(4px);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        transition: background 0.2s;
+    `;
+    btn.addEventListener("click", () => {
+        const next = !isCodecEnabled();
+        setCodecEnabled(next);
+        btn.textContent = next ? " URL Mask: ON" : " URL Mask: OFF";
+        btn.style.background = next ? "rgba(0,180,80,0.85)" : "rgba(180,0,0,0.75)";
+        // Reload so ScramjetController re-initializes with new codec
+        location.reload();
+    });
+    document.body.appendChild(btn);
+}
+
+injectToggleButton();
+
+form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    try {
+        await registerSW();
+    } catch (err) {
+        error.textContent = "Failed to register service worker.";
+        errorCode.textContent = err.toString();
+        throw err;
+    }
+
+    const url = search(address.value, searchEngine.value);
+    let wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
+
+    if ((await connection.getTransport()) !== "/libcurl/index.mjs") {
+        await connection.setTransport("/libcurl/index.mjs", [{ websocket: wispUrl }]);
+    }
+
+    const frame = scramjet.createFrame();
+    frame.frame.id = "sj-frame";
+    document.body.appendChild(frame.frame);
+    frame.go(url);
+
+    document.body.insertAdjacentHTML("beforeend", `
+        <div style="display: flex; gap: 10px; background: rgba(255,255,255,0.43); padding: 6px; align-items: center; border-radius: 8px; width: fit-content; position: fixed; bottom: 20px; left: 20px; z-index: 1000000;"> 
+            <input id="sj-new-address" style="background: rgba(0,0,0,0.73); height: 30px !important; width: 250px; color: white; border-radius: 6px; border: none; padding: 0 8px !important; box-sizing: border-box;" placeholder="Search or enter a url." /> 
+            <button style="width: 35px; border-radius: 6px; background: rgba(0,0,0,0.73); color: rgba(209,209,209,0.81); height: 30px; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-sizing: border-box;" id="reloadBtn">⟳</button> 
+        </div>
+    `);
+
+    const newAddress = document.getElementById("sj-new-address");
+    newAddress.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            const newUrl = search(newAddress.value, searchEngine.value);
+            frame.go(newUrl);
+        }
+    });
+
+    const reloadBtn = document.getElementById("reloadBtn");
+    reloadBtn.addEventListener("click", () => {
+        frame.go(frame.url.href);
+    });
+});
+
+
+async function loadShortcut(targetUrl) {
+    const searchEngine = document.getElementById("sj-search-engine");
+    const url = search(targetUrl, searchEngine.value);
+
+    if (window.currentFrame) {
+        window.currentFrame.go(url);
+        return;
+    }
+
+    try {
+        await registerSW();
+    } catch (err) {
+        const error = document.getElementById("sj-error");
+        const errorCode = document.getElementById("sj-error-code");
+        if (error) error.textContent = "Failed to register service worker.";
+        if (errorCode) errorCode.textContent = err.toString();
+        throw err;
+    }
+
+    const shortConnection = new BareMux.BareMuxConnection("/baremux/worker.js");
+    let wispUrl = (location.protocol === "https:" ? "wss" : "ws") + "://" + location.host + "/wisp/";
+
+    if ((await shortConnection.getTransport()) !== "/libcurl/index.mjs") {
+        await shortConnection.setTransport("/libcurl/index.mjs", [{ websocket: wispUrl }]);
+    }
+
+    const frame = scramjet.createFrame();
+    frame.frame.id = "sj-frame";
+    document.body.appendChild(frame.frame);
+    window.currentFrame = frame;
+    frame.go(url);
+
+    document.body.insertAdjacentHTML("beforeend", `
+        <div style="display: flex; gap: 10px; background: rgba(255,255,255,0.43); padding: 6px; align-items: center; border-radius: 8px; width: fit-content; position: fixed; bottom: 20px; left: 20px; z-index: 1000000;"> 
+            <input id="sj-new-address" style="background: rgba(0,0,0,0.73); height: 30px !important; width: 250px; color: white; border-radius: 6px; border: none; padding: 0 8px !important; box-sizing: border-box;" placeholder="Search or enter a url." /> 
+            <button style="width: 35px; border-radius: 6px; background: rgba(0,0,0,0.73); color: rgba(209,209,209,0.81); height: 30px; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; box-sizing: border-box;" id="reloadBtn">⟳</button> 
+        </div>
+    `);
+
+    const newAddress = document.getElementById("sj-new-address");
+    newAddress.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            const newUrl = search(newAddress.value, searchEngine.value);
+            frame.go(newUrl);
+        }
+    });
+
+    const reloadBtn = document.getElementById("reloadBtn");
+    reloadBtn.addEventListener("click", () => {
+        frame.go(frame.url.href);
+    });
+
+    function isProbablyMobile() {
+        const hasTouch = navigator.maxTouchPoints > 0 || "ontouchstart" in window;
+        const smallScreen = window.matchMedia("(max-width: 768px)").matches;
+        const mobileUA = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        return (hasTouch && smallScreen) || mobileUA;
+    }
+
+    if (isProbablyMobile()) {
+        alert("PGIS proxy may not work properly on mobile devices.");
+    }
+}
+
+		</script>
+
+  <style> html, body { scroll-behavior: smooth; text-align: center; background-color: black; color: whitesmoke; font-variant-emoji: text;} /* Container for the game divs */ .games-area {background-color: rgba(0,0,0,0.1); display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; position: relative; z-index: 1; } /* Each game div itself */ .gamediv {   width: 200px;
+    height: 150px;
+    background-color: rgba(0, 0, 0, 0.3); /* semi-transparent black */
+    background-size: cover;
+    background-position: center;
+    cursor: auto;
+    border: 1px solid #444;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px); /* optional, makes it smoother */}
+     button, input { 
+        cursor: pointer;
+      background-color: #444;
+       color: whitesmoke;
+        border: none; }
+         button:hover { 
+            cursor: pointer;
+             background-color: lightgray; 
+             color: black; border: none; }
+              a { color: white; } /* Particle background container */ #particles-js {
+                 position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;       /* keep behind the games */
+    pointer-events: none; /* so clicks go through */
+    background: transparent; /* make sure it’s not black */}
+    
+    
 
 #sj-address, #sj-new-address {
-	width: 250px;
-	padding: 10px 15px;
-	font-size: 16px;
-	border: 1px solid #555;
-	border-radius: 8px;
-	background-color: rgba(0, 0, 0, 0.6);
-	color: whitesmoke;
-	outline: none;
-	height: 30px;
+    width: 250px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #555;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: whitesmoke;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+    height: 30px;
 }
 
-#sj-address::placeholder, #sj-new-address::placeholder { color: #aaa; }
+#sj-address::placeholder, #sj-new-address::placeholder {
+    color: #aaa;
+}
 
 #sj-address:focus, #sj-new-address:focus {
-	border-color: #fff;
-	background-color: rgba(0,0,0,0.8);
+    border-color: #fff;
+    box-shadow: 0 0 10px rgba(255,255,255,0.5);
+    background-color: rgba(0,0,0,0.8);
+}
+
+
+a {
+  cursor: pointer;
 }
 </style>
+
+
+
+
+
 
 	</head>
 
 	<body>
  <div id="particles-js"></div>
 
-	<div class="flex-center logo-wrapper header-center">
-		<img class="logo" src="https://education-qik3.onrender.com/logo.png" alt="logo" />
-		<h1>P G I S  p r o x y</h1>
-	</div>
 
-	<form id="sj-form" class="flex-center">
-		<input id="sj-search-engine" value="https://duckduckgo.com/?q=%s" type="hidden"/>
-		<input id="sj-address" type="text" placeholder="search or enter an url" />
-		<br>
-	</form>
+
+		<div title="PGIS Logo" class="flex-center logo-wrapper header-center">
+			<img class="logo" src="https://education-qik3.onrender.com/logo.png" alt="logo" />
+			<h1>P G I S    p r o x y</h1>
+		</div>
+		<div class="flex-center desc left-margin">
+			
+		</div>
+
+		<form id="sj-form" class="flex-center">
+			<input
+				id="sj-search-engine"
+				value="https://duckduckgo.com/?q=%s"
+				type="hidden"
+			/>
+			<input id="sj-address" type="text" placeholder="search or enter an url" />
+			<br>
+		</form>
+    <script>
+     document.getElementById("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+});
+          </script>
+        <br><br>
+		<div>
+			<br>
+<a style="padding: 12px;" onclick="loadShortcut('https://google.com')"><img src="https://education-qik3.onrender.com/Google_btn.png" style="height: 40px;"></a>
+<a style="padding: 12px;" onclick="loadShortcut('https://youtube.com')"><img src="https://education-qik3.onrender.com/Youtube_btn.png" style="height: 40px;"></a>
+<a style="padding: 12px;" onclick="loadShortcut('https://tiktok.com')"><img src="https://education-qik3.onrender.com/Tiktok_btn.png" style="height: 40px" ></a>
+<a style="padding: 12px;" onclick="loadShortcut('https://github.com')"><img src="https://education-qik3.onrender.com/Github_btn.png" style="height: 40px;"></a>
+<a style="padding: 12px;" onclick="loadShortcut('https://now.gg')"><img src="https://education-qik3.onrender.com/Nowgg_btn.png" style="height: 40px;"></a>
+		</div>
+        <br><br><br>
+
+		<div class="desc left-margin">
+			<p id="sj-error"></p>
+			<pre id="sj-error-code"></pre>
+		</div>
+		<footer>
+			<div>
+				<br>
+				<a title="return" href="https://pgis.x10.mx">PGIS</a>
+        <a title="mirrors idk" href="https://education-qik3.onrender.com/mirrors">Mirrors</a>
+        <br>
+        <a title="repo" href="https://gitlab.com/0800WebDev/Scramjet-App/" target="_blank">GitLab repo</a>
+        <a title="repo2" href="https://github.com/0800WebDev/pgis-proxy/" target="_blank">GitHub repo</a>
+        <br>
+        <a title="profile" href="https://github.com/0800WebDev/" target="_blank">GitHub profile</a>
+		</footer>
+
+
+
+
+
+
+		
+
+
+      </div>
+
+
+
+
 
 <script>
-document.getElementById("form").addEventListener("submit",(e)=>e.preventDefault());
-</script>
+  window.addEventListener("load", () => {
+    const btn = document.createElement("button");
+    btn.textContent = "↺";
+    Object.assign(btn.style, {
+        position: "fixed",                   
+        top: "10px",
+        left: "10px",
+        zIndex: "9999",
+        padding: "8px 12px",
+        cursor: "pointer",
+        backgroundColor: "#fff",
+        border: "1px solid #ccc",
+        borderRadius: "4px",
+        color: "whitesmoke",
+        backgroundColor: "#444",
+        border: "none"
+    });
 
-<script>
-const BASE = "https://education-qik3.onrender.com";
+    btn.onclick = async () => {
+        try {
+            const res = await fetch(location.href);
+            const text = await res.text();
+            const parser = new DOMParser();
+            const newDoc = parser.parseFromString(text, "text/html");
 
-const CODEC_KEY = "scramjet_codec_enabled";
+                        document.head.innerHTML = newDoc.head.innerHTML;
+            document.body.innerHTML = newDoc.body.innerHTML;
 
-function isCodecEnabled(){
-	const v = localStorage.getItem(CODEC_KEY);
-	return v === null ? true : v === "true";
-}
+                         document.body.appendChild(btn);
+            
+            console.log("Siden ble oppdatert uten full reload.");
+        } catch (err) {
+            console.error("Kunne ikke oppdatere siden:", err);
+        }
+    };
 
-function setCodecEnabled(v){
-	localStorage.setItem(CODEC_KEY,String(v));
-}
-
-function getCodec(enabled){
-	if(enabled){
-		return {
-			encode:`(url)=>{try{const u=new URL(url);u.hostname=u.hostname.replace(/\\./g,",");return u.toString()}catch(e){return url}}`,
-			decode:`(e)=>{try{return e.replace(/:\\/\\/([^/]+)/,(m,h)=>"://"+h.replace(/,/g,"."))}catch(x){return e}}`
-		};
-	}else{
-		return {
-			encode:`(url)=>encodeURIComponent(url)`,
-			decode:`(e)=>decodeURIComponent(e)`
-		};
-	}
-}
-
-let currentUrl="";
-let globalConnection;
-
-const form=document.getElementById("sj-form");
-const address=document.getElementById("sj-address");
-const searchEngine=document.getElementById("sj-search-engine");
-const error=document.getElementById("sj-error");
-const errorCode=document.getElementById("sj-error-code");
-
-const {ScramjetController}=$scramjetLoadController();
-
-const scramjet=new ScramjetController({
-	prefix: BASE + "/scramjet/",
-	codec: getCodec(isCodecEnabled()),
-	files:{
-		wasm: BASE + "/scram/scramjet.wasm.wasm",
-		all: BASE + "/scram/scramjet.all.js",
-		sync: BASE + "/scram/scramjet.sync.js"
-	}
+    document.body.appendChild(btn);
 });
 
-scramjet.init();
 
-const connection=new BareMux.BareMuxConnection(BASE + "/baremux/worker.js");
 
-form.addEventListener("submit",async(e)=>{
-	e.preventDefault();
+</script>
 
-	try{
-		await registerSW();
-	}catch(err){
-		error.textContent="SW failed";
-		errorCode.textContent=err.toString();
-		return;
-	}
 
-	const url = search(address.value, searchEngine.value);
-	const wispUrl = BASE.replace("https","wss") + "/wisp/";
 
-	if((await connection.getTransport())!==BASE+"/libcurl/index.mjs"){
-		await connection.setTransport(BASE+"/libcurl/index.mjs",[{"websocket":wispUrl}]);
-	}
 
-	const frame = scramjet.createFrame();
-	frame.frame.id="sj-frame";
-	document.body.appendChild(frame.frame);
-	frame.go(url);
+
+      <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script> <script>
+         // GHUB-style particles with cursor fix
+particlesJS('particles-js', {
+  "particles": {
+    "number": {
+      "value": 100,
+      "density": { "enable": true, "value_area": 800 }
+    },
+    "color": { "value": "#ffffff" },
+    "shape": { "type": "circle", "stroke": { "width": 0 } },
+    "opacity": {
+      "value": 0.08,
+      "random": true,
+      "anim": { "enable": true, "speed": 1, "opacity_min": 0.3, "sync": false }
+    },
+    "size": {
+      "value": 3,
+      "random": true,
+      "anim": { "enable": true, "speed": 2, "size_min": 0.5, "sync": false }
+    },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#ffffff",
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": {
+      "enable": true,
+      "speed": 1.5,
+      "direction": "none",
+      "straight": false,
+      "out_mode": "out"
+    }
+  },
+  "interactivity": {
+    "detect_on": "window", // ← cursor now works over all elements
+    "events": {
+      "onhover": { "enable": true, "mode": "repulse" },
+      "onclick": { "enable": false }
+    },
+    "modes": {
+      "repulse": { "distance": 120, "duration": 0.5 }
+    }
+  },
+  "retina_detect": true
 });
-</script>
 
-<script>
-function loadShortcut(targetUrl){
-	const url = search(targetUrl, document.getElementById("sj-search-engine").value);
-
-	registerSW().catch(()=>{});
-
-	const conn = new BareMux.BareMuxConnection(BASE + "/baremux/worker.js");
-	let wispUrl = BASE.replace("https","wss") + "/wisp/";
-
-	conn.getTransport().then(async t=>{
-		if(t!==BASE+"/libcurl/index.mjs"){
-			await conn.setTransport(BASE+"/libcurl/index.mjs",[{"websocket":wispUrl}]);
-		}
-
-		const frame = scramjet.createFrame();
-		frame.frame.id="sj-frame";
-		document.body.appendChild(frame.frame);
-		frame.go(url);
-	});
-}
-</script>
-
-<br><br>
-
-<div>
-<a onclick="loadShortcut('https://google.com')"><img src="https://education-qik3.onrender.com/Google_btn.png" height="40"></a>
-<a onclick="loadShortcut('https://youtube.com')"><img src="https://education-qik3.onrender.com/Youtube_btn.png" height="40"></a>
-<a onclick="loadShortcut('https://tiktok.com')"><img src="https://education-qik3.onrender.com/Tiktok_btn.png" height="40"></a>
-<a onclick="loadShortcut('https://github.com')"><img src="https://education-qik3.onrender.com/Github_btn.png" height="40"></a>
-<a onclick="loadShortcut('https://now.gg')"><img src="https://education-qik3.onrender.com/Nowgg_btn.png" height="40"></a>
-</div>
-
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-<script>
-particlesJS('particles-js',{particles:{number:{value:100}},interactivity:{events:{onhover:{enable:true,mode:"repulse"}}}});
-</script>
-
+      </script> 
+    
 	</body>
 </html>
