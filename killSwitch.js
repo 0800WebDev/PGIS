@@ -146,7 +146,17 @@ window.addEventListener("load", () => runSafely(() => {
       document.documentElement.replaceWith(newHTML);
 
       // re-run scripts after DOM swap
-      setTimeout(reexecuteScripts, 0);
+
+
+      
+      requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        reexecuteScripts();
+      });
+    });
+
+
+      
     } catch (e) {
       console.warn("Soft reload failed:", e);
     }
