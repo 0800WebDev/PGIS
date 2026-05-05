@@ -1,5 +1,11 @@
 // Global script
-console.log("global script: start")
+const log = (...args) => {
+  try {
+    console.log(...args);
+  } catch (e) {}
+};
+
+log("global script: start");
 
 
 
@@ -149,11 +155,7 @@ window.addEventListener("load", () => runSafely(() => {
 
 
       
-      requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        reexecuteScripts();
-      });
-    });
+      setTimeout(reexecuteScripts, 0);
 
 
       
