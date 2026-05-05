@@ -7,23 +7,6 @@
 ### Official Link
 [pgis.x10.mx](https://pgis.x10.mx)
 
-### Features
-- A cloak option to hide the tab
-- An open-in-`about:blank` option to hide the page
-- Contact button to get in touch with the owner
-
-### Apps / Tools
-PGIS has a selection of tools including:
-- Orange Unlock
-- 8os
-- Live Chat
-- YouTube Shorts
-- EmulatorJS
-- AI
-- Live HTML Editor
-- The wagon site (iframe)
-- Soundboard
-
 ### How to Use
 
 #### Play a Game
@@ -52,6 +35,6 @@ I do not claim own any games or tools on this website.
 
 
 ### other
-- **for more info go to [info.txt](https://pgis.onrender.com/info.txt)**
+- **for more info go to [info.txt](https://pgis.x10.mx/info.txt)**
 
 - **made by 0800**
