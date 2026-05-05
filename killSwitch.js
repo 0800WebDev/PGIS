@@ -9,27 +9,26 @@ console.log("global script: start")
 
 
 (function () {
-  function loadMatomo() {
-    window._paq = window._paq || [];
-    _paq.push(['trackPageView']);
-    _paq.push(['enableLinkTracking']);
+  if (window.__matomoLoaded) return;
+  window.__matomoLoaded = true;
 
-    var u = "https://pgis.matomo.cloud/";
-    _paq.push(['setTrackerUrl', u + 'matomo.php']);
-    _paq.push(['setSiteId', '1']);
+  window._paq = window._paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
 
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = 'https://cdn.matomo.cloud/pgis.matomo.cloud/matomo.js';
+  var u = "https://pgis.matomo.cloud/";
+  _paq.push(['setTrackerUrl', u + 'matomo.php']);
+  _paq.push(['setSiteId', '1']);
 
-    document.head.appendChild(script);
-  }
+  // prevent duplicate script injection
+  if (document.querySelector('script[data-matomo="true"]')) return;
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadMatomo);
-  } else {
-    loadMatomo();
-  }
+  var script = document.createElement('script');
+  script.async = true;
+  script.src = 'https://cdn.matomo.cloud/pgis.matomo.cloud/matomo.js';
+  script.setAttribute('data-matomo', 'true');
+
+  (document.head || document.documentElement).appendChild(script);
 })();
 
 
