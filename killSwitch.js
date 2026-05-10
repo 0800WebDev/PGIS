@@ -444,11 +444,10 @@ runSafely(() => {
 
 
 
-
+console.log("test")
 
 
 const script = document.createElement("script");
-
 script.src = "https://cdn.jsdelivr.net/npm/eruda";
 
 script.onload = () => {
@@ -456,7 +455,6 @@ script.onload = () => {
 };
 
 document.head.appendChild(script);
-
 
 
 
