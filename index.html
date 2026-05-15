@@ -761,6 +761,132 @@ visDagligHilsen();
 
 
 
+
+
+
+
+
+
+
+<style>
+    #flags {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      display: flex;
+      gap: 6px;
+      z-index: 9999;
+      padding: 0;
+      margin: 0;
+    }
+
+    .flag {
+      width: 22px;
+      height: 16px;
+      border-radius: 2px;
+      object-fit: cover;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="flags">...</div>
+
+<script>
+const KEYWORDS = [
+  "national",
+  "independence",
+  "constitution",
+  "republic",
+  "liberation"
+];
+
+function isRelevant(name) {
+  return KEYWORDS.some(k => name.toLowerCase().includes(k));
+}
+
+function flagUrl(code) {
+  return `https://flagcdn.com/w40/${code.toLowerCase()}.png`;
+}
+
+async function load() {
+  const container = document.getElementById("flags");
+
+  const today = new Date();
+  const year = today.getFullYear();
+
+  const countries = await fetch(
+    "https://date.nager.at/api/v3/AvailableCountries"
+  ).then(r => r.json());
+
+  const results = [];
+
+  const chunkSize = 20;
+
+  for (let i = 0; i < countries.length; i += chunkSize) {
+    const chunk = countries.slice(i, i + chunkSize);
+
+    await Promise.all(chunk.map(async (c) => {
+      try {
+        const holidays = await fetch(
+          `https://date.nager.at/api/v3/PublicHolidays/${year}/${c.countryCode}`
+        ).then(r => r.json());
+
+        const match = holidays.find(h => {
+          const d = new Date(h.date);
+
+          return (
+            d.getUTCDate() === today.getDate() &&
+            d.getUTCMonth() === today.getMonth() &&
+            isRelevant(h.localName)
+          );
+        });
+
+        if (match) {
+          results.push(c.countryCode);
+        }
+      } catch (e) {}
+    }));
+  }
+
+  if (results.length === 0) return;
+
+  container.innerHTML = "";
+
+  results.forEach(code => {
+    const img = document.createElement("img");
+    img.className = "flag";
+    img.src = flagUrl(code);
+    container.appendChild(img);
+  });
+}
+
+load();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
 <script>
   const buttons = document.querySelectorAll("button");
 
