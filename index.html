@@ -801,11 +801,11 @@ const KEYWORDS = [
   "constitution",
   "republic",
   "liberation",
-    "Syttende"
+  "Syttende"
 ];
 
 function isRelevant(name) {
-  return KEYWORDS.some(k => name.toLowerCase().includes(k));
+  return KEYWORDS.some(k => name.toLowerCase().includes(k.toLowerCase()));
 }
 
 function flagUrl(code) {
@@ -815,14 +815,14 @@ function flagUrl(code) {
 async function load() {
   const container = document.getElementById("flags");
 
-  const today = new Date();
-  const year = today.getFullYear();
+  const todayString = new Date().toISOString().split("T")[0];
+  const year = todayString.split("-")[0];
 
   const countries = await fetch(
     "https://date.nager.at/api/v3/AvailableCountries"
   ).then(r => r.json());
 
-  const results = [];
+  const results = new Set();
 
   const chunkSize = 20;
 
@@ -835,28 +835,22 @@ async function load() {
           `https://date.nager.at/api/v3/PublicHolidays/${year}/${c.countryCode}`
         ).then(r => r.json());
 
-        const match = holidays.find(h => {
-          const d = new Date(h.date);
-
-          return (
-            d.getUTCDate() === today.getDate() &&
-            d.getUTCMonth() === today.getMonth() &&
-            isRelevant(h.localName)
-          );
-        });
+        const match = holidays.find(h =>
+          h.date === todayString && isRelevant(h.localName)
+        );
 
         if (match) {
-          results.push(c.countryCode);
+          results.add(c.countryCode);
         }
       } catch (e) {}
     }));
   }
 
-  if (results.length === 0) return;
+  if (results.size === 0) return;
 
   container.innerHTML = "";
 
-  results.forEach(code => {
+  [...results].forEach(code => {
     const img = document.createElement("img");
     img.className = "flag";
     img.src = flagUrl(code);
