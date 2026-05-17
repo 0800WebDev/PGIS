@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Movie & TV Search</title>
+<title>PGIS movies</title>
 
 <style>
 body {
@@ -26,9 +26,17 @@ input {
     color: white;
 }
 
+select {
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #1e1e1e;
+    color: white;
+}
+
 h2 {
-    margin-top: 30px;
-    margin-bottom: 15px;
+    margin-top: 25px;
 }
 
 #results {
@@ -83,7 +91,7 @@ iframe {
 
 #backBtn {
     display: none;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     padding: 10px 16px;
     background: #222;
     color: white;
@@ -94,35 +102,63 @@ iframe {
 
 #episodeControls {
     display: none;
-    margin-bottom: 15px;
     gap: 10px;
+    margin-bottom: 10px;
 }
 
-select {
-    padding: 10px;
-    border-radius: 8px;
+#loadMoreBtn {
+    margin-top: 20px;
+    padding: 12px 18px;
     border: none;
-    background: #1e1e1e;
+    border-radius: 10px;
+    background: #222;
     color: white;
+    cursor: pointer;
 }
+
+  #particles-js{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:0;
+pointer-events:none;
+background:transparent;
+}
+
 </style>
 </head>
 
 <body>
+<div id="particles-js"></div>
 
+  
 <h1>PGIS movies</h1>
-
 <button id="backBtn">X</button>
+
 <input id="search" placeholder="Search movies or shows..." />
+
+<select id="domainSelect">
+    <option value="https://vidfast.pro">vidfast.pro</option>
+    <option value="https://vidfast.in">vidfast.in</option>
+    <option value="https://vidfast.io">vidfast.io</option>
+    <option value="https://vidfast.me">vidfast.me</option>
+    <option value="https://vidfast.net">vidfast.net</option>
+    <option value="https://vidfast.pm">vidfast.pm</option>
+    <option value="https://vidfast.xyz">vidfast.xyz</option>
+</select>
 
 <div id="episodeControls">
     <select id="seasonSelect"></select>
     <select id="episodeSelect"></select>
 </div>
-  
+
 <h2 id="sectionTitle">Popular</h2>
 
 <div id="results"></div>
+
+<button id="loadMoreBtn">Load More</button>
 
 <div id="player"></div>
 
@@ -139,40 +175,48 @@ const episodeControls = document.getElementById("episodeControls");
 const seasonSelect = document.getElementById("seasonSelect");
 const episodeSelect = document.getElementById("episodeSelect");
 
+const loadMoreBtn = document.getElementById("loadMoreBtn");
+const domainSelect = document.getElementById("domainSelect");
+
+function getDomain() {
+    return domainSelect.value;
+}
+
+let combined = [];
+let page = 1;
 let currentShowId = null;
 
-async function fetchPopular() {
+function renderVisible() {
     results.innerHTML = "";
-    sectionTitle.textContent = "Popular";
+    combined.forEach(createCard);
+}
 
+async function fetchPopularPage() {
     const movieRes = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&page=${page}`
     );
 
     const tvRes = await fetch(
-        `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}`
+        `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}&page=${page}`
     );
 
     const movieData = await movieRes.json();
     const tvData = await tvRes.json();
 
-    const combined = [
-        ...movieData.results.slice(0, 10).map(x => ({...x, media_type: "movie"})),
-        ...tvData.results.slice(0, 10).map(x => ({...x, media_type: "tv"}))
-    ];
+    combined.push(
+        ...movieData.results.map(x => ({ ...x, media_type: "movie" })),
+        ...tvData.results.map(x => ({ ...x, media_type: "tv" }))
+    );
 
-    combined.forEach(createCard);
+    renderVisible();
+    page++;
 }
 
 function createCard(item) {
     if (!item.poster_path) return;
 
     const title = item.title || item.name;
-    const year = (
-        item.release_date ||
-        item.first_air_date ||
-        ""
-    ).slice(0, 4);
+    const year = (item.release_date || item.first_air_date || "").slice(0, 4);
 
     const div = document.createElement("div");
     div.className = "card";
@@ -194,6 +238,7 @@ async function openPlayer(item) {
     results.style.display = "none";
     searchInput.style.display = "none";
     sectionTitle.style.display = "none";
+    loadMoreBtn.style.display = "none";
 
     backBtn.style.display = "inline-block";
 
@@ -201,31 +246,26 @@ async function openPlayer(item) {
         episodeControls.style.display = "none";
 
         player.innerHTML = `
-            <iframe
-                src="https://vidfast.pro/movie/${item.id}"
-                allowfullscreen
-            ></iframe>
+            <iframe src="${getDomain()}/movie/${item.id}" allowfullscreen></iframe>
         `;
     } else {
         currentShowId = item.id;
 
         episodeControls.style.display = "flex";
 
-        const detailsRes = await fetch(
+        const details = await fetch(
             `https://api.themoviedb.org/3/tv/${item.id}?api_key=${API_KEY}`
-        );
-
-        const details = await detailsRes.json();
+        ).then(r => r.json());
 
         seasonSelect.innerHTML = "";
 
         details.seasons.forEach(season => {
             if (season.season_number === 0) return;
 
-            const option = document.createElement("option");
-            option.value = season.season_number;
-            option.textContent = `Season ${season.season_number}`;
-            seasonSelect.appendChild(option);
+            const opt = document.createElement("option");
+            opt.value = season.season_number;
+            opt.textContent = `Season ${season.season_number}`;
+            seasonSelect.appendChild(opt);
         });
 
         loadEpisodes(item.id, 1);
@@ -233,19 +273,17 @@ async function openPlayer(item) {
 }
 
 async function loadEpisodes(showId, season) {
-    const res = await fetch(
+    const data = await fetch(
         `https://api.themoviedb.org/3/tv/${showId}/season/${season}?api_key=${API_KEY}`
-    );
-
-    const data = await res.json();
+    ).then(r => r.json());
 
     episodeSelect.innerHTML = "";
 
     data.episodes.forEach(ep => {
-        const option = document.createElement("option");
-        option.value = ep.episode_number;
-        option.textContent = `Episode ${ep.episode_number}`;
-        episodeSelect.appendChild(option);
+        const opt = document.createElement("option");
+        opt.value = ep.episode_number;
+        opt.textContent = `Episode ${ep.episode_number}`;
+        episodeSelect.appendChild(opt);
     });
 
     loadEpisodePlayer(showId, season, 1);
@@ -253,67 +291,81 @@ async function loadEpisodes(showId, season) {
 
 function loadEpisodePlayer(showId, season, episode) {
     player.innerHTML = `
-        <iframe
-            src="https://vidfast.pro/tv/${showId}/${season}/${episode}"
-            allowfullscreen
-        ></iframe>
+        <iframe src="${getDomain()}/tv/${showId}/${season}/${episode}" allowfullscreen></iframe>
     `;
 }
 
-seasonSelect.addEventListener("change", () => {
+seasonSelect.onchange = () => {
     loadEpisodes(currentShowId, seasonSelect.value);
-});
+};
 
-episodeSelect.addEventListener("change", () => {
-    loadEpisodePlayer(
-        currentShowId,
-        seasonSelect.value,
-        episodeSelect.value
-    );
-});
+episodeSelect.onchange = () => {
+    loadEpisodePlayer(currentShowId, seasonSelect.value, episodeSelect.value);
+};
 
-searchInput.addEventListener("input", async () => {
-    const query = searchInput.value.trim();
+loadMoreBtn.onclick = () => {
+    fetchPopularPage();
+};
 
-    if (!query) {
-        fetchPopular();
+searchInput.oninput = async () => {
+    const q = searchInput.value.trim();
+
+    if (!q) {
+        results.style.display = "grid";
+        page = 1;
+        combined = [];
+        await fetchPopularPage();
         return;
     }
 
-    sectionTitle.textContent = "Search Results";
+    const data = await fetch(
+        `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(q)}`
+    ).then(r => r.json());
 
-    const res = await fetch(
-        `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query)}`
-    );
+    combined = data.results.filter(x => x.media_type === "movie" || x.media_type === "tv");
 
-    const data = await res.json();
-
-    results.innerHTML = "";
-
-    data.results.forEach(item => {
-        if (
-            item.media_type !== "movie" &&
-            item.media_type !== "tv"
-        ) return;
-
-        createCard(item);
-    });
-});
+    renderVisible();
+};
 
 backBtn.onclick = () => {
     player.innerHTML = "";
-
     results.style.display = "grid";
     searchInput.style.display = "block";
     sectionTitle.style.display = "block";
-
+    loadMoreBtn.style.display = "block";
     episodeControls.style.display = "none";
-
     backBtn.style.display = "none";
 };
 
-fetchPopular();
+fetchPopularPage();
 </script>
 
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+
+<script>
+
+particlesJS('particles-js',{
+"particles":{
+"number":{"value":100,"density":{"enable":true,"value_area":800}},
+"color":{"value":"#ffffff"},
+"shape":{"type":"circle"},
+"opacity":{"value":0.08,"random":true},
+"size":{"value":3,"random":true},
+"line_linked":{"enable":true,"distance":150,"color":"#ffffff","opacity":0.4,"width":1},
+"move":{"enable":true,"speed":1.5,"direction":"none","straight":false,"out_mode":"out"}
+},
+"interactivity":{
+"detect_on":"window",
+"events":{"onhover":{"enable":true,"mode":"repulse"},"onclick":{"enable":false}},
+"modes":{"repulse":{"distance":120,"duration":0.5}}
+},
+"retina_detect":true
+})
+
+</script>
 </body>
 </html>
