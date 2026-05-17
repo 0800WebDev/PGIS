@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Movie & TV Search</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 20px;
+    background: #0f0f0f;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+input {
+    width: 100%;
+    max-width: 500px;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    outline: none;
+    background: #1e1e1e;
+    color: white;
+}
+
+h2 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+#results {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.card {
+    background: #1a1a1a;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+.card img {
+    width: 100%;
+    display: block;
+}
+
+.card-info {
+    padding: 10px;
+}
+
+.card-title {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.card-year {
+    color: #aaa;
+    margin-top: 4px;
+    font-size: 14px;
+}
+
+#player {
+    margin-top: 20px;
+}
+
+iframe {
+    width: 100%;
+    height: 80vh;
+    border: none;
+    border-radius: 12px;
+}
+
+#backBtn {
+    display: none;
+    margin-bottom: 15px;
+    padding: 10px 16px;
+    background: #222;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#episodeControls {
+    display: none;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+select {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background: #1e1e1e;
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<button id="backBtn">X</button>
+<h1>PGIS Movies</h1>
+<input id="search" placeholder="Search movies or shows..." />
+
+<div id="episodeControls">
+    <select id="seasonSelect"></select>
+    <select id="episodeSelect"></select>
+</div>
+  
+<h2 id="sectionTitle">Popular</h2>
+
+<div id="results"></div>
+
+<div id="player"></div>
+
+<script>
+const API_KEY = "58c450a9e134b118a282f43b3aea9da1";
+
+const results = document.getElementById("results");
+const searchInput = document.getElementById("search");
+const player = document.getElementById("player");
+const backBtn = document.getElementById("backBtn");
+const sectionTitle = document.getElementById("sectionTitle");
+
+const episodeControls = document.getElementById("episodeControls");
+const seasonSelect = document.getElementById("seasonSelect");
+const episodeSelect = document.getElementById("episodeSelect");
+
+let currentShowId = null;
+
+async function fetchPopular() {
+    results.innerHTML = "";
+    sectionTitle.textContent = "Popular";
+
+    const movieRes = await fetch(
+        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
+    );
+
+    const tvRes = await fetch(
+        `https://api.themoviedb.org/3/tv/popular?api_key=${API_KEY}`
+    );
+
+    const movieData = await movieRes.json();
+    const tvData = await tvRes.json();
+
+    const combined = [
+        ...movieData.results.slice(0, 10).map(x => ({...x, media_type: "movie"})),
+        ...tvData.results.slice(0, 10).map(x => ({...x, media_type: "tv"}))
+    ];
+
+    combined.forEach(createCard);
+}
+
+function createCard(item) {
+    if (!item.poster_path) return;
+
+    const title = item.title || item.name;
+    const year = (
+        item.release_date ||
+        item.first_air_date ||
+        ""
+    ).slice(0, 4);
+
+    const div = document.createElement("div");
+    div.className = "card";
+
+    div.innerHTML = `
+        <img src="https://image.tmdb.org/t/p/w500${item.poster_path}">
+        <div class="card-info">
+            <div class="card-title">${title}</div>
+            <div class="card-year">${year}</div>
+        </div>
+    `;
+
+    div.onclick = () => openPlayer(item);
+
+    results.appendChild(div);
+}
+
+async function openPlayer(item) {
+    results.style.display = "none";
+    searchInput.style.display = "none";
+    sectionTitle.style.display = "none";
+
+    backBtn.style.display = "inline-block";
+
+    if (item.media_type === "movie") {
+        episodeControls.style.display = "none";
+
+        player.innerHTML = `
+            <iframe
+                src="https://vidfast.pro/movie/${item.id}"
+                allowfullscreen
+            ></iframe>
+        `;
+    } else {
+        currentShowId = item.id;
+
+        episodeControls.style.display = "flex";
+
+        const detailsRes = await fetch(
+            `https://api.themoviedb.org/3/tv/${item.id}?api_key=${API_KEY}`
+        );
+
+        const details = await detailsRes.json();
+
+        seasonSelect.innerHTML = "";
+
+        details.seasons.forEach(season => {
+            if (season.season_number === 0) return;
+
+            const option = document.createElement("option");
+            option.value = season.season_number;
+            option.textContent = `Season ${season.season_number}`;
+            seasonSelect.appendChild(option);
+        });
+
+        loadEpisodes(item.id, 1);
+    }
+}
+
+async function loadEpisodes(showId, season) {
+    const res = await fetch(
+        `https://api.themoviedb.org/3/tv/${showId}/season/${season}?api_key=${API_KEY}`
+    );
+
+    const data = await res.json();
+
+    episodeSelect.innerHTML = "";
+
+    data.episodes.forEach(ep => {
+        const option = document.createElement("option");
+        option.value = ep.episode_number;
+        option.textContent = `Episode ${ep.episode_number}`;
+        episodeSelect.appendChild(option);
+    });
+
+    loadEpisodePlayer(showId, season, 1);
+}
+
+function loadEpisodePlayer(showId, season, episode) {
+    player.innerHTML = `
+        <iframe
+            src="https://vidfast.pro/tv/${showId}/${season}/${episode}"
+            allowfullscreen
+        ></iframe>
+    `;
+}
+
+seasonSelect.addEventListener("change", () => {
+    loadEpisodes(currentShowId, seasonSelect.value);
+});
+
+episodeSelect.addEventListener("change", () => {
+    loadEpisodePlayer(
+        currentShowId,
+        seasonSelect.value,
+        episodeSelect.value
+    );
+});
+
+searchInput.addEventListener("input", async () => {
+    const query = searchInput.value.trim();
+
+    if (!query) {
+        fetchPopular();
+        return;
+    }
+
+    sectionTitle.textContent = "Search Results";
+
+    const res = await fetch(
+        `https://api.themoviedb.org/3/search/multi?api_key=${API_KEY}&query=${encodeURIComponent(query)}`
+    );
+
+    const data = await res.json();
+
+    results.innerHTML = "";
+
+    data.results.forEach(item => {
+        if (
+            item.media_type !== "movie" &&
+            item.media_type !== "tv"
+        ) return;
+
+        createCard(item);
+    });
+});
+
+backBtn.onclick = () => {
+    player.innerHTML = "";
+
+    results.style.display = "grid";
+    searchInput.style.display = "block";
+    sectionTitle.style.display = "block";
+
+    episodeControls.style.display = "none";
+
+    backBtn.style.display = "none";
+};
+
+fetchPopular();
+</script>
+
+</body>
+</html>
