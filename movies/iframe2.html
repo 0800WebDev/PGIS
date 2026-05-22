@@ -293,7 +293,7 @@ async function loadEpisodes(showId, season) {
 
 function loadEpisodePlayer(showId, season, episode) {
     player.innerHTML = `
-        <iframe src="${getDomain()}/tv/${showId}/${season}/${episode}" allowfullscreen></iframe>
+        <iframe src="${getDomain()}/tv/${showId}/${season}/${episode}" allowfullscreen   sandbox="allow-scripts"></iframe>
     `;
 }
 
@@ -395,7 +395,7 @@ particlesJS('particles-js',{
 "number":{"value":100,"density":{"enable":true,"value_area":800}},
 "color":{"value":"#ffffff"},
 "shape":{"type":"circle"},
-"opacity":{"value":0.08,"random":true},
+"opacity":{"value":0.8,"random":true},
 "size":{"value":3,"random":true},
 "line_linked":{"enable":true,"distance":150,"color":"#ffffff","opacity":0.4,"width":1},
 "move":{"enable":true,"speed":1.5,"direction":"none","straight":false,"out_mode":"out"}
