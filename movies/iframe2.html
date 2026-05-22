@@ -293,7 +293,7 @@ async function loadEpisodes(showId, season) {
 
 function loadEpisodePlayer(showId, season, episode) {
     player.innerHTML = `
-        <iframe src="${getDomain()}/tv/${showId}/${season}/${episode}" allowfullscreen   sandbox="allow-scripts"></iframe>
+        <iframe src="${getDomain()}/tv/${showId}/${season}/${episode}" allowfullscreen ></iframe>
     `;
 }
 
