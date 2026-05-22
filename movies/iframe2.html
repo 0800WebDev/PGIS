@@ -345,12 +345,33 @@ fetchPopularPage();
 </script>
 
 <script>
-window.addEventListener("beforeunload", e => {
-  if (document.activeElement?.tagName === "IFRAME") {
-    e.preventDefault();
-    e.returnValue = "";
+(function () {
+  const realOpen = window.open;
+
+  function external(url) {
+    try {
+      return new URL(url, location.href).origin !== location.origin;
+    } catch {
+      return true;
+    }
   }
-});
+
+  window.open = function(url, ...args) {
+    if (url && external(url)) return null;
+    return realOpen.call(this, url, ...args);
+  };
+
+  document.addEventListener("click", e => {
+    const a = e.target.closest("a");
+
+    if (!a) return;
+
+    if (external(a.href)) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, true);
+})();
 </script>
 
 
