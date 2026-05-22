@@ -248,8 +248,7 @@ async function openPlayer(item) {
         episodeControls.style.display = "none";
 
         player.innerHTML = `
-            <iframe src="${getDomain()}/movie/${item.id}"  sandbox="allow-scripts allow-forms allow-same-origin"
-  referrerpolicy="no-referrer" allowfullscreen></iframe>
+            <iframe src="${getDomain()}/movie/${item.id}"  allowfullscreen></iframe>
         `;
     } else {
         currentShowId = item.id;
@@ -294,8 +293,7 @@ async function loadEpisodes(showId, season) {
 
 function loadEpisodePlayer(showId, season, episode) {
     player.innerHTML = `
-        <iframe src="${getDomain()}/tv/${showId}/${season}/${episode}"  sandbox="allow-scripts allow-forms allow-same-origin"
-  referrerpolicy="no-referrer" allowfullscreen ></iframe>
+        <iframe src="${getDomain()}/tv/${showId}/${season}/${episode}" \ allowfullscreen ></iframe>
     `;
 }
 
