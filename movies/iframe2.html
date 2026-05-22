@@ -341,7 +341,47 @@ backBtn.onclick = () => {
 fetchPopularPage();
 </script>
 
+<script>
+(() => {
+  const originalAssign = window.location.assign.bind(window.location);
+  const originalReplace = window.location.replace.bind(window.location);
+  const originalOpen = window.open.bind(window);
 
+  function isExternal(url) {
+    try {
+      const parsed = new URL(url, location.href);
+      return parsed.origin !== location.origin;
+    } catch {
+      return true;
+    }
+  }
+
+  window.location.assign = function(url) {
+    if (isExternal(url)) return;
+    originalAssign(url);
+  };
+
+  window.location.replace = function(url) {
+    if (isExternal(url)) return;
+    originalReplace(url);
+  };
+
+  window.open = function(url, ...args) {
+    if (url && isExternal(url)) return null;
+    return originalOpen(url, ...args);
+  };
+
+  document.addEventListener("click", e => {
+    const a = e.target.closest("a");
+    if (!a || !a.href) return;
+
+    if (isExternal(a.href)) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }, true);
+})();
+</script>
 
 
 
