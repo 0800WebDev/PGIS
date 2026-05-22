@@ -343,49 +343,56 @@ fetchPopularPage();
 </script>
 
 <script>
-document.addEventListener("click", e => {
-  const a = e.target.closest("a");
+(function () {
+  const ALLOWED_ORIGIN = location.origin;
 
-  if (!a) return;
-
-  try {
-    const url = new URL(a.href);
-
-    if (url.origin !== location.origin) {
-      e.preventDefault();
-      e.stopPropagation();
+  function isExternal(url) {
+    try {
+      return new URL(url, location.href).origin !== ALLOWED_ORIGIN;
+    } catch {
+      return true;
     }
-  } catch {}
-}, true);
-
-const realOpen = window.open;
-
-window.open = function(url, ...args) {
-  if (!url) return null;
-
-  try {
-    const parsed = new URL(url, location.href);
-
-    if (parsed.origin !== location.origin) {
-      return null;
-    }
-  } catch {
-    return null;
   }
 
-  return realOpen.call(window, url, ...args);
-};
+  // Block new tabs/windows
+  const realOpen = window.open;
+  window.open = function (url, ...args) {
+    if (url && isExternal(url)) return null;
+    return realOpen.call(window, url, ...args);
+  };
 
-window.addEventListener("message", e => {
-  if (typeof e.data === "string") {
-    if (
-      e.data.includes("http://") ||
-      e.data.includes("https://")
-    ) {
+  // Block link clicks
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest("a");
+    if (!a) return;
+
+    if (isExternal(a.href)) {
+      e.preventDefault();
       e.stopImmediatePropagation();
     }
-  }
-}, true);
+  }, true);
+
+  // Try to detect top navigation attempts (limited effectiveness)
+  let lastURL = location.href;
+
+  const observer = new MutationObserver(() => {
+    if (location.href !== lastURL) {
+      const current = location.href;
+      if (isExternal(current)) {
+        history.pushState(null, "", lastURL);
+      } else {
+        lastURL = current;
+      }
+    }
+  });
+
+  observer.observe(document, { subtree: true, childList: true });
+
+  // Attempt to regain focus if a popup steals it
+  window.addEventListener("blur", () => {
+    setTimeout(() => window.focus(), 0);
+  });
+})();
 </script>
 
 
