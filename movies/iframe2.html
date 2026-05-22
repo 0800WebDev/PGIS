@@ -343,33 +343,49 @@ fetchPopularPage();
 </script>
 
 <script>
-(function () {
-  const realOpen = window.open;
+document.addEventListener("click", e => {
+  const a = e.target.closest("a");
 
-  function external(url) {
-    try {
-      return new URL(url, location.href).origin !== location.origin;
-    } catch {
-      return true;
-    }
-  }
+  if (!a) return;
 
-  window.open = function(url, ...args) {
-    if (url && external(url)) return null;
-    return realOpen.call(this, url, ...args);
-  };
+  try {
+    const url = new URL(a.href);
 
-  document.addEventListener("click", e => {
-    const a = e.target.closest("a");
-
-    if (!a) return;
-
-    if (external(a.href)) {
+    if (url.origin !== location.origin) {
       e.preventDefault();
       e.stopPropagation();
     }
-  }, true);
-})();
+  } catch {}
+}, true);
+
+const realOpen = window.open;
+
+window.open = function(url, ...args) {
+  if (!url) return null;
+
+  try {
+    const parsed = new URL(url, location.href);
+
+    if (parsed.origin !== location.origin) {
+      return null;
+    }
+  } catch {
+    return null;
+  }
+
+  return realOpen.call(window, url, ...args);
+};
+
+window.addEventListener("message", e => {
+  if (typeof e.data === "string") {
+    if (
+      e.data.includes("http://") ||
+      e.data.includes("https://")
+    ) {
+      e.stopImmediatePropagation();
+    }
+  }
+}, true);
 </script>
 
 
