@@ -784,6 +784,17 @@ visDagligHilsen();
       margin: 0;
     }
 
+    #æ.corner-icon {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      display: flex;
+      gap: 6px;
+      z-index: 9999;
+      padding: 0;
+      margin: 0;
+    }
+
     .flag {
       width: 22px;
       height: 16px;
@@ -796,7 +807,7 @@ visDagligHilsen();
 
 <body>
 
-<div id="flags"></div>
+<div id="flags"></div> <div class="corner-icon"><p class="flag">⚽️</p></div>
 
 <script>
 const KEYWORDS = [
