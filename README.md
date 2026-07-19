@@ -38,3 +38,6 @@ I do not claim own any games or tools on this website.
 - **for more info go to [info.txt](https://pgis.x10.mx/info.txt)**
 
 - **made by 0800**
+  
+---
+PGIS 2 will not be updated much because ive been working a lot on other projects like PGIS 3 and Zinc. I will probably start updating more after im done with those but updates will still be less frequent then it used to.
